@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://bxy4ikbifr7mf"]
+
+[ext_resource type="FontFile" uid="uid://cnnk5m04elgc0" path="res://art/FOT-RodinBokutoh Pro EB.otf" id="1_1fvms"]
+
+[resource]
+default_font = ExtResource("1_1fvms")

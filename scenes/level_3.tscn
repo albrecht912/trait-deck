@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://fy5oe0yry43w"]
+
+[ext_resource type="PackedScene" uid="uid://dklu1oe0ddcbj" path="res://art/level3.blend" id="1_70nk6"]
+
+[node name="level3" unique_id=2113828072 instance=ExtResource("1_70nk6")]

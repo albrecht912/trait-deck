@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://bivhx3v5ukxs6"]
+
+[ext_resource type="PackedScene" uid="uid://fy5oe0yry43w" path="res://scenes/level_3.tscn" id="1_w2twt"]
+[ext_resource type="Script" uid="uid://gg58rki8i8nx" path="res://scenes/ui/hand.gd" id="2_7ykc4"]
+[ext_resource type="Script" uid="uid://c5t10x5ok571v" path="res://scenes/session_manager.gd" id="4_pu3yx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pu3yx"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_gubc5"]
+sky_material = SubResource("ProceduralSkyMaterial_pu3yx")
+
+[sub_resource type="Environment" id="Environment_rt2n2"]
+background_mode = 2
+sky = SubResource("Sky_gubc5")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2twt"]
+size = Vector2(1920, 640)
+
+[sub_resource type="Curve" id="Curve_7ykc4"]
+_data = [Vector2(0, -1), 0.0, 2.0, 0, 1, Vector2(1, 1), 2.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_pu3yx"]
+_data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_gubc5"]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 2.0, 2.0, 1, 1, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="MainScene" type="Node3D" unique_id=1976559943]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=87204546]
+environment = SubResource("Environment_rt2n2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=141292077]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2046098946]
+transform = Transform3D(1, 0, 0, 0, 0.91435295, 0.40491816, 0, -0.40491816, 0.91435295, 9.09981, 6.750951, 10.498167)
+fov = 90.0
+
+[node name="SceneBG" parent="." unique_id=2113828072 instance=ExtResource("1_w2twt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00040100887, 1.1920929e-07, -0.02558732)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=707143436]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1003156704]
+position = Vector2(960, 320)
+shape = SubResource("RectangleShape2D_w2twt")
+
+[node name="AnswerUI" type="CanvasLayer" parent="." unique_id=1685859080 groups=["ui_layer"]]
+
+[node name="PromptLabel" type="Label" parent="AnswerUI" unique_id=590582686]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hand" type="Control" parent="AnswerUI" unique_id=60214265]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("2_7ykc4")
+width_curve = SubResource("Curve_7ykc4")
+height_curve = SubResource("Curve_pu3yx")
+rotation_curve = SubResource("Curve_gubc5")
+max_hand_height = 150.0
+max_hand_rotation = 15.0
+
+[node name="SessionManager" type="Node" parent="." unique_id=799919880]
+script = ExtResource("4_pu3yx")
