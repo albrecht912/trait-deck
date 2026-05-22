@@ -11,9 +11,14 @@ func enter() -> void:
 	#snap card to where we clicked on the card
 	card_ui.pivot_offset = Vector2.ZERO
 
-#transition to clicked state and calculate position from where to drag the card from
+#transition to selected state on left click (snap to center)
 func on_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_mouse"):
-		card_ui.pivot_offset = card_ui.get_global_mouse_position() - card_ui.global_position
-		transition_requested.emit(self, CardState.State.CLICKED)
+		# Save the current sibling index before leaving the hand, so we can restore it on cancel
+		card_ui.hand_index = card_ui.get_index()
+		# Reparent to ui_layer so the card can move freely over the whole screen
+		var ui_layer := get_tree().get_first_node_in_group("ui_layer")
+		if ui_layer:
+			card_ui.reparent(ui_layer)
+		transition_requested.emit(self, CardState.State.SELECTED)
 	

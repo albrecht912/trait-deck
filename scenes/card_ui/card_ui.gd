@@ -2,12 +2,16 @@ class_name CardUI
 extends Control
 
 signal reparent_requested(which_card_ui: CardUI)
+signal answer_submitted(which_card_ui: CardUI)
 
 # ==========================================
 ## BFI-2 DATABASE TRACKING PROPERTIES
 # ==========================================
 var card_db_id: int = -1
 var likert_value: int = -1
+
+# Tracks the original sibling index in the Hand so we can restore position on cancel
+var hand_index: int = -1
 
 # Your existing state components
 @onready var color: ColorRect = $Color

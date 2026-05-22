@@ -29,7 +29,7 @@ _data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_gubc5"]
-_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 2.0, 2.0, 1, 1, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 2.0, 2.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [node name="MainScene" type="Node3D" unique_id=1976559943]

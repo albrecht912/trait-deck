@@ -16,6 +16,8 @@ func _ready():
 	start_new_playthrough("Syaqeer")
 	# Automatically fetch and render the initial BFI-2 scenario question on boot
 	load_active_scenario(current_item_db_id)
+	# Connect the hand's answer submission signal to our commit handler
+	hand.card_answer_submitted.connect(_on_card_answer_submitted)
 
 ## ==========================================
 ## 1. PERSISTENT TRANSACTION DATA PIPELINE
@@ -51,6 +53,19 @@ func load_active_scenario(item_id: int):
 	
 	# 3. Hand the data records down to Hand.gd to spawn and fan the 5 cards programmatically
 	hand.populate_hand_with_choices(dataset_results)
+
+func _on_card_answer_submitted(card: CardUI) -> void:
+	print("[TraitDeck] Answer submitted: card_db_id=%d, likert=%d" % [card.card_db_id, card.likert_value])
+	
+	# TODO: Uncomment the lines below when the game is ready to persist answers to the database.
+	# commit_card_selection_to_db(card.card_db_id)
+	
+	# Remove the submitted card from the scene
+	card.queue_free()
+	
+	# TODO: Uncomment the lines below when ready to advance through scenarios automatically.
+	# current_item_db_id += 1
+	# load_active_scenario(current_item_db_id)
 
 func commit_card_selection_to_db(played_card_id: int):
 	# Validates that an active session context exists before attempting database entry

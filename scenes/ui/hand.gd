@@ -1,6 +1,8 @@
 class_name Hand
 extends Control
 
+signal card_answer_submitted(card: CardUI)
+
 # Export curves to edit them visually in the Inspector
 @export var width_curve: Curve
 @export var height_curve: Curve
@@ -45,28 +47,35 @@ func populate_hand_with_choices(cards_data_array: Array) -> void:
 		# Safely inject the text string column directly from your SQLite results array
 		new_card.set_dialogue_text(data_packet["dialogue_text"])
 
-		# Add to tree and connect existing reparent signals
-		add_child(new_card)
-		
-		# Check your CardUI script for your exact text assignment method:
-		if new_card.has_method("set_dialogue_text"):
-			new_card.set_dialogue_text(data_packet["dialogue_text"])
-		else:
-			# Direct fallback injection if you manage a label node inside CardUI
-			new_card.get_node("Label").text = data_packet["dialogue_text"]
-			
 		# Connect your existing reparenting signal tracking hooks
 		new_card.reparent_requested.connect(_on_card_ui_reparent_requested)
 		
-		# Append the newly constructed card to your active scene node layout stack
+		# Connect the answer submission signal
+		new_card.answer_submitted.connect(_on_card_answer_submitted)
+		
+		# Add to tree
 		add_child(new_card)
+		
+		# Store the card's original position in the hand so it can be restored on cancel
+		new_card.hand_index = index
 		
 	# 4. Trigger the fanning layout algorithm across the newly populated tree
 	update_fan_layout()
 
 func _on_card_ui_reparent_requested(child: CardUI) -> void:
+	# Reparent back into the hand
 	child.reparent(self)
+	# Restore the card to its original sibling index so the fan order is preserved
+	if child.hand_index >= 0:
+		move_child(child, child.hand_index)
+	# Reset pivot and rotation so update_fan_layout positions the card correctly
+	child.pivot_offset = Vector2.ZERO
+	child.rotation = 0.0
 	update_fan_layout()
+
+func _on_card_answer_submitted(card: CardUI) -> void:
+	# Bubble the signal up so SessionManager can handle the DB commit
+	card_answer_submitted.emit(card)
 	
 # =================
 # Card fanning logic
