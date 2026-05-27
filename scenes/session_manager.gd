@@ -14,9 +14,11 @@ const TOTAL_ITEMS: int = 12
 ## NODE REFERENCES
 ## ==========================================
 
-@onready var prompt_label: Label = $"../AnswerUI/PromptLabel"
-@onready var hand: Hand = $"../AnswerUI/Hand"
-@onready var world_environment: WorldEnvironment = $"../WorldEnvironment"
+@onready var prompt_label: Label       = $"../AnswerUI/PromptLabel"
+@onready var hand: Hand                = $"../AnswerUI/Hand"
+@onready var answer_ui: CanvasLayer    = $"../AnswerUI"
+@onready var results_ui: Control       = $"../ResultsUI"
+@onready var world_environment: WorldEnvironment   = $"../WorldEnvironment"
 @onready var directional_light: DirectionalLight3D = $"../DirectionalLight3D"
 
 ## ==========================================
@@ -24,6 +26,12 @@ const TOTAL_ITEMS: int = 12
 ## ==========================================
 
 func _ready() -> void:
+	# Hide the results screen until the assessment is finished.
+	results_ui.visible = false
+
+	# Wire the ResultsUI restart button signal back into this manager.
+	results_ui.restart_requested.connect(_on_restart_requested)
+
 	# Step 1: Wipe any leftover responses from a previous run so every session starts clean.
 	# The ITEM and CARD_OPTION seed data is preserved; only runtime responses are cleared.
 	_clear_player_responses()
@@ -95,7 +103,7 @@ func _load_scenario(item_id: int) -> void:
 ## ==========================================
 
 func _on_card_answer_submitted(card: CardUI) -> void:
-	print("[TraitDeck] Card submitted → card_db_id=%d | item_id (via likert)=%d | likert_value=%d"
+	print("[TraitDeck] Card submitted → card_db_id=%d | item_id=%d | likert_value=%d"
 		% [card.card_db_id, current_item_id, card.likert_value])
 
 	# Step A: Persist the player's choice to the database.
@@ -137,12 +145,46 @@ func _save_response(played_card_id: int) -> void:
 ## ==========================================
 
 func _on_assessment_completed() -> void:
-	# Placeholder: replace with your end-screen transition, results display, etc.
 	print("[TraitDeck] *** Assessment complete! All %d items answered. ***" % TOTAL_ITEMS)
-	# TODO: Show results screen, play completion animation, etc.
+
+	# Query the final BFI-2 domain averages for all five Big Five dimensions.
+	var extraversion: float     = _get_domain_average("Extraversion")
+	var neuroticism: float      = _get_domain_average("Negative Emotionality")
+	var agreeableness: float    = _get_domain_average("Agreeableness")
+	var conscientiousness: float = _get_domain_average("Conscientiousness")
+	var openness: float         = _get_domain_average("Open-Mindedness")
+
+	print("[TraitDeck] Final scores → E:%.2f N:%.2f A:%.2f C:%.2f O:%.2f"
+		% [extraversion, neuroticism, agreeableness, conscientiousness, openness])
+
+	# Pass the computed scores into the ResultsUI component for display.
+	results_ui.display_scores(extraversion, neuroticism, agreeableness, conscientiousness, openness)
+
+	# Swap visibility: hide the gameplay UI, reveal the results screen.
+	answer_ui.visible  = false
+	results_ui.visible = true
 
 ## ==========================================
-## 6. REAL-TIME BFI-2 CALCULATIONS
+## 6. RESTART HANDLER
+## ==========================================
+
+func _on_restart_requested() -> void:
+	print("[TraitDeck] Restart requested. Resetting session...")
+
+	# Hide results, restore the gameplay UI.
+	results_ui.visible = false
+	answer_ui.visible  = true
+
+	# Flush all previous responses and start a brand-new session record.
+	_clear_player_responses()
+	_start_new_playthrough("Syaqeer")
+
+	# Reset progression counter and reload the first scenario.
+	current_item_id = 1
+	_load_scenario(current_item_id)
+
+## ==========================================
+## 7. REAL-TIME BFI-2 CALCULATIONS
 ## ==========================================
 
 func _get_domain_average(domain_name: String) -> float:
@@ -172,7 +214,7 @@ func _get_domain_average(domain_name: String) -> float:
 	return 3.0
 
 ## ==========================================
-## 7. DYNAMIC 3D ENVIRONMENT MOOD SHIFTS
+## 8. DYNAMIC 3D ENVIRONMENT MOOD SHIFTS
 ## ==========================================
 
 func _process_environmental_updates() -> void:

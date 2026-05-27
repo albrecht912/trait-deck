@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://gg58rki8i8nx" path="res://scenes/ui/hand.gd" id="2_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://buqxcep8ddrw8" path="res://art/Player.glb" id="4_gubc5"]
 [ext_resource type="Script" uid="uid://c5t10x5ok571v" path="res://scenes/session_manager.gd" id="4_pu3yx"]
+[ext_resource type="PackedScene" uid="uid://6e5ltlm3bvys" path="res://scenes/results_ui.tscn" id="5_gubc5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pu3yx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -91,3 +92,6 @@ script = ExtResource("4_pu3yx")
 
 [node name="Player" parent="." unique_id=1717212813 instance=ExtResource("4_gubc5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12867117, 4.7683716e-07, -0.06587684)
+
+[node name="ResultsUI" parent="." unique_id=1399925077 instance=ExtResource("5_gubc5")]
+visible = false

@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://6e5ltlm3bvys"]
+
+[ext_resource type="Theme" uid="uid://bxy4ikbifr7mf" path="res://game_theme.tres" id="1_iugs1"]
+[ext_resource type="Script" uid="uid://by3eeq5aia7u1" path="res://scenes/results_ui.gd" id="2_wkr8k"]
+
+[node name="ResultsUI" type="Control" unique_id=1399925077]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -192.0
+offset_right = 128.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_iugs1")
+script = ExtResource("2_wkr8k")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1113461016]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1584723, 0.15847233, 0.1584723, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=6793263]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0703125
+anchor_right = 1.0703125
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MainLayout" type="VBoxContainer" parent="CenterContainer" unique_id=140861708]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CenterContainer/MainLayout" unique_id=830896877]
+layout_mode = 2
+text = "Assesment Completed"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Spacer2" type="Control" parent="CenterContainer/MainLayout" unique_id=269942181]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="ScoresGrid" type="GridContainer" parent="CenterContainer/MainLayout" unique_id=299485720]
+layout_mode = 2
+columns = 2
+
+[node name="E_Title" type="Label" parent="CenterContainer/MainLayout/ScoresGrid" unique_id=1799827320]
+layout_mode = 2
+text = "Extraversion:"
+
+[node name="E_Value" type="Label" parent="CenterContainer/MainLayout/ScoresGrid" unique_id=1322859623]
+layout_mode = 2
+text = "0.00 / 5.00"
+
+[node name="N_Title" type="Label" parent="CenterContainer/MainLayout/ScoresGrid" unique_id=1908433522]
+layout_mode = 2
+text = "Negative Emotionality:"
+
+[node name="N_Value" type="Label" parent="CenterContainer/MainLayout/ScoresGrid" unique_id=1822270398]
+layout_mode = 2
+text = "0.00 / 5.00"
+
+[node name="A_Title" type="Label" parent="CenterContainer/MainLayout/ScoresGrid" unique_id=621416653]
+layout_mode = 2
+text = "Agreeableness:"
+
+[node name="A_Value" type="Label" parent="CenterContainer/MainLayout/ScoresGrid" unique_id=70024336]
+layout_mode = 2
+text = "0.00 / 5.00"
+
+[node name="C_Title" type="Label" parent="CenterContainer/MainLayout/ScoresGrid" unique_id=1011912601]
+layout_mode = 2
+text = "Conscientiousness"
+
+[node name="C_Value" type="Label" parent="CenterContainer/MainLayout/ScoresGrid" unique_id=1191593853]
+layout_mode = 2
+text = "0.00 / 5.00"
+
+[node name="O_Title" type="Label" parent="CenterContainer/MainLayout/ScoresGrid" unique_id=488658108]
+layout_mode = 2
+text = "Open-Mindedness"
+
+[node name="O_Value" type="Label" parent="CenterContainer/MainLayout/ScoresGrid" unique_id=1748787156]
+layout_mode = 2
+text = "0.00 / 5.00"
+
+[node name="Spacer" type="Control" parent="CenterContainer/MainLayout" unique_id=594594076]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="CenterContainer/MainLayout" unique_id=979649679]
+layout_mode = 2
+text = "RESTART ASSESSMENT"
