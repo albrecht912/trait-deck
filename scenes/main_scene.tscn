@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://fy5oe0yry43w" path="res://scenes/level_3.tscn" id="1_w2twt"]
 [ext_resource type="Script" uid="uid://gg58rki8i8nx" path="res://scenes/ui/hand.gd" id="2_7ykc4"]
+[ext_resource type="PackedScene" uid="uid://buqxcep8ddrw8" path="res://art/Player.glb" id="4_gubc5"]
 [ext_resource type="Script" uid="uid://c5t10x5ok571v" path="res://scenes/session_manager.gd" id="4_pu3yx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pu3yx"]
@@ -87,3 +88,6 @@ max_hand_rotation = 15.0
 
 [node name="SessionManager" type="Node" parent="." unique_id=799919880]
 script = ExtResource("4_pu3yx")
+
+[node name="Player" parent="." unique_id=1717212813 instance=ExtResource("4_gubc5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12867117, 4.7683716e-07, -0.06587684)
