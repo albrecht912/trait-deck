@@ -23,16 +23,13 @@ glow_enabled = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2twt"]
 size = Vector2(1920, 640)
 
-[sub_resource type="Curve" id="Curve_7ykc4"]
-_data = [Vector2(0, -1), 0.0, 2.0, 0, 1, Vector2(1, 1), 2.0, 0.0, 1, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_pu3yx"]
+[sub_resource type="Curve" id="Curve_rt2n2"]
 _data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Curve" id="Curve_gubc5"]
-_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 2.0, 2.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_c16ls"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 6.0, 0, 0, Vector2(0.5, 1.4901161e-08), 0.0, 0.0, 0, 0, Vector2(1, 1), 6.0, 0.0, 0, 0]
 point_count = 3
 
 [node name="MainScene" type="Node3D" unique_id=1976559943]
@@ -73,20 +70,21 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Hand" type="Control" parent="AnswerUI" unique_id=60214265]
+custom_minimum_size = Vector2(1200, 210)
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -600.0
+offset_top = -210.0
+offset_right = 600.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("2_7ykc4")
-width_curve = SubResource("Curve_7ykc4")
-height_curve = SubResource("Curve_pu3yx")
-rotation_curve = SubResource("Curve_gubc5")
-max_hand_height = 150.0
-max_hand_rotation = 15.0
+hand_curve = SubResource("Curve_rt2n2")
+rotation_curve = SubResource("Curve_c16ls")
 
 [node name="SessionManager" type="Node" parent="." unique_id=799919880]
 script = ExtResource("4_pu3yx")
