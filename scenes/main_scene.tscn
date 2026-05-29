@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bivhx3v5ukxs6"]
 
+[ext_resource type="Script" uid="uid://dsoqtrql3o4d6" path="res://scenes/camera_3d.gd" id="1_gubc5"]
 [ext_resource type="Script" uid="uid://gg58rki8i8nx" path="res://scenes/ui/hand.gd" id="2_7ykc4"]
-[ext_resource type="PackedScene" uid="uid://buqxcep8ddrw8" path="res://assets/Player.glb" id="4_gubc5"]
 [ext_resource type="Script" uid="uid://c5t10x5ok571v" path="res://scenes/session_manager.gd" id="4_pu3yx"]
 [ext_resource type="PackedScene" uid="uid://6e5ltlm3bvys" path="res://scenes/results_ui.tscn" id="5_gubc5"]
 
@@ -42,8 +42,9 @@ shadow_enabled = true
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2046098946]
 transform = Transform3D(1, 0, 0, 0, 0.91435295, 0.40491816, 0, -0.40491816, 0.91435295, 9.09981, 6.750951, 10.498167)
 fov = 90.0
+script = ExtResource("1_gubc5")
 
-[node name="Player" parent="." unique_id=1900352769 instance=ExtResource("4_gubc5")]
+[node name="CurrentRoom" type="Node3D" parent="." unique_id=82714281]
 
 [node name="Waypoints" type="Node3D" parent="." unique_id=151692518]
 

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bk6ws3htfhmvq"]
 
+[ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_6lrwl"]
 [ext_resource type="PackedScene" uid="uid://dsq7x3dte520r" path="res://assets/musolla.glb" id="1_bl406"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6lrwl"]
@@ -11,6 +12,7 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 4), PackedInt32Arr
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xv0se"]
 
 [node name="musolla" type="Node3D" unique_id=1374724535]
+script = ExtResource("1_6lrwl")
 
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=1294031424]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2231355, 0.20477223, 3.2305145)

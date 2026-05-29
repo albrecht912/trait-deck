@@ -1,6 +1,12 @@
 extends Node
 
 ## ==========================================
+## SessionManager.gd
+## Core game loop orchestrator — no player/navigation code.
+## Flow: room load → camera sync → DB query → card UI → answer → next room
+## ==========================================
+
+## ==========================================
 ## STATE VARIABLES
 ## ==========================================
 
@@ -11,13 +17,36 @@ var current_item_id: int = 1
 const TOTAL_ITEMS: int = 12
 
 ## ==========================================
+## PROGRESSION TIMELINE MAP
+## Maps each item_id to the room scene that should be loaded for that question.
+## Add or reorder entries here as your level list grows.
+## ==========================================
+
+var session_timeline: Dictionary = {
+	1:  "res://scenes/mo_office.tscn",   # Item 1 : mo
+	2:  "res://scenes/mo_office.tscn",       # Item 2 : MO Office
+	3:  "res://scenes/mahallah_room.tscn",      # Item 3 : ICC Inside
+	4:  "res://scenes/icc_outside.tscn",   # Item 4 : Sports Centre
+	5:  "res://scenes/cafe.tscn",            # Item 5 : Cafe
+	6:  "res://scenes/icc_inside.tscn",         # Item 6 : Musolla
+	7:  "res://scenes/sports_centre.tscn",     # Item 7 : ICC Outside
+	8:  "res://scenes/musolla.tscn",   # Item 8 : (repeat / placeholder)
+	9:  "res://scenes/musolla.tscn",       # Item 9 : (repeat / placeholder)
+	10: "res://scenes/musolla.tscn",      # Item 10: (repeat / placeholder)
+	11: "res://scenes/mahallah_room.tscn",   # Item 11: (repeat / placeholder)
+	12: "res://scenes/icc_inside.tscn",            # Item 12: (repeat / placeholder)
+}
+
+## ==========================================
 ## NODE REFERENCES
 ## ==========================================
 
-@onready var prompt_label: Label       = $"../AnswerUI/PromptLabel"
-@onready var hand: Hand                = $"../AnswerUI/Hand"
-@onready var answer_ui: CanvasLayer    = $"../AnswerUI"
-@onready var results_ui: Control       = $"../ResultsUI"
+@onready var current_room_slot: Node3D   = $"../CurrentRoom"
+@onready var camera_3d: Camera3D         = $"../Camera3D"
+@onready var answer_ui: CanvasLayer      = $"../AnswerUI"
+@onready var prompt_label: Label         = $"../AnswerUI/PromptLabel"
+@onready var hand: Hand                  = $"../AnswerUI/Hand"
+@onready var results_ui: Control         = $"../ResultsUI"
 @onready var world_environment: WorldEnvironment   = $"../WorldEnvironment"
 @onready var directional_light: DirectionalLight3D = $"../DirectionalLight3D"
 
@@ -33,7 +62,7 @@ func _ready() -> void:
 	results_ui.restart_requested.connect(_on_restart_requested)
 
 	# Step 1: Wipe any leftover responses from a previous run so every session starts clean.
-	# The ITEM and CARD_OPTION seed data is preserved; only runtime responses are cleared.
+	# ITEM and CARD_OPTION seed data is preserved; only runtime responses are cleared.
 	_clear_player_responses()
 
 	# Step 2: Create a fresh session record for this playthrough.
@@ -43,7 +72,7 @@ func _ready() -> void:
 	# Step 3: Connect the Hand's answer-submission signal before loading the first scenario.
 	hand.card_answer_submitted.connect(_on_card_answer_submitted)
 
-	# Step 4: Load and display the very first question.
+	# Step 4: Load the first room and its associated question.
 	current_item_id = 1
 	_load_scenario(current_item_id)
 
@@ -53,7 +82,6 @@ func _ready() -> void:
 
 func _clear_player_responses() -> void:
 	# SQL: Delete every row from PLAYER_RESPONSE so this run starts from a blank slate.
-	# ITEM and CARD_OPTION seed rows are untouched.
 	DatabaseManager.db.query("DELETE FROM PLAYER_RESPONSE;")
 	print("[TraitDeck] PLAYER_RESPONSE table cleared for new run.")
 
@@ -65,25 +93,60 @@ func _start_new_playthrough(student_name: String) -> void:
 	print("[TraitDeck] Session started. active_session_id = %d" % active_session_id)
 
 ## ==========================================
-## 2. SCENARIO LOADING
+## 2. SCENARIO LOADING (room → camera → UI)
 ## ==========================================
 
 func _load_scenario(item_id: int) -> void:
-	# --- Guard: check whether this item actually exists ---
+	# --- Guard: if item_id is not in the timeline, the assessment is complete ---
+	if not session_timeline.has(item_id):
+		push_warning("[TraitDeck] No room mapped for item_id=%d. Triggering completion." % item_id)
+		_on_assessment_completed()
+		return
+
+	# --- Step A: Resolve the scene path for this item ---
+	var target_scene_path: String = session_timeline[item_id]
+
+	# --- Step B: Clear the old room from the slot ---
+	for old_child in current_room_slot.get_children():
+		old_child.queue_free()
+
+	# --- Step C: Load and instance the new room scene ---
+	var packed: PackedScene = load(target_scene_path) as PackedScene
+	if packed == null:
+		push_error("[TraitDeck] Failed to load scene: %s" % target_scene_path)
+		return
+
+	var new_room: Node = packed.instantiate()
+
+	# --- Step D: Type-check and add the new room ---
+	if not (new_room is BaseRoom):
+		push_error("[TraitDeck] Scene root is not a BaseRoom: %s" % target_scene_path)
+		new_room.queue_free()
+		return
+
+	current_room_slot.add_child(new_room)
+	print("[TraitDeck] Loaded room: %s" % target_scene_path)
+
+	# --- Step E: Sync camera to the room's exported configuration ---
+	camera_3d.setup_camera_for_room(
+		new_room.camera_mode,
+		new_room.custom_camera_position,
+		new_room.custom_camera_rotation
+	)
+
+	# --- Step F: Fetch the question prompt text from the database ---
 	var item_sql: String = "SELECT item_id, context_text FROM ITEM WHERE item_id = %d;" % item_id
 	DatabaseManager.db.query(item_sql)
 
 	if DatabaseManager.db.query_result.is_empty():
-		# No more items → assessment is finished.
-		push_warning("[TraitDeck] No ITEM found for item_id=%d. Triggering completion." % item_id)
+		push_warning("[TraitDeck] No ITEM found for item_id=%d." % item_id)
 		_on_assessment_completed()
 		return
 
-	# Display the scenario prompt text on the UI label.
 	prompt_label.text = DatabaseManager.db.query_result[0]["context_text"]
 	print("[TraitDeck] Loaded item_id=%d onto PromptLabel." % item_id)
 
-	# --- Fetch the 5 answer cards for this item, ordered by Likert value ---
+	# --- Step G: Fetch the 5 answer cards for this item ---
 	var cards_sql: String = (
 		"SELECT card_id, item_id, likert_value, dialogue_text "
 		+ "FROM CARD_OPTION "
@@ -95,7 +158,8 @@ func _load_scenario(item_id: int) -> void:
 	var card_rows: Array = DatabaseManager.db.query_result
 	print("[TraitDeck] Retrieved %d card options for item_id=%d." % [card_rows.size(), item_id])
 
-	# Hand off the data array to Hand.gd which will instantiate and fan the cards.
+	# Ensure the gameplay UI is visible and populate the card hand.
+	answer_ui.visible = true
 	hand.populate_hand_with_choices(card_rows)
 
 ## ==========================================
@@ -112,12 +176,9 @@ func _on_card_answer_submitted(card: CardUI) -> void:
 	# Step B: Remove the submitted card node from the scene tree.
 	card.queue_free()
 
-	# Step C: Advance to the next item, or end the assessment if all items are done.
+	# Step C: Advance to the next item and load the next room + scenario.
 	current_item_id += 1
-	if current_item_id <= TOTAL_ITEMS:
-		_load_scenario(current_item_id)
-	else:
-		_on_assessment_completed()
+	_load_scenario(current_item_id)
 
 ## ==========================================
 ## 4. DATABASE WRITE
@@ -129,7 +190,6 @@ func _save_response(played_card_id: int) -> void:
 		return
 
 	# SQL: Insert a bridge row linking this session to the chosen card.
-	# The PLAYER_RESPONSE table schema: (session_id, card_id, timestamp)
 	var sql: String = (
 		"INSERT INTO PLAYER_RESPONSE (session_id, card_id) VALUES (%d, %d);"
 		% [active_session_id, played_card_id]
@@ -148,11 +208,11 @@ func _on_assessment_completed() -> void:
 	print("[TraitDeck] *** Assessment complete! All %d items answered. ***" % TOTAL_ITEMS)
 
 	# Query the final BFI-2 domain averages for all five Big Five dimensions.
-	var extraversion: float     = _get_domain_average("Extraversion")
-	var neuroticism: float      = _get_domain_average("Negative Emotionality")
-	var agreeableness: float    = _get_domain_average("Agreeableness")
+	var extraversion: float      = _get_domain_average("Extraversion")
+	var neuroticism: float       = _get_domain_average("Negative Emotionality")
+	var agreeableness: float     = _get_domain_average("Agreeableness")
 	var conscientiousness: float = _get_domain_average("Conscientiousness")
-	var openness: float         = _get_domain_average("Open-Mindedness")
+	var openness: float          = _get_domain_average("Open-Mindedness")
 
 	print("[TraitDeck] Final scores → E:%.2f N:%.2f A:%.2f C:%.2f O:%.2f"
 		% [extraversion, neuroticism, agreeableness, conscientiousness, openness])
@@ -179,7 +239,7 @@ func _on_restart_requested() -> void:
 	_clear_player_responses()
 	_start_new_playthrough("Syaqeer")
 
-	# Reset progression counter and reload the first scenario.
+	# Reset progression counter and reload the first room + scenario.
 	current_item_id = 1
 	_load_scenario(current_item_id)
 

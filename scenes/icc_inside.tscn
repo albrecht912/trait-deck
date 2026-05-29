@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bcmjvtxc7pja4"]
 
+[ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_divyu"]
 [ext_resource type="PackedScene" uid="uid://bvhn8agxr6grl" path="res://assets/ICC_inside.glb" id="1_dvxaj"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_divyu"]
@@ -11,6 +12,7 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Arr
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_omxeb"]
 
 [node name="ICC_inside" type="Node3D" unique_id=295292395]
+script = ExtResource("1_divyu")
 
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=501380906]
 transform = Transform3D(0.9995987, 0.010177713, -0.02643541, -0.010154674, 0.9999479, 0.0010056043, 0.02644427, -0.0007367529, 0.99965, -2.1866653, 7.940529, 4.121451)

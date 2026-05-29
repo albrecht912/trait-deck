@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cdwedbh2kcl72"]
 
 [ext_resource type="PackedScene" uid="uid://b2tf7a7rq0fxv" path="res://assets/mo_office.glb" id="1_okm2r"]
+[ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_vync6"]
 [ext_resource type="PackedScene" uid="uid://c44md7c8edwqd" path="res://assets/table.glb" id="2_vi2ji"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_vi2ji"]
@@ -12,6 +13,7 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 0), PackedInt32Arr
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_0c86e"]
 
 [node name="MO_office" type="Node3D" unique_id=496004334]
+script = ExtResource("1_vync6")
 
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=758506585]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2231355, 0.20477223, 3.2305145)
