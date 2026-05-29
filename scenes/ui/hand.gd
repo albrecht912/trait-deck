@@ -3,9 +3,9 @@ extends Control
 
 signal card_answer_submitted(card: CardUI)
 
-# ==========================================
+## ==========================================
 ## EXPORT PARAMETERS (set in Inspector)
-# ==========================================
+## ==========================================
 
 @export var hand_curve: Curve
 @export var rotation_curve: Curve
@@ -14,22 +14,32 @@ signal card_answer_submitted(card: CardUI)
 @export var y_min: float = 0.0
 @export var y_max: float = -15.0
 
+## ==========================================
+## CONSTANTS
+## ==========================================
+
 # Fixed card footprint — must match CardUI custom_minimum_size
-const CARD_WIDTH: float = 150.0
+const CARD_SCENE: PackedScene = preload("res://scenes/card_ui/card_ui.tscn")
 
-# Preload the card scene for dynamic instantiation
-const CARD_SCENE = preload("res://scenes/card_ui/card_ui.tscn")
+## ==========================================
+## NODE REFERENCES
+## ==========================================
 
-# ==========================================
+# The DropZone Area2D lives as a sibling inside AnswerUI.
+# Hand.gd passes this reference to every spawned card so they can do
+# screen-space rect intersection checks without needing physics layers.
+@onready var drop_zone: Area2D = get_parent().get_node_or_null("DropZone") as Area2D
+
+## ==========================================
 ## LIFECYCLE
-# ==========================================
+## ==========================================
 
 func _ready() -> void:
 	update_fan_layout()
 
-# ==========================================
+## ==========================================
 ## HAND POPULATION (called by SessionManager)
-# ==========================================
+## ==========================================
 
 func populate_hand_with_choices(cards_data_array: Array) -> void:
 	# 1. Flush any leftover card nodes from the previous question
@@ -53,8 +63,12 @@ func populate_hand_with_choices(cards_data_array: Array) -> void:
 		new_card.likert_value = data_packet["likert_value"]
 		new_card.set_dialogue_text(data_packet["dialogue_text"])
 
-		# Connect reparent signal (cancel → return to hand)
-		new_card.reparent_requested.connect(_on_card_ui_reparent_requested)
+		# Pass the DropZone reference so the card can do rect-based overlap checks.
+		# This avoids any cross-layer physics collision issues.
+		new_card.drop_zone = drop_zone
+
+		# Connect reparent signal (cancel tween finished → restore hand slot)
+		new_card.reparent_requested.connect(_on_card_reparent_requested)
 
 		# Connect answer submission signal (confirm → bubble up to SessionManager)
 		new_card.answer_submitted.connect(_on_card_answer_submitted)
@@ -68,20 +82,19 @@ func populate_hand_with_choices(cards_data_array: Array) -> void:
 	# 4. Run the layout algorithm on the freshly populated hand
 	update_fan_layout()
 
-# ==========================================
+## ==========================================
 ## SIGNAL HANDLERS
-# ==========================================
+## ==========================================
 
-func _on_card_ui_reparent_requested(child: CardUI) -> void:
-	# Return the card to the Hand node
-	child.reparent(self)
-
-	# Restore the card to its original sibling index so the fan order is preserved
-	if child.hand_index >= 0:
+func _on_card_reparent_requested(child: CardUI) -> void:
+	# The card's cancel tween has finished — restore it to its hand slot.
+	# If the card was top_level during drag it is still a child of Hand,
+	# so we just need to fix the sibling index and re-run the layout.
+	if child.hand_index >= 0 and child.get_parent() == self:
 		move_child(child, child.hand_index)
 
-	# Reset transform state so update_fan_layout can position it cleanly
-	child.pivot_offset = Vector2(CARD_WIDTH / 2.0, child.size.y / 2.0)
+	# Reset transform state so update_fan_layout can position it cleanly.
+	child.pivot_offset = Vector2.ZERO
 	child.rotation     = 0.0
 
 	update_fan_layout()
@@ -90,26 +103,28 @@ func _on_card_answer_submitted(card: CardUI) -> void:
 	# Bubble the signal up to SessionManager for DB commit and progression
 	card_answer_submitted.emit(card)
 
-# ==========================================
+## ==========================================
 ## CARD FANNING LAYOUT (GodotGameLab formula)
-# ==========================================
+## ==========================================
 
 func update_fan_layout() -> void:
-	# --- Filter: only operate on live cards; ignore nodes pending queue_free() ---
-	# This prevents deferred-deletion ghosts from corrupting the width math when
-	# populate_hand_with_choices() clears the old hand and spawns new cards in the
-	# same frame.
+	# Filter: only operate on live, non-dragging cards.
+	# Dragging cards have top_level=true and manage their own position.
+	# Dying cards (queue_free) are excluded to prevent ghost width math.
 	var active_cards: Array = []
 	for child in get_children():
 		if child is CardUI and not child.is_queued_for_deletion():
-			active_cards.append(child)
+			var c := child as CardUI
+			# Skip cards that are currently being dragged or placed.
+			if c.drag_state == CardUI.DragState.IDLE:
+				active_cards.append(c)
 
 	var num_cards: int = active_cards.size()
 
 	if num_cards == 0:
 		return
 
-	# Use a local constant so engine text-scaling cannot alter the width math.
+	# Use a local float so engine text-scaling cannot alter the width math.
 	var card_width: float = 150.0
 
 	# --- Single-card edge case: centre it, no curve needed ---
@@ -124,30 +139,25 @@ func update_fan_layout() -> void:
 	var total_width: float = (card_width * float(num_cards)) + (x_separation * float(num_cards - 1))
 
 	# --- Step 2: Overflow compression ---
-	# If the cards spill past the container width, squeeze the spacing so they fit exactly.
 	var final_x_sep: float = x_separation
 	if total_width > custom_minimum_size.x:
 		final_x_sep = (custom_minimum_size.x - (card_width * float(num_cards))) / float(num_cards - 1)
-		total_width  = custom_minimum_size.x   # locked to container edge
+		total_width  = custom_minimum_size.x
 
 	# --- Step 3: Centering offset ---
-	# When the hand is narrower than the container, shift it right so it stays centred.
 	var x_offset: float = (custom_minimum_size.x - total_width) / 2.0
 
-	# --- Step 4: Per-card curve sampling loop (active cards only) ---
+	# --- Step 4: Per-card curve sampling loop (active IDLE cards only) ---
 	for i in range(num_cards):
 		var card: CardUI = active_cards[i] as CardUI
 		if not card:
 			continue
 
-		# Normalised 0.0 → 1.0 weight for curve sampling
 		var ratio: float = float(i) / float(num_cards - 1)
 
-		# Sample the two exported curves
 		var y_curve_value: float = hand_curve.sample(ratio)
 		var r_curve_value: float = rotation_curve.sample(ratio)
 
-		# Final position
 		var final_x: float = x_offset + (float(i) * (card_width + final_x_sep))
 		var final_y: float = y_min + (y_curve_value * y_max)
 

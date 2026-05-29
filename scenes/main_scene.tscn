@@ -21,9 +21,6 @@ ambient_light_color = Color(0.6901961, 0.6901961, 0.6901961, 1)
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2twt"]
-size = Vector2(1920, 640)
-
 [sub_resource type="Curve" id="Curve_rt2n2"]
 _data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.0, 0.0, 0, 0]
 point_count = 3
@@ -32,6 +29,9 @@ point_count = 3
 _limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, -1), 0.0, 6.0, 0, 0, Vector2(0.5, 1.4901161e-08), 0.0, 0.0, 0, 0, Vector2(1, 1), 6.0, 0.0, 0, 0]
 point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2twt"]
+size = Vector2(640, 436)
 
 [node name="MainScene" type="Node3D" unique_id=1976559943]
 
@@ -52,12 +52,6 @@ script = ExtResource("1_gubc5")
 [node name="Waypoints" type="Node3D" parent="." unique_id=151692518]
 
 [node name="Marker3D" type="Marker3D" parent="Waypoints" unique_id=1699326965]
-
-[node name="Area2D" type="Area2D" parent="." unique_id=707143436]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1003156704]
-position = Vector2(960, 320)
-shape = SubResource("RectangleShape2D_w2twt")
 
 [node name="AnswerUI" type="CanvasLayer" parent="." unique_id=1685859080 groups=["ui_layer"]]
 
@@ -90,6 +84,12 @@ grow_vertical = 0
 script = ExtResource("2_7ykc4")
 hand_curve = SubResource("Curve_rt2n2")
 rotation_curve = SubResource("Curve_c16ls")
+
+[node name="DropZone" type="Area2D" parent="AnswerUI" unique_id=707143436]
+position = Vector2(960, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnswerUI/DropZone" unique_id=1003156704]
+shape = SubResource("RectangleShape2D_w2twt")
 
 [node name="SessionManager" type="Node" parent="." unique_id=799919880]
 script = ExtResource("4_pu3yx")
