@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bk6ws3htfhmvq"]
+
+[ext_resource type="PackedScene" uid="uid://dsq7x3dte520r" path="res://assets/musolla.glb" id="1_bl406"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_6lrwl"]
+vertices = PackedVector3Array(-9.08767, 0.5, 0.10000038, -1.0876703, 0.5, 0.10000038, -1.0876703, 0.5, -0.8999996, 0.16232967, 0.5, -1.1499996, 0.16232967, 0.5, -9.15, -9.08767, 0.5, -9.15, 1.1623297, 0.5, -0.8999996, 1.1623297, 0.5, 0.10000038, 9.16233, 0.5, 0.10000038, 9.16233, 0.5, -9.15, -0.8376703, 0.5, 1.1000004, -9.08767, 0.5, 9.6, 0.16232967, 0.5, 9.6, 0.16232967, 0.5, 1.1000004, 0.9123297, 0.5, 1.1000004, 9.16233, 0.5, 9.6)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 4), PackedInt32Array(4, 2, 5), PackedInt32Array(5, 2, 0), PackedInt32Array(8, 7, 6), PackedInt32Array(3, 4, 6), PackedInt32Array(6, 4, 9), PackedInt32Array(6, 9, 8), PackedInt32Array(1, 10, 0), PackedInt32Array(0, 10, 11), PackedInt32Array(11, 10, 12), PackedInt32Array(10, 13, 12), PackedInt32Array(7, 8, 14), PackedInt32Array(14, 8, 15), PackedInt32Array(14, 15, 12), PackedInt32Array(12, 13, 14)]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_non5e"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xv0se"]
+
+[node name="musolla" type="Node3D" unique_id=1374724535]
+
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=1294031424]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2231355, 0.20477223, 3.2305145)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1069724476]
+navigation_mesh = SubResource("NavigationMesh_6lrwl")
+
+[node name="VisualMap" parent="NavigationRegion3D" unique_id=701060697 instance=ExtResource("1_bl406")]
+
+[node name="ActiveWaypoint" type="Node3D" parent="." unique_id=433641400]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6415303, 2.288241)
+
+[node name="Area3D" type="Area3D" parent="ActiveWaypoint" unique_id=181156478]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D" unique_id=427849155]
+shape = SubResource("BoxShape3D_non5e")
+
+[node name="ArrowIndicator" type="MeshInstance3D" parent="ActiveWaypoint" unique_id=737212536]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, -0.16096652, 0)
+mesh = SubResource("CapsuleMesh_xv0se")

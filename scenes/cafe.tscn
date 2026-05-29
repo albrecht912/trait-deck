@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c2k2gxlfvq4h5"]
+
+[ext_resource type="PackedScene" uid="uid://3wvyo3q40wq" path="res://assets/cafe.glb" id="1_0dv7p"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_a6vgn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_de0wi"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qifwr"]
+
+[node name="cafe" type="Node3D" unique_id=960553019]
+
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=99973363]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2231355, 0.20477223, 3.2305145)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=380839697]
+navigation_mesh = SubResource("NavigationMesh_a6vgn")
+
+[node name="VisualMap" parent="NavigationRegion3D" unique_id=1088174868 instance=ExtResource("1_0dv7p")]
+
+[node name="ActiveWaypoint" type="Node3D" parent="." unique_id=1299292383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6415303, 2.288241)
+
+[node name="Area3D" type="Area3D" parent="ActiveWaypoint" unique_id=1040522947]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D" unique_id=1930034377]
+shape = SubResource("BoxShape3D_de0wi")
+
+[node name="ArrowIndicator" type="MeshInstance3D" parent="ActiveWaypoint" unique_id=1173379675]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, -0.16096652, 0)
+mesh = SubResource("CapsuleMesh_qifwr")

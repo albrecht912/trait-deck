@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bcmjvtxc7pja4"]
+
+[ext_resource type="PackedScene" uid="uid://bvhn8agxr6grl" path="res://assets/ICC_inside.glb" id="1_dvxaj"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_divyu"]
+vertices = PackedVector3Array(-9.5, 0.5, -14.5, -9.5, 0.5, 14.5, 9.5, 0.5, 14.5, 9.5, 0.5, -14.5, -9.5, 7.5, -11.75, -9.5, 7.5, 0.25, 9.5, 7.5, 0.25, 9.5, 7.5, -11.75, -9.5, 7.5, 3.75, -9.5, 7.5, 4.25, 9.5, 7.5, 4.25, 9.5, 7.5, 3.75)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5), PackedInt32Array(11, 10, 8), PackedInt32Array(8, 10, 9)]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hv383"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_omxeb"]
+
+[node name="ICC_inside" type="Node3D" unique_id=295292395]
+
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=501380906]
+transform = Transform3D(0.9995987, 0.010177713, -0.02643541, -0.010154674, 0.9999479, 0.0010056043, 0.02644427, -0.0007367529, 0.99965, -2.1866653, 7.940529, 4.121451)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1258609880]
+navigation_mesh = SubResource("NavigationMesh_divyu")
+
+[node name="VisualMap" parent="NavigationRegion3D" unique_id=262750608 instance=ExtResource("1_dvxaj")]
+
+[node name="ActiveWaypoint" type="Node3D" parent="." unique_id=743703784]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.711299, 3.8259897)
+
+[node name="Area3D" type="Area3D" parent="ActiveWaypoint" unique_id=106243935]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D" unique_id=297287937]
+shape = SubResource("BoxShape3D_hv383")
+
+[node name="ArrowIndicator" type="MeshInstance3D" parent="ActiveWaypoint" unique_id=1071522118]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, -0.16096652, 0)
+mesh = SubResource("CapsuleMesh_omxeb")

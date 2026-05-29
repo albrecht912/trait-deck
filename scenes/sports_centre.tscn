@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dlxiy1ppymb25"]
+
+[ext_resource type="PackedScene" uid="uid://sywvvv6oo6eg" path="res://assets/sports_centre.glb" id="1_07t8t"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_tgu6s"]
+vertices = PackedVector3Array(40.75, 0.5, 40, 42.75, 0.5, 40, 43, 0.5, 39, 40.75, 0.5, 37.75, -40.5, 0.5, 37.75, -39.5, 0.75, 37.75, 39.75, 0.5, 37.5, 54.75, 0.5, 32.5, 61, 0.5, -41.5, -63, 0.5, -41.5, 44.25, 0.5, 39, 54.5, 0.5, 34, -44.5, 0.5, 43, -44.25, 0.5, 44, -40.5, 0.5, 44, 56.25, 0.5, 32.5, 56.5, 0.5, 33.5, 61, 0.5, 33.5, -52, 0.5, 41.5, -51.75, 0.5, 43, -46.25, 0.5, 43.25, -63, 0.5, 43, -53.5, 0.5, 41.5, -53.75, 0.5, 43, -39.5, 15, 56.5, 39.5, 15, 56.5, -39.5, 15, 55.057693, 39.519234, 15, 55.03846, 56.25, 0.5, 34.5, 56, 0.5, 40.5, 56.25, 0.5, 41.5, 61, 0.5, 41.5, 55.25, 0.5, 34.5, 55.25, 0.5, 40.5, 54.5, 0.5, 40.5, 44.75, 0.5, 39.25, 54.25, 0.5, 41, 44.75, 0.5, 40.75, 43, 0.5, 41, 40.75, 0.5, 52, 48.75, 0.5, 51.5, 54.25, 0.5, 50, 54.25, 0.5, 48.75, 47.5, 0.5, 51.5, 55.25, 0.5, 48.5, 55.25, 0.5, 42.5, 54.25, 0.5, 42.25, 47.25, 0.5, 52, -39.25, 0.5, 40.25, -39.25, 0.5, 56.5, 39.5, 0.5, 56.5, 39.5, 0.5, 40.25, 56, 0.5, 42.5, 56, 0.5, 48.5, 56.25, 0.5, 49.5, 61, 0.5, 49.5, -55.75, 0.5, 47.75, -53.25, 0.5, 43.5, -57, 0.5, 47.75, -63, 0.5, 48.75, -57.25, 0.5, 48.75, -55.25, 0.5, 48, -52, 0.5, 43.5, -55.25, 0.5, 49.5, -46.25, 0.5, 51, -46.25, 0.5, 44.75, -46.25, 0.5, 51.25, -45, 0.5, 51.25, -44.5, 0.5, 45, -44.75, 0.5, 52.25, -40.5, 0.5, 52.25, -57.25, 0.5, 49.75, -56.25, 0.5, 50, -63, 0.5, 57.5, -56.25, 0.5, 57.5, -46.75, 0.5, 51.5, -45.75, 0.5, 57.5, -45.75, 0.5, 53.25, -46.75, 0.5, 53, -55.5, 0.5, 50, 56, 0.5, 50.5, 55.25, 0.5, 57.5, 61, 0.5, 57.5, 55.25, 0.5, 50.5, 49.25, 0.5, 53.25, 48.25, 0.5, 53.5, 48.25, 0.5, 57.5, 49.25, 0.5, 51.75, 54.5, 0.5, 50.5, 47.25, 0.5, 53.25, 40.5, 0.5, 57.5, -45, 0.5, 53.25, -40.5, 0.5, 57.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(7, 4, 8), PackedInt32Array(8, 4, 9), PackedInt32Array(2, 3, 10), PackedInt32Array(10, 3, 11), PackedInt32Array(11, 3, 7), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 4), PackedInt32Array(16, 15, 17), PackedInt32Array(17, 15, 8), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 12), PackedInt32Array(12, 18, 4), PackedInt32Array(22, 21, 4), PackedInt32Array(4, 21, 9), PackedInt32Array(8, 15, 7), PackedInt32Array(22, 23, 21), PackedInt32Array(24, 26, 25), PackedInt32Array(25, 26, 27), PackedInt32Array(27, 26, 5), PackedInt32Array(27, 5, 6), PackedInt32Array(7, 3, 6), PackedInt32Array(4, 18, 22), PackedInt32Array(16, 17, 28), PackedInt32Array(28, 17, 29), PackedInt32Array(29, 17, 30), PackedInt32Array(30, 17, 31), PackedInt32Array(33, 32, 29), PackedInt32Array(29, 32, 28), PackedInt32Array(32, 33, 34), PackedInt32Array(34, 36, 32), PackedInt32Array(32, 36, 11), PackedInt32Array(11, 36, 35), PackedInt32Array(11, 35, 10), PackedInt32Array(36, 37, 35), PackedInt32Array(1, 38, 0), PackedInt32Array(0, 38, 39), PackedInt32Array(41, 40, 42), PackedInt32Array(42, 40, 43), PackedInt32Array(44, 42, 45), PackedInt32Array(45, 42, 46), PackedInt32Array(37, 46, 38), PackedInt32Array(38, 46, 42), PackedInt32Array(38, 42, 43), PackedInt32Array(38, 43, 39), PackedInt32Array(43, 47, 39), PackedInt32Array(37, 36, 46), PackedInt32Array(51, 50, 48), PackedInt32Array(48, 50, 49), PackedInt32Array(30, 31, 52), PackedInt32Array(52, 31, 53), PackedInt32Array(53, 31, 54), PackedInt32Array(54, 31, 55), PackedInt32Array(52, 53, 45), PackedInt32Array(45, 53, 44), PackedInt32Array(57, 56, 23), PackedInt32Array(23, 56, 58), PackedInt32Array(59, 21, 58), PackedInt32Array(58, 21, 23), PackedInt32Array(58, 60, 59), PackedInt32Array(61, 56, 57), PackedInt32Array(57, 62, 61), PackedInt32Array(61, 62, 63), PackedInt32Array(63, 62, 65), PackedInt32Array(63, 65, 64), PackedInt32Array(19, 20, 62), PackedInt32Array(62, 20, 65), PackedInt32Array(67, 66, 64), PackedInt32Array(13, 14, 68), PackedInt32Array(68, 14, 67), PackedInt32Array(67, 14, 69), PackedInt32Array(69, 14, 70), PackedInt32Array(67, 64, 68), PackedInt32Array(68, 64, 65), PackedInt32Array(59, 60, 71), PackedInt32Array(71, 72, 59), PackedInt32Array(59, 72, 74), PackedInt32Array(59, 74, 73), PackedInt32Array(66, 75, 64), PackedInt32Array(64, 75, 63), PackedInt32Array(76, 78, 77), PackedInt32Array(74, 72, 79), PackedInt32Array(79, 63, 74), PackedInt32Array(74, 63, 78), PackedInt32Array(74, 78, 76), PackedInt32Array(63, 75, 78), PackedInt32Array(54, 55, 80), PackedInt32Array(80, 55, 82), PackedInt32Array(80, 82, 81), PackedInt32Array(81, 83, 80), PackedInt32Array(86, 85, 84), PackedInt32Array(87, 40, 41), PackedInt32Array(41, 88, 87), PackedInt32Array(87, 88, 84), PackedInt32Array(88, 83, 84), PackedInt32Array(84, 83, 86), PackedInt32Array(86, 83, 81), PackedInt32Array(85, 86, 89), PackedInt32Array(89, 86, 90), PackedInt32Array(89, 90, 39), PackedInt32Array(39, 47, 89), PackedInt32Array(76, 77, 91), PackedInt32Array(69, 70, 91), PackedInt32Array(91, 70, 92), PackedInt32Array(91, 92, 76)]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ppj64"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wyyng"]
+
+[node name="sports_centre" type="Node3D" unique_id=742401134]
+
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=584668430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3585334, 0.20477223, -29.480682)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=230725396]
+navigation_mesh = SubResource("NavigationMesh_tgu6s")
+
+[node name="VisualMap" parent="NavigationRegion3D" unique_id=2095231798 instance=ExtResource("1_07t8t")]
+
+[node name="ActiveWaypoint" type="Node3D" parent="." unique_id=175400905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7380576, -30.422956)
+
+[node name="Area3D" type="Area3D" parent="ActiveWaypoint" unique_id=229182396]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D" unique_id=810210578]
+shape = SubResource("BoxShape3D_ppj64")
+
+[node name="ArrowIndicator" type="MeshInstance3D" parent="ActiveWaypoint" unique_id=1450103057]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, -0.16096652, 0)
+mesh = SubResource("CapsuleMesh_wyyng")

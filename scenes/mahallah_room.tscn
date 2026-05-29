@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://c1d7syc67o6ml"]
+
+[ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_hfpep"]
+[ext_resource type="PackedScene" uid="uid://1qmjxn3w0wxn" path="res://assets/room.glb" id="1_o2kia"]
+[ext_resource type="PackedScene" uid="uid://5fju1pdqid6q" path="res://assets/locker.glb" id="3_o58tt"]
+[ext_resource type="PackedScene" uid="uid://dlidr0urc5awb" path="res://assets/bed.glb" id="4_o0843"]
+[ext_resource type="PackedScene" uid="uid://c44md7c8edwqd" path="res://assets/table.glb" id="5_4gwge"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_o2kia"]
+vertices = PackedVector3Array(-2.3500004, 0.5, -1.3747096, -2.3500004, 0.5, 0.3752904, -1.6000004, 0.5, 0.3752904, -0.6000004, 0.5, -1.3747096, -0.6000004, 0.5, 1.3752904, 1.3999996, 0.5, 0.6252904, 0.6499996, 0.5, -1.3747096, 0.39999962, 0.5, 1.6252904, 1.3999996, 0.5, 1.3752904, -1.3500004, 0.5, 1.3752904, -1.6000004, 0.5, 2.3752904, -1.3500004, 0.5, 3.3752904, 1.3999996, 0.5, 3.3752904, -4.3500004, 0.5, 3.3752904, -2.6000004, 0.5, 3.3752904, -2.3500004, 0.5, 2.3752904, -4.3500004, 0.5, 1.6252904, 2.3999996, 0.5, 0.3752904, 2.3999996, 0.5, -1.3747096, 2.3999996, 0.5, 2.3752904, 4.3999996, 0.5, 1.6252904, 1.6499996, 0.5, 2.3752904, 2.6499996, 0.5, 3.3752904, 4.3999996, 0.5, 3.3752904)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 3, 2), PackedInt32Array(2, 3, 4), PackedInt32Array(8, 7, 5), PackedInt32Array(5, 7, 6), PackedInt32Array(9, 2, 4), PackedInt32Array(9, 4, 10), PackedInt32Array(10, 4, 7), PackedInt32Array(10, 7, 11), PackedInt32Array(11, 7, 12), PackedInt32Array(14, 13, 15), PackedInt32Array(15, 13, 16), PackedInt32Array(17, 5, 18), PackedInt32Array(18, 5, 6), PackedInt32Array(10, 15, 9), PackedInt32Array(9, 15, 16), PackedInt32Array(21, 8, 19), PackedInt32Array(19, 8, 20), PackedInt32Array(8, 21, 7), PackedInt32Array(7, 21, 12), PackedInt32Array(22, 19, 23), PackedInt32Array(23, 19, 20)]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o58tt"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o0843"]
+
+[node name="MahallahRoom" type="Node3D" unique_id=987672149]
+script = ExtResource("1_hfpep")
+
+[node name="SpawnPoint" type="Marker3D" parent="." unique_id=1599216928]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2231355, 0.20477223, 3.2305145)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1394716512]
+navigation_mesh = SubResource("NavigationMesh_o2kia")
+
+[node name="VisualMap" parent="NavigationRegion3D" unique_id=611529745 instance=ExtResource("1_o2kia")]
+
+[node name="locker" parent="NavigationRegion3D" unique_id=1102733889 instance=ExtResource("3_o58tt")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.9827521, 0.10000014, 2.4664302)
+
+[node name="locker2" parent="NavigationRegion3D" unique_id=178103393 instance=ExtResource("3_o58tt")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -1.9436755, 0.10000014, 2.4664302)
+
+[node name="locker3" parent="NavigationRegion3D" unique_id=632673150 instance=ExtResource("3_o58tt")]
+transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, -1.385459, 0.10000014, 0.8670287)
+
+[node name="locker4" parent="NavigationRegion3D" unique_id=1819859651 instance=ExtResource("3_o58tt")]
+transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, 1.4300318, 0.10000014, 0.9049337)
+
+[node name="bed" parent="NavigationRegion3D" unique_id=1447865870 instance=ExtResource("4_o0843")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.1502583, 0.10000038, 3.4959106)
+
+[node name="bed3" parent="NavigationRegion3D" unique_id=601554113 instance=ExtResource("4_o0843")]
+transform = Transform3D(0.99999976, 0.0006108491, -2.8086195e-08, -0.00061084883, 0.99999934, 0.0009460278, 6.059665e-07, -0.0009460276, 0.9999995, 2.3031693, 0.10000038, -0.88127637)
+
+[node name="bed4" parent="NavigationRegion3D" unique_id=1550666089 instance=ExtResource("4_o0843")]
+transform = Transform3D(0.99999976, 0.0006108491, -2.8086195e-08, -0.00061084883, 0.99999934, 0.0009460278, 6.059665e-07, -0.0009460276, 0.9999995, -2.3384094, 0.10000038, -0.88127637)
+
+[node name="bed2" parent="NavigationRegion3D" unique_id=40888177 instance=ExtResource("4_o0843")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.1460333, 0.10000038, 3.4959106)
+
+[node name="ActiveWaypoint" type="Node3D" parent="." unique_id=623781831]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6415303, 2.288241)
+
+[node name="Area3D" type="Area3D" parent="ActiveWaypoint" unique_id=364549169]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D" unique_id=526101047]
+shape = SubResource("BoxShape3D_o58tt")
+
+[node name="ArrowIndicator" type="MeshInstance3D" parent="ActiveWaypoint" unique_id=464939456]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, -0.16096652, 0)
+mesh = SubResource("CapsuleMesh_o0843")
+
+[node name="table" parent="." unique_id=92295028 instance=ExtResource("5_4gwge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7853787, 0.10000038, 1.4763625)
+
+[node name="table2" parent="." unique_id=1146333531 instance=ExtResource("5_4gwge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9216783, 0.10000038, 1.4763625)
+
+[node name="table3" parent="." unique_id=1253034764 instance=ExtResource("5_4gwge")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.45807946, 0.10000038, -1.0260425)
+
+[node name="table4" parent="." unique_id=554619312 instance=ExtResource("5_4gwge")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0.47244716, 0.10000038, -1.0260425)
+
+[connection signal="body_entered" from="ActiveWaypoint/Area3D" to="." method="_on_area_3d_body_entered"]

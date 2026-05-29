@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://bivhx3v5ukxs6"]
 
-[ext_resource type="PackedScene" uid="uid://fy5oe0yry43w" path="res://scenes/level_3.tscn" id="1_w2twt"]
 [ext_resource type="Script" uid="uid://gg58rki8i8nx" path="res://scenes/ui/hand.gd" id="2_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://buqxcep8ddrw8" path="res://assets/Player.glb" id="4_gubc5"]
 [ext_resource type="Script" uid="uid://c5t10x5ok571v" path="res://scenes/session_manager.gd" id="4_pu3yx"]
 [ext_resource type="PackedScene" uid="uid://6e5ltlm3bvys" path="res://scenes/results_ui.tscn" id="5_gubc5"]
-[ext_resource type="PackedScene" uid="uid://dr6jjl22bucgk" path="res://assets/suitcase2.glb" id="6_rt2n2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pu3yx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -45,8 +43,11 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 0.91435295, 0.40491816, 0, -0.40491816, 0.91435295, 9.09981, 6.750951, 10.498167)
 fov = 90.0
 
-[node name="SceneBG" parent="." unique_id=2113828072 instance=ExtResource("1_w2twt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00040100887, 1.1920929e-07, -0.02558732)
+[node name="Player" parent="." unique_id=1900352769 instance=ExtResource("4_gubc5")]
+
+[node name="Waypoints" type="Node3D" parent="." unique_id=151692518]
+
+[node name="Marker3D" type="Marker3D" parent="Waypoints" unique_id=1699326965]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=707143436]
 
@@ -89,11 +90,5 @@ rotation_curve = SubResource("Curve_c16ls")
 [node name="SessionManager" type="Node" parent="." unique_id=799919880]
 script = ExtResource("4_pu3yx")
 
-[node name="Player" parent="." unique_id=1900352769 instance=ExtResource("4_gubc5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12867117, 4.7683716e-07, -0.06587684)
-
 [node name="ResultsUI" parent="." unique_id=1399925077 instance=ExtResource("5_gubc5")]
 visible = false
-
-[node name="suitcase2" parent="." unique_id=934776380 instance=ExtResource("6_rt2n2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36374354, 3.5762787e-07, 2.4483118)
