@@ -17,6 +17,10 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 3, 2), PackedInt32Arr
 [node name="MahallahRoom" type="Node3D" unique_id=987672149]
 script = ExtResource("1_hfpep")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=195414911]
+transform = Transform3D(0.88781536, 0.3801703, -0.25933456, 0, 0.56352603, 0.8260983, 0.4601998, -0.73342276, 0.5003071, 0, 0, 0)
+shadow_enabled = true
+
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=1599216928]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2231355, 0.20477223, 3.2305145)
 

@@ -6,15 +6,18 @@
 [ext_resource type="PackedScene" uid="uid://6e5ltlm3bvys" path="res://scenes/results_ui.tscn" id="5_gubc5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pu3yx"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_top_color = Color(0.5686275, 0.59607846, 0.92941177, 1)
+sky_horizon_color = Color(0.8481749, 0.84728765, 0.921621, 1)
+ground_horizon_color = Color(0.8481749, 0.84728765, 0.921621, 1)
 
 [sub_resource type="Sky" id="Sky_gubc5"]
 sky_material = SubResource("ProceduralSkyMaterial_pu3yx")
 
 [sub_resource type="Environment" id="Environment_rt2n2"]
-background_mode = 2
+background_color = Color(0.20511743, 0.20511743, 0.20511743, 1)
 sky = SubResource("Sky_gubc5")
+ambient_light_source = 2
+ambient_light_color = Color(0.6901961, 0.6901961, 0.6901961, 1)
 tonemap_mode = 2
 glow_enabled = true
 
@@ -32,7 +35,7 @@ point_count = 3
 
 [node name="MainScene" type="Node3D" unique_id=1976559943]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=87204546]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=840672313]
 environment = SubResource("Environment_rt2n2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=141292077]

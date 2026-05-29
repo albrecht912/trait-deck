@@ -14,6 +14,10 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 4), PackedInt32Arr
 [node name="musolla" type="Node3D" unique_id=1374724535]
 script = ExtResource("1_6lrwl")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=79794177]
+transform = Transform3D(0.8562671, 0.4815763, -0.18679117, 0, 0.36162463, 0.93232375, 0.5165333, -0.79831815, 0.30964726, 0, 0, 0)
+shadow_enabled = true
+
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=1294031424]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2231355, 0.20477223, 3.2305145)
 

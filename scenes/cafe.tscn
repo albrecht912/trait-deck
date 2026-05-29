@@ -14,6 +14,10 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Arr
 [node name="cafe" type="Node3D" unique_id=960553019]
 script = ExtResource("1_a6vgn")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=692309857]
+transform = Transform3D(0.61014515, 0.53628176, -0.58320206, 0, 0.7360971, 0.67687595, 0.7922896, -0.41299257, 0.44912606, 0, 0, 0)
+shadow_enabled = true
+
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=99973363]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2231355, 0.20477223, 3.2305145)
 

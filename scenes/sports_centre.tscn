@@ -14,6 +14,10 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 [node name="sports_centre" type="Node3D" unique_id=742401134]
 script = ExtResource("1_tgu6s")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1847313138]
+transform = Transform3D(-0.99950653, 0.028650476, -0.012876034, 0, 0.40992302, 0.9121201, 0.031410858, 0.91167, -0.40972072, 0, 0, 0)
+shadow_enabled = true
+
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=584668430]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3585334, 0.20477223, -29.480682)
 

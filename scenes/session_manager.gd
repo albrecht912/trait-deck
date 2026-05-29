@@ -162,6 +162,9 @@ func _load_scenario(item_id: int) -> void:
 	answer_ui.visible = true
 	hand.populate_hand_with_choices(card_rows)
 
+	# --- Step H: Sync global MainScene lighting to the player's current Extraversion score ---
+	_process_environmental_updates()
+
 ## ==========================================
 ## 3. ANSWER SUBMISSION HANDLER
 ## ==========================================
@@ -177,6 +180,8 @@ func _on_card_answer_submitted(card: CardUI) -> void:
 	card.queue_free()
 
 	# Step C: Advance to the next item and load the next room + scenario.
+	# _load_scenario() already calls _process_environmental_updates() at the end,
+	# so global lighting is refreshed automatically with the new score.
 	current_item_id += 1
 	_load_scenario(current_item_id)
 
@@ -274,33 +279,27 @@ func _get_domain_average(domain_name: String) -> float:
 	return 3.0
 
 ## ==========================================
-## 8. DYNAMIC 3D ENVIRONMENT MOOD SHIFTS
+## 8. GLOBAL LIGHTING — Extraversion-driven (MainScene DirectionalLight3D)
 ## ==========================================
 
+## Called at the end of every _load_scenario() and after each _save_response().
+## Reads the player's running Extraversion score and adjusts the MainScene's
+## permanent DirectionalLight3D colour and energy accordingly.
+## No room-local light scanning — operates purely on the global rig.
 func _process_environmental_updates() -> void:
 	var extraversion_avg: float = _get_domain_average("Extraversion")
-	var neuroticism_avg: float  = _get_domain_average("Negative Emotionality")
 
-	print("[TraitDeck] Domain averages → Extraversion: %.2f | Neuroticism: %.2f"
-		% [extraversion_avg, neuroticism_avg])
+	# Normalise 1–5 Likert scale to a 0.0–1.0 blend factor.
+	var blend: float = clampf((extraversion_avg - 1.0) / 4.0, 0.0, 1.0)
 
-	_update_3d_atmosphere(extraversion_avg, neuroticism_avg)
+	print("[TraitDeck] Lighting update → Extraversion: %.2f | Blend: %.2f" % [extraversion_avg, blend])
 
-func _update_3d_atmosphere(e_score: float, n_score: float) -> void:
-	# Normalise 1–5 Likert range to 0.0–1.0 blend factors.
-	var energy_factor: float = (e_score - 1.0) / 4.0
-	var stress_factor: float = (n_score - 1.0) / 4.0
-
-	# --- Directional light colour & energy (driven by Extraversion) ---
 	if directional_light:
-		var vibrant_gold := Color(1.0, 0.93, 0.82)
-		var reserved_dim := Color(0.48, 0.52, 0.60)
-		directional_light.light_color  = reserved_dim.lerp(vibrant_gold, energy_factor)
-		directional_light.light_energy = lerp(0.6, 1.3, energy_factor)
+		var introverted_color := Color(0.6, 0.75, 1.0)   # Soft cool blue  (low E)
+		var extroverted_color := Color(1.0, 0.85, 0.6)   # Warm amber gold (high E)
 
-	# --- Fog density & colour (driven by Negative Emotionality) ---
-	if world_environment and world_environment.environment:
-		var env: Environment = world_environment.environment
-		env.fog_enabled     = true
-		env.fog_density     = lerp(0.002, 0.06, stress_factor)
-		env.fog_light_color = Color(0.55, 0.55, 0.55).lerp(Color(0.18, 0.20, 0.25), stress_factor)
+		directional_light.light_color  = introverted_color.lerp(extroverted_color, blend)
+		directional_light.light_energy = lerp(0.5, 1.5, blend)
+
+		print("[TraitDeck] DirectionalLight3D → color=%s | energy=%.2f"
+			% [directional_light.light_color, directional_light.light_energy])

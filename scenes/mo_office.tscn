@@ -15,6 +15,10 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 0), PackedInt32Arr
 [node name="MO_office" type="Node3D" unique_id=496004334]
 script = ExtResource("1_vync6")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=370591594]
+transform = Transform3D(0.9967789, 0.07048019, -0.03826762, 0, 0.47715876, 0.87881714, 0.08019893, -0.8759864, 0.4756218, 0, 0, 0)
+shadow_enabled = true
+
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=758506585]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2231355, 0.20477223, 3.2305145)
 
