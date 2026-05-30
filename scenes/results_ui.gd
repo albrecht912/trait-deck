@@ -7,10 +7,19 @@ signal restart_requested
 @onready var a_value: Label = $CenterContainer/MainLayout/ScoresGrid/A_Value
 @onready var c_value: Label = $CenterContainer/MainLayout/ScoresGrid/C_Value
 @onready var o_value: Label = $CenterContainer/MainLayout/ScoresGrid/O_Value
+
 @onready var restart_button: Button = $CenterContainer/MainLayout/RestartButton
+# 1. Grab a clean reference to the ReturnButton node path
+@onready var return_button: Button = $CenterContainer/MainLayout/ReturnButton
 
 func _ready() -> void:
-	restart_button.pressed.connect(func(): restart_requested.emit())
+	# Wire up the restart signal handler safely
+	if not restart_button.pressed.is_connected(_on_restart_pressed):
+		restart_button.pressed.connect(_on_restart_pressed)
+		
+	# 2. Wire up the Return to Title scene transition safely
+	if not return_button.pressed.is_connected(_on_return_button_pressed):
+		return_button.pressed.connect(_on_return_button_pressed)
 
 func display_scores(e: float, n: float, a: float, c: float, o: float) -> void:
 	e_value.text = "%.2f / 5.0" % e
@@ -18,3 +27,13 @@ func display_scores(e: float, n: float, a: float, c: float, o: float) -> void:
 	a_value.text = "%.2f / 5.0" % a
 	c_value.text = "%.2f / 5.0" % c
 	o_value.text = "%.2f / 5.0" % o
+
+func _on_restart_pressed() -> void:
+	restart_requested.emit()
+
+# 3. Add the callback method to execution switch back to your title layout file
+func _on_return_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()

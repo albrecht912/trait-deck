@@ -14,7 +14,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qeblu"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_opj8w"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qeblu"]
 noise = SubResource("FastNoiseLite_qeblu")
 seamless = true
 
@@ -25,7 +25,7 @@ shader_parameter/cull_back = true
 shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
-shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_opj8w")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_qeblu")
 shader_parameter/dissolve_value = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qeblu"]

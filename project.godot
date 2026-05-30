@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="TraitDeck"
-run/main_scene="uid://bivhx3v5ukxs6"
+run/main_scene="uid://cg6v2h1lajcdm"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://bm7q5bo5veh7q"
 

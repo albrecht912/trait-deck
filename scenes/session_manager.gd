@@ -21,6 +21,9 @@ var active_session_id: int = -1
 var current_item_id: int   = 1
 const TOTAL_ITEMS: int     = 12
 
+## Active player name — resolved from the database on _ready().
+var current_student_name: String = ""
+
 ## Cached question text for the current item — populated in _load_scenario()
 ## and consumed in _on_player_reached_waypoint().
 var _current_question_text: String = ""
@@ -69,7 +72,22 @@ func _ready() -> void:
 	results_ui.restart_requested.connect(_on_restart_requested)
 
 	_clear_player_responses()
-	_start_new_playthrough("Syaqeer")
+
+	# --- Resolve the active player name from the database ---
+	# TitleScreen inserts a SESSION row before changing scenes.
+	# We query the most recent row here to retrieve that name.
+	var name_sql: String = "SELECT student_name FROM SESSION ORDER BY session_id DESC LIMIT 1;"
+	DatabaseManager.db.query(name_sql)
+
+	if DatabaseManager.db.query_result.size() > 0:
+		var latest_row: Dictionary = DatabaseManager.db.query_result[0]
+		current_student_name = str(latest_row.get("student_name", ""))
+		print("[TraitDeck] SessionManager: Successfully synced session data for student: ", current_student_name)
+	else:
+		push_error("[TraitDeck] SessionManager: No active session row found in the database!")
+		current_student_name = "Guest"
+
+	_start_new_playthrough(current_student_name)
 
 	hand.card_answer_submitted.connect(_on_card_answer_submitted)
 
@@ -301,7 +319,7 @@ func _on_restart_requested() -> void:
 	answer_ui.visible  = false
 
 	_clear_player_responses()
-	_start_new_playthrough("Syaqeer")
+	_start_new_playthrough(current_student_name)
 
 	current_item_id = 1
 	_load_scenario(current_item_id)

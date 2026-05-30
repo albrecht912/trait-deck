@@ -2,42 +2,51 @@
 
 [ext_resource type="Theme" uid="uid://bxy4ikbifr7mf" path="res://game_theme.tres" id="1_iugs1"]
 [ext_resource type="Script" uid="uid://by3eeq5aia7u1" path="res://scenes/results_ui.gd" id="2_wkr8k"]
+[ext_resource type="Texture2D" uid="uid://ciu20vhrfhott" path="res://assets/TitleLogo.png" id="3_vislc"]
 
 [node name="ResultsUI" type="Control" unique_id=1399925077]
 layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("1_iugs1")
+script = ExtResource("2_wkr8k")
+
+[node name="TitleLogo" type="TextureRect" parent="." unique_id=1685643432]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.29687497
+anchor_top = 0.029629627
+anchor_right = 0.696875
+anchor_bottom = 0.42962962
+offset_right = 1152.0
+offset_bottom = 648.0
+scale = Vector2(0.4, 0.4)
+mouse_filter = 2
+texture = ExtResource("3_vislc")
+metadata/_edit_use_anchors_ = true
+
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=1447423462]
+show_behind_parent = true
+layout_mode = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0.123934574, 0.15554163, 0.34317455, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=6793263]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -170.0
-offset_top = -192.0
-offset_right = 170.0
-offset_bottom = 192.0
+offset_left = -146.0
+offset_top = -141.5
+offset_right = 146.0
+offset_bottom = 141.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_iugs1")
-script = ExtResource("2_wkr8k")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1113461016]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.1584723, 0.15847233, 0.1584723, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=6793263]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.0703125
-anchor_right = 1.0703125
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="MainLayout" type="VBoxContainer" parent="CenterContainer" unique_id=140861708]
 layout_mode = 2
@@ -104,4 +113,16 @@ layout_mode = 2
 
 [node name="RestartButton" type="Button" parent="CenterContainer/MainLayout" unique_id=979649679]
 layout_mode = 2
-text = "RESTART ASSESSMENT"
+text = "Restart"
+
+[node name="ReturnButton" type="Button" parent="CenterContainer/MainLayout" unique_id=1080790580]
+layout_mode = 2
+text = "Return to Title"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/MainLayout" unique_id=1253296301]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/MainLayout/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MainLayout/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MainLayout/QuitButton" to="." method="_on_quit_button_pressed"]
