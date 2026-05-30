@@ -45,9 +45,9 @@ color = Color(0.123934574, 0.15554163, 0.34317455, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.834375
-anchor_top = 0.8537037
+anchor_top = 0.787963
 anchor_right = 0.99010414
-anchor_bottom = 0.9814815
+anchor_bottom = 0.9157407
 text = "Tutorial:
 
 1. Left Click to Move Character

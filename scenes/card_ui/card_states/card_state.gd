@@ -3,7 +3,9 @@ extends Node
 
 enum State {BASE, CLICKED, DRAGGING, AIMING, RELEASED, SELECTED}
 
-signal transition_requested(from: CardState, to: State)
+# silence the compiler:
+@warning_ignore("unused_signal")
+signal transition_requested(from: CardState, to: State)  # Unused — FSM uses direct method calls.
 
 @export var state: State
 

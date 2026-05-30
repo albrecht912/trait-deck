@@ -17,7 +17,7 @@ var target_base_position: Vector3 = Vector3.ZERO
 
 ## Called by SessionManager immediately after a new room is loaded.
 ## Snaps the camera to the room's configured position and rotation.
-func setup_camera_for_room(mode: String, room_pos: Vector3, room_rot: Vector3) -> void:
+func setup_camera_for_room(_mode: String, room_pos: Vector3, room_rot: Vector3) -> void:
 	# Force static behaviour globally until other modes are implemented.
 	active_mode = "Static"
 

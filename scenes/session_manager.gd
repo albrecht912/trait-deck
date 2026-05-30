@@ -71,8 +71,6 @@ func _ready() -> void:
 	results_ui.visible = false
 	results_ui.restart_requested.connect(_on_restart_requested)
 
-	_clear_player_responses()
-
 	# --- Resolve the active player name from the database ---
 	# TitleScreen inserts a SESSION row before changing scenes.
 	# We query the most recent row here to retrieve that name.
@@ -97,10 +95,6 @@ func _ready() -> void:
 ## ==========================================
 ## 1. SESSION INITIALISATION
 ## ==========================================
-
-func _clear_player_responses() -> void:
-	DatabaseManager.db.query("DELETE FROM PLAYER_RESPONSE;")
-	print("[TraitDeck] PLAYER_RESPONSE table cleared for new run.")
 
 func _start_new_playthrough(student_name: String) -> void:
 	var sql: String = "INSERT INTO SESSION (student_name, current_scene) VALUES ('%s', 1);" % student_name
@@ -318,7 +312,6 @@ func _on_restart_requested() -> void:
 	results_ui.visible = false
 	answer_ui.visible  = false
 
-	_clear_player_responses()
 	_start_new_playthrough(current_student_name)
 
 	current_item_id = 1

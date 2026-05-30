@@ -123,7 +123,7 @@ func _process(delta: float) -> void:
 
 ## Dynamically repositions the Shadow TextureRect based on the card's screen
 ## position and current hover scale, simulating a perspective elevation effect.
-func handle_shadow(delta: float) -> void:
+func handle_shadow(_delta: float) -> void:
 	var center: Vector2 = get_viewport_rect().size / 2.0
 	var distance: float = global_position.x - center.x
 
