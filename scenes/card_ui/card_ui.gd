@@ -19,11 +19,22 @@ enum DragState { IDLE, DRAGGING, RELEASED, PLACED }
 ## BFI-2 DATABASE TRACKING PROPERTIES
 ## ==========================================
 
-var card_db_id: int    = -1
-var likert_value: int  = -1
+var card_db_id: int = -1
 
 # Original sibling index in Hand — used to restore slot order on cancel.
 var hand_index: int = -1
+
+## ==========================================
+## LIKERT VALUE (drives both corner labels)
+## ==========================================
+
+# Set this to automatically update both LikertValTopLeft and LikertValBottomRight.
+var likert_value: int = -1 :
+	set(value):
+		likert_value = value
+		# Guard: nodes may not be ready yet during instantiation.
+		if is_node_ready():
+			_update_likert_labels()
 
 ## ==========================================
 ## DRAG TRACKING
@@ -46,24 +57,25 @@ var drop_zone: Area2D = null
 ## NODE REFERENCES
 ## ==========================================
 
-@onready var color_rect: ColorRect = $Color
-@onready var state_label: Label    = $State
-@onready var answer_label: Label   = $AnswerLabel
+@onready var answer_label: Label          = $AnswerLabel
+@onready var likert_top_left: Label       = $LikertValTopLeft
+@onready var likert_bottom_right: Label   = $LikertValBottomRight
 
 ## ==========================================
 ## LIFECYCLE
 ## ==========================================
 
 func _ready() -> void:
-	# Ensure the card starts in a clean idle state.
-	_set_drag_state(DragState.IDLE)
+	# Apply any likert_value that was set before the node was ready.
+	_update_likert_labels()
+	# Ensure drag state is clean on spawn.
+	drag_state = DragState.IDLE
 
 ## ==========================================
 ## INPUT HANDLING
 ## ==========================================
 
 func _gui_input(event: InputEvent) -> void:
-	# ---- LEFT MOUSE DOWN: begin drag ----
 	if event is InputEventMouseButton:
 		var mb := event as InputEventMouseButton
 
@@ -86,8 +98,7 @@ func _input(event: InputEvent) -> void:
 	# Track mouse movement globally while dragging so the card follows even if
 	# the cursor leaves the card's own rect.
 	if drag_state == DragState.DRAGGING and event is InputEventMouseMotion:
-		# Use the saved offset so the card stays locked to the exact grab point,
-		# not just centered under the cursor.
+		# Use the saved offset so the card stays locked to the exact grab point.
 		global_position = get_global_mouse_position() + _drag_offset
 
 ## ==========================================
@@ -103,35 +114,31 @@ func _begin_drag() -> void:
 	_drag_offset = global_position - get_global_mouse_position()
 
 	# Step 2: Break free from the Hand container's layout.
-	# top_level = true makes the Control ignore its parent's transform/layout.
 	top_level = true
 
 	# Step 3: Immediately re-lock the card to the cursor using the saved offset
 	# so there is zero visual jump on the frame top_level is applied.
 	global_position = get_global_mouse_position() + _drag_offset
 
-	_set_drag_state(DragState.DRAGGING)
+	drag_state = DragState.DRAGGING
 
 func _end_drag() -> void:
-	_set_drag_state(DragState.RELEASED)
+	drag_state = DragState.RELEASED
 
-	# Check whether the card is overlapping the DropZone.
 	if _is_over_drop_zone():
 		_place_card()
 	else:
 		_cancel_drag()
 
 func _place_card() -> void:
-	_set_drag_state(DragState.PLACED)
+	drag_state = DragState.PLACED
 
-	# Re-attach to the layout (top_level = false) so the card is part of the
-	# CanvasLayer coordinate space again.
+	# Re-attach to the layout so the card is part of the CanvasLayer space again.
 	top_level = false
 
 	# Snap the card's center to the center of the DropZone.
 	if drop_zone:
 		var zone_center: Vector2 = drop_zone.global_position
-		# Offset by half the card size so the card is centered on the zone.
 		global_position = zone_center - size / 2.0
 	else:
 		# Fallback: snap to viewport center.
@@ -147,8 +154,7 @@ func _cancel_drag() -> void:
 	# Instantly snap back to the position the card was at before dragging began.
 	global_position = original_global_position
 
-	# Reset state and notify Hand.gd to restore the sibling index.
-	_set_drag_state(DragState.IDLE)
+	drag_state = DragState.IDLE
 	reparent_requested.emit(self)
 
 func _confirm_answer() -> void:
@@ -165,10 +171,8 @@ func _is_over_drop_zone() -> bool:
 	if drop_zone == null:
 		return false
 
-	# Build a screen-space rect for the card.
 	var card_rect: Rect2 = Rect2(global_position, size)
 
-	# Build a screen-space rect for the drop zone using its CollisionShape2D child.
 	var shape_node: CollisionShape2D = drop_zone.get_node_or_null("CollisionShape2D") as CollisionShape2D
 	if shape_node == null:
 		return false
@@ -183,24 +187,17 @@ func _is_over_drop_zone() -> bool:
 	return card_rect.intersects(zone_rect)
 
 ## ==========================================
-## STATE VISUAL FEEDBACK
+## LIKERT LABEL HELPER
 ## ==========================================
 
-func _set_drag_state(new_state: DragState) -> void:
-	drag_state = new_state
-	match drag_state:
-		DragState.IDLE:
-			color_rect.color = Color.WEB_GREEN
-			state_label.text = "IDLE"
-		DragState.DRAGGING:
-			color_rect.color = Color.NAVY_BLUE
-			state_label.text = "DRAGGING"
-		DragState.RELEASED:
-			color_rect.color = Color.DARK_VIOLET
-			state_label.text = "RELEASED"
-		DragState.PLACED:
-			color_rect.color = Color.GOLD
-			state_label.text = "PLACED"
+## Syncs both corner labels to the current likert_value.
+## Called from the setter and from _ready() to handle deferred assignment.
+func _update_likert_labels() -> void:
+	var display_text: String = str(likert_value) if likert_value >= 0 else ""
+	if likert_top_left:
+		likert_top_left.text = display_text
+	if likert_bottom_right:
+		likert_bottom_right.text = display_text
 
 ## ==========================================
 ## DATABASE HELPER

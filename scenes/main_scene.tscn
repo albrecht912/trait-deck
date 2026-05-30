@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dsoqtrql3o4d6" path="res://scenes/camera_3d.gd" id="1_gubc5"]
 [ext_resource type="Script" uid="uid://gg58rki8i8nx" path="res://scenes/ui/hand.gd" id="2_7ykc4"]
+[ext_resource type="Theme" uid="uid://bxy4ikbifr7mf" path="res://game_theme.tres" id="2_gubc5"]
 [ext_resource type="Script" uid="uid://c5t10x5ok571v" path="res://scenes/session_manager.gd" id="4_pu3yx"]
 [ext_resource type="PackedScene" uid="uid://6e5ltlm3bvys" path="res://scenes/results_ui.tscn" id="5_gubc5"]
 
@@ -67,6 +68,7 @@ offset_right = 0.5
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_gubc5")
 
 [node name="Hand" type="Control" parent="AnswerUI" unique_id=60214265]
 custom_minimum_size = Vector2(1200, 210)

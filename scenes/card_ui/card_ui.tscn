@@ -2,12 +2,23 @@
 
 [ext_resource type="Theme" uid="uid://bxy4ikbifr7mf" path="res://game_theme.tres" id="1_5x102"]
 [ext_resource type="Script" uid="uid://buijflaec8qbs" path="res://scenes/card_ui/card_ui.gd" id="2_e1hm3"]
+[ext_resource type="Texture2D" uid="uid://ckcnfkgd12l6e" path="res://assets/CardBG.svg" id="3_ci03s"]
 [ext_resource type="Script" uid="uid://b04p3d6yqyjsg" path="res://scenes/card_ui/card_state_machine.gd" id="3_psaan"]
+[ext_resource type="Shader" uid="uid://dkgtklshkoxd8" path="res://shaders/fake_3d.gdshader" id="3_qeblu"]
+[ext_resource type="Texture2D" uid="uid://bmwmwo01wdehg" path="res://assets/CardShadow.svg" id="4_js3ux"]
 [ext_resource type="Script" uid="uid://do6eybnm3jxgo" path="res://scenes/card_ui/card_states/card_base_state.gd" id="4_orrkt"]
 [ext_resource type="Script" uid="uid://dhkrmje4nc4nw" path="res://scenes/card_ui/card_states/card_clicked_state.gd" id="5_yxx8x"]
 [ext_resource type="Script" uid="uid://bge4v2oi5selh" path="res://scenes/card_ui/card_states/card_dragging_state.gd" id="6_ci03s"]
 [ext_resource type="Script" uid="uid://b10x7r0t12qfb" path="res://scenes/card_ui/card_states/card_released_state.gd" id="7_js3ux"]
 [ext_resource type="Script" uid="uid://b5pjkwvesxak6" path="res://scenes/card_ui/card_states/card_selected_state.gd" id="8_selct"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_opj8w"]
+shader = ExtResource("3_qeblu")
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5x102"]
 size = Vector2(150, 210)
@@ -23,43 +34,65 @@ pivot_offset = Vector2(75, 105)
 theme = ExtResource("1_5x102")
 script = ExtResource("2_e1hm3")
 
-[node name="Color" type="ColorRect" parent="." unique_id=286733211]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.16007689, 0.244638, 0.5575076, 1)
+[node name="CardBackground" type="TextureRect" parent="." unique_id=1157856669]
+material = SubResource("ShaderMaterial_opj8w")
+layout_mode = 0
+offset_right = 149.99304
+offset_bottom = 210.00127
+texture = ExtResource("3_ci03s")
 
-[node name="State" type="Label" parent="." unique_id=447465053]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "state"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Shadow" type="TextureRect" parent="." unique_id=878228372]
+z_index = -1
+layout_mode = 0
+offset_left = 0.0005564471
+offset_top = 14.002983
+offset_right = 150.00055
+offset_bottom = 224.00424
+texture = ExtResource("4_js3ux")
 
 [node name="AnswerLabel" type="Label" parent="." unique_id=1937504643]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.9960256
-offset_top = 5.0027847
-offset_right = -5.0039673
-offset_bottom = -4.997223
+anchor_left = 0.11717293
+anchor_top = 0.13997026
+anchor_right = 0.8859374
+anchor_bottom = 0.86225116
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 clip_text = true
 
+[node name="LikertValTopLeft" type="Label" parent="." unique_id=1477299215]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.059974562
+anchor_top = 0.042869646
+anchor_right = 0.172999
+anchor_bottom = 0.12382202
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LikertValBottomRight" type="Label" parent="." unique_id=1116713205]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.833668
+anchor_top = 0.8809397
+anchor_right = 0.947
+anchor_bottom = 0.9620001
+offset_left = 16.95366
+offset_top = 17.0
+offset_right = 16.907516
+offset_bottom = 16.977325
+rotation = 3.1415927
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DropPointDetector" type="Area2D" parent="." unique_id=313377560]
+visible = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropPointDetector" unique_id=562213137]
