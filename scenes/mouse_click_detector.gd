@@ -27,12 +27,25 @@ extends Node
 const RAY_LENGTH: float = 1000.0
 
 ## ==========================================
+## INPUT GATE
+## ==========================================
+
+## Set to false by SessionManager when the player enters the assessment phase
+## so clicks cannot trigger pathfinding while the card UI is active.
+## Set back to true when a new exploration phase begins.
+var input_enabled: bool = true
+
+## ==========================================
 ## INPUT HANDLER
 ## ==========================================
 
 ## _unhandled_input fires ONLY when no Control / CanvasLayer node has already
 ## consumed the event — this is the built-in UI guard for free.
 func _unhandled_input(event: InputEvent) -> void:
+	# Hard gate: block all raycasting while the assessment phase is active.
+	if not input_enabled:
+		return
+
 	# Only react to a left mouse button press.
 	if not (event is InputEventMouseButton):
 		return

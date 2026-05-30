@@ -29,6 +29,7 @@ navigation_mesh = SubResource("NavigationMesh_a6vgn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4676241, 0.6415303, 0.22900844)
 
 [node name="Area3D" type="Area3D" parent="ActiveWaypoint" unique_id=723965591]
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D" unique_id=1175942973]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13382375, 0)
@@ -36,3 +37,5 @@ shape = SubResource("BoxShape3D_qifwr")
 
 [node name="arrow" parent="ActiveWaypoint" unique_id=737539261 instance=ExtResource("3_de0wi")]
 transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0.722363, 0)
+
+[connection signal="body_entered" from="ActiveWaypoint/Area3D" to="." method="_on_area_3d_body_entered"]
