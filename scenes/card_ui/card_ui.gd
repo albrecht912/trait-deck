@@ -107,8 +107,8 @@ func _ready() -> void:
 
 	_update_likert_labels()
 	drag_state = DragState.IDLE
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
+	# mouse_entered.connect(_on_mouse_entered)
+	# mouse_exited.connect(_on_mouse_exited)
 
 ## ==========================================
 ## PROCESS (shadow update every frame)
@@ -193,6 +193,11 @@ func _input(event: InputEvent) -> void:
 	if drag_state == DragState.DRAGGING and event is InputEventMouseMotion:
 		global_position = get_global_mouse_position() + _drag_offset
 
+		# Juice B: Velocity-driven wobble — card leans in the direction of mouse movement.
+		var mouse_velocity: Vector2 = event.relative
+		var target_wobble: float = clampf(mouse_velocity.x * 0.15, -25.0, 25.0)
+		DampedOscillator.animate(self, "rotation_degrees", 200.0, 10.0, target_wobble, 1.0)
+
 ## ==========================================
 ## HOVER ANIMATIONS
 ## ==========================================
@@ -250,6 +255,9 @@ func _begin_drag() -> void:
 	_reset_tilt()
 	_reset_label_positions()
 
+	# Juice A: Squash-and-stretch pickup spring — card elastically pops up on lift.
+	DampedOscillator.animate(self, "scale", 250.0, 12.0, 18.0, 1.15)
+
 func _end_drag() -> void:
 	drag_state = DragState.RELEASED
 	if _is_over_drop_zone():
@@ -278,6 +286,11 @@ func _cancel_drag() -> void:
 	drag_state = DragState.IDLE
 	scale = Vector2.ONE
 	_reset_label_positions()
+
+	# Juice C: Snap-back bounce — card settles into its slot with a rubber-band spring.
+	DampedOscillator.animate(self, "scale", 300.0, 8.0, 20.0, 1.0)
+	DampedOscillator.animate(self, "rotation_degrees", 250.0, 9.0, 15.0, 0.0)
+
 	reparent_requested.emit(self)
 
 func _confirm_answer() -> void:
@@ -297,14 +310,11 @@ func animate_dissolve_and_free() -> void:
 	# Prevent any further mouse interaction during the dissolve.
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	# --- FIX: Save screen coordinates BEFORE escaping the container layout ---
+	# Save screen coordinates BEFORE escaping the container layout so the card
+	# stays exactly where it was placed when top_level recalculates its transform.
 	var current_global_pos: Vector2 = global_position
 	top_level = true
-	global_position = current_global_pos # <-- Force it to stay exactly where it was placedeens()
-
-	# Ensure the card is detached from the Hand container so clip_contents
-	# on the parent Control cannot hide it mid-dissolve.
-	top_level = true
+	global_position = current_global_pos
 
 	# Guard: if the material doesn't support dissolve_value, emit and free immediately.
 	if not (card_texture and card_texture.material):

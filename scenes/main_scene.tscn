@@ -5,6 +5,9 @@
 [ext_resource type="Theme" uid="uid://bxy4ikbifr7mf" path="res://game_theme.tres" id="2_gubc5"]
 [ext_resource type="Script" uid="uid://c5t10x5ok571v" path="res://scenes/session_manager.gd" id="4_pu3yx"]
 [ext_resource type="PackedScene" uid="uid://6e5ltlm3bvys" path="res://scenes/results_ui.tscn" id="5_gubc5"]
+[ext_resource type="Shader" uid="uid://dkgtklshkoxd8" path="res://shaders/fake_3d.gdshader" id="6_c16ls"]
+[ext_resource type="Texture2D" uid="uid://bxov87g2wlbba" path="res://assets/CardFront.svg" id="7_18nlu"]
+[ext_resource type="Texture2D" uid="uid://bmwmwo01wdehg" path="res://assets/CardShadow.svg" id="8_18nlu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pu3yx"]
 sky_top_color = Color(0.5686275, 0.59607846, 0.92941177, 1)
@@ -33,6 +36,22 @@ point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2twt"]
 size = Vector2(640, 436)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c1pb6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_opj8w"]
+noise = SubResource("FastNoiseLite_c1pb6")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6wevv"]
+shader = ExtResource("6_c16ls")
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_opj8w")
+shader_parameter/dissolve_value = 1.0
 
 [node name="MainScene" type="Node3D" unique_id=1976559943]
 
@@ -98,3 +117,30 @@ script = ExtResource("4_pu3yx")
 
 [node name="ResultsUI" parent="." unique_id=1399925077 instance=ExtResource("5_gubc5")]
 visible = false
+
+[node name="CardDrawpile" type="TextureRect" parent="." unique_id=1410437921]
+material = SubResource("ShaderMaterial_6wevv")
+offset_left = 50.0
+offset_top = 778.0
+offset_right = 200.0
+offset_bottom = 988.0013
+pivot_offset = Vector2(75, 105)
+theme = ExtResource("2_gubc5")
+texture = ExtResource("7_18nlu")
+
+[node name="Label" type="Label" parent="CardDrawpile" unique_id=604342322]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 27.0
+offset_right = 109.0
+offset_bottom = 50.0
+text = "TraitDeck"
+
+[node name="CardShadow" type="TextureRect" parent="CardDrawpile" unique_id=57208311]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_6wevv")
+layout_mode = 0
+offset_top = 11.0
+offset_right = 150.0
+offset_bottom = 221.00122
+texture = ExtResource("8_18nlu")
