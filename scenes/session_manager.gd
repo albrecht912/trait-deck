@@ -43,6 +43,7 @@ var session_timeline: Dictionary = {
 
 @onready var current_room_slot: Node3D   = $"../CurrentRoom"
 @onready var camera_3d: Camera3D         = $"../Camera3D"
+@onready var player: Player              = $"../Player"
 @onready var answer_ui: CanvasLayer      = $"../AnswerUI"
 @onready var question_card: QuestionCard = $"../AnswerUI/QuestionCard"
 @onready var hand: Hand                  = $"../AnswerUI/Hand"
@@ -126,6 +127,17 @@ func _load_scenario(item_id: int) -> void:
 
 	current_room_slot.add_child(new_room)
 	print("[TraitDeck] Loaded room: %s" % target_scene_path)
+
+	# --- Step D.5: Teleport the player to the room's SpawnPoint ---
+	# This runs synchronously before any UI animation so the camera sees the
+	# player in the correct position the exact frame the question card slides in.
+	var spawn_node: Node3D = new_room.find_child("SpawnPoint", true, false) as Node3D
+	if spawn_node:
+		if player and player.has_method("teleport_to_position"):
+			player.teleport_to_position(spawn_node.global_position)
+			print("[TraitDeck] Player snapped to SpawnPoint: %s" % spawn_node.global_position)
+	else:
+		push_warning("[TraitDeck] Room '%s' is missing a 'SpawnPoint' node!" % new_room.name)
 
 	# --- Step E: Sync camera to the room's exported configuration ---
 	camera_3d.setup_camera_for_room(

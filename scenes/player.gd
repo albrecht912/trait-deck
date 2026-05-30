@@ -39,6 +39,21 @@ func _ready() -> void:
 func set_movement_target(target_point: Vector3) -> void:
 	nav_agent.target_position = target_point
 
+## Instantly relocates the player to a world-space position without any
+## movement lag or residual velocity artifacts.
+## Called by SessionManager after each room loads to snap the player to SpawnPoint.
+func teleport_to_position(target_global_pos: Vector3) -> void:
+	# 1. Override position cleanly.
+	global_position = target_global_pos
+
+	# 2. Halt all momentum so the player doesn't slide on arrival.
+	velocity = Vector3.ZERO
+
+	# 3. Flush the navigation agent's waypoint cache so it doesn't try to
+	#    resume a stale path from the previous room.
+	if has_node("NavigationAgent3D"):
+		$NavigationAgent3D.target_position = target_global_pos
+
 ## ==========================================
 ## PHYSICS LOOP
 ## ==========================================
