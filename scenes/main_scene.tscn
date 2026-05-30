@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://6e5ltlm3bvys" path="res://scenes/results_ui.tscn" id="5_gubc5"]
 [ext_resource type="Shader" uid="uid://dkgtklshkoxd8" path="res://shaders/fake_3d.gdshader" id="6_c16ls"]
 [ext_resource type="Texture2D" uid="uid://bxov87g2wlbba" path="res://assets/CardFront.svg" id="7_18nlu"]
+[ext_resource type="Script" uid="uid://bupa3tmga3i1a" path="res://scenes/mouse_click_detector.gd" id="7_e1cbu"]
 [ext_resource type="Texture2D" uid="uid://bmwmwo01wdehg" path="res://assets/CardShadow.svg" id="8_18nlu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pu3yx"]
@@ -108,11 +109,14 @@ position = Vector2(960, 540)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnswerUI/DropZone" unique_id=1003156704]
 shape = SubResource("RectangleShape2D_w2twt")
 
+[node name="ResultsUI" parent="." unique_id=1399925077 instance=ExtResource("5_gubc5")]
+visible = false
+
 [node name="SessionManager" type="Node" parent="." unique_id=799919880]
 script = ExtResource("4_pu3yx")
 
-[node name="ResultsUI" parent="." unique_id=1399925077 instance=ExtResource("5_gubc5")]
-visible = false
+[node name="MouseClickDetector" type="Node" parent="." unique_id=1924637389]
+script = ExtResource("7_e1cbu")
 
 [node name="CardDrawpile" type="TextureRect" parent="." unique_id=1410437921]
 material = SubResource("ShaderMaterial_6wevv")

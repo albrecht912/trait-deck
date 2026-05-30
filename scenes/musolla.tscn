@@ -19,7 +19,7 @@ transform = Transform3D(0.8562671, 0.4815763, -0.18679117, 0, 0.36162463, 0.9323
 shadow_enabled = true
 
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=1294031424]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2231355, 0.20477223, 3.2305145)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2231355, 0.53734696, 3.2305145)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1069724476]
 navigation_mesh = SubResource("NavigationMesh_6lrwl")
