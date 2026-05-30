@@ -28,11 +28,9 @@ var hand_index: int = -1
 ## LIKERT VALUE (drives both corner labels)
 ## ==========================================
 
-# Set this to automatically update both LikertValTopLeft and LikertValBottomRight.
 var likert_value: int = -1 :
 	set(value):
 		likert_value = value
-		# Guard: nodes may not be ready yet during instantiation.
 		if is_node_ready():
 			_update_likert_labels()
 
@@ -43,39 +41,110 @@ var likert_value: int = -1 :
 var drag_state: DragState = DragState.IDLE
 
 # World-space position of the card when the player first clicks it.
-# Used to snap back on cancel or failed drop.
 var original_global_position: Vector2 = Vector2.ZERO
 
 # Offset between the card's global_position and the cursor at the moment of click.
-# Keeps the card locked to the exact grab point throughout the drag.
 var _drag_offset: Vector2 = Vector2.ZERO
 
 # Reference to the DropZone Area2D inside AnswerUI — set by Hand.gd after spawn.
 var drop_zone: Area2D = null
 
 ## ==========================================
+## TILT SHADER PARAMETERS
+## ==========================================
+
+var angle_x_max: float = deg_to_rad(15.0)
+var angle_y_max: float = deg_to_rad(15.0)
+
+## ==========================================
+## SHADOW PARAMETERS
+## ==========================================
+
+var max_offset_shadow: float    = 20.0
+var base_shadow_y_offset: float = 10.0
+
+## ==========================================
+## LABEL PARALLAX TRACKING
+## ==========================================
+
+# Stores the resting local position of each text label so they can snap back.
+var base_label_positions: Dictionary = {}
+
+## ==========================================
+## HOVER / ROTATION TWEEN HANDLES
+## ==========================================
+
+var tween_hover: Tween
+var tween_rot: Tween
+
+## ==========================================
 ## NODE REFERENCES
 ## ==========================================
 
-@onready var answer_label: Label          = $AnswerLabel
-@onready var likert_top_left: Label       = $LikertValTopLeft
-@onready var likert_bottom_right: Label   = $LikertValBottomRight
+@onready var card_texture: TextureRect  = $CardBackground
+@onready var card_shadow: TextureRect   = $Shadow
+
+# Labels are children of CardBackground.
+@onready var answer_label: Label        = $CardBackground/AnswerLabel
+@onready var likert_top_left: Label     = $CardBackground/LikertValTopLeft
+@onready var likert_bottom_right: Label = $CardBackground/LikertValBottomRight
 
 ## ==========================================
 ## LIFECYCLE
 ## ==========================================
 
 func _ready() -> void:
-	# Apply any likert_value that was set before the node was ready.
+	# --- Isolate shader resources: each card gets its own material instance ---
+	if card_texture.material:
+		card_texture.material = card_texture.material.duplicate()
+	if card_shadow.material:
+		card_shadow.material = card_shadow.material.duplicate()
+
+	# --- Capture resting positions of all text labels for parallax reset ---
+	base_label_positions["answer"]       = answer_label.position
+	base_label_positions["likert_tl"]    = likert_top_left.position
+	base_label_positions["likert_br"]    = likert_bottom_right.position
+
 	_update_likert_labels()
-	# Ensure drag state is clean on spawn.
 	drag_state = DragState.IDLE
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+
+## ==========================================
+## PROCESS (shadow update every frame)
+## ==========================================
+
+func _process(delta: float) -> void:
+	handle_shadow(delta)
+
+## ==========================================
+## SHADOW HANDLER
+## ==========================================
+
+## Dynamically repositions the Shadow TextureRect based on the card's screen
+## position and current hover scale, simulating a perspective elevation effect.
+func handle_shadow(delta: float) -> void:
+	var center: Vector2 = get_viewport_rect().size / 2.0
+	var distance: float = global_position.x - center.x
+
+	# Horizontal: shadow shifts away from the screen center proportionally.
+	card_shadow.position.x = lerp(
+		0.0,
+		-sign(distance) * max_offset_shadow,
+		abs(distance / center.x)
+	)
+
+	# Vertical: shadow drops further when the card is scaled up (hover/drag),
+	# simulating the card lifting off the surface.
+	var height_factor: float = (scale.x - 1.0) * 50.0
+	card_shadow.position.y = base_shadow_y_offset + height_factor
 
 ## ==========================================
 ## INPUT HANDLING
 ## ==========================================
 
 func _gui_input(event: InputEvent) -> void:
+	# --- Handle click/drag/cancel inputs ---
 	if event is InputEventMouseButton:
 		var mb := event as InputEventMouseButton
 
@@ -83,7 +152,6 @@ func _gui_input(event: InputEvent) -> void:
 			if drag_state == DragState.IDLE:
 				_begin_drag()
 			elif drag_state == DragState.PLACED:
-				# Second left-click while placed → confirm submission.
 				_confirm_answer()
 
 		elif mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed:
@@ -94,37 +162,96 @@ func _gui_input(event: InputEvent) -> void:
 			if drag_state == DragState.DRAGGING or drag_state == DragState.PLACED:
 				_cancel_drag()
 
+	# --- Tilt shader: skip when dragging or placed ---
+	if drag_state == DragState.DRAGGING or drag_state == DragState.PLACED:
+		return
+	if not event is InputEventMouseMotion:
+		return
+
+	# --- Compute perspective tilt from local mouse position ---
+	var mouse_pos: Vector2 = get_local_mouse_position()
+
+	var lerp_val_x: float = remap(mouse_pos.x, 0.0, size.x, 0.0, 1.0)
+	var lerp_val_y: float = remap(mouse_pos.y, 0.0, size.y, 0.0, 1.0)
+
+	var rot_x: float = rad_to_deg(lerp_angle(-angle_x_max, angle_x_max, lerp_val_x))
+	var rot_y: float = rad_to_deg(lerp_angle(angle_y_max, -angle_y_max, lerp_val_y))
+
+	_set_tilt(rot_y, rot_x)
+
+	# --- 3D parallax emulation: shift all text labels opposite to the tilt ---
+	var text_offset_x: float = rot_y * 0.4
+	var text_offset_y: float = -rot_x * 0.4
+	var parallax_offset: Vector2 = Vector2(text_offset_x, text_offset_y)
+
+	answer_label.position      = base_label_positions["answer"]    + parallax_offset
+	likert_top_left.position   = base_label_positions["likert_tl"] + parallax_offset
+	likert_bottom_right.position = base_label_positions["likert_br"] + parallax_offset
+
 func _input(event: InputEvent) -> void:
-	# Track mouse movement globally while dragging so the card follows even if
-	# the cursor leaves the card's own rect.
+	# Track mouse movement globally while dragging.
 	if drag_state == DragState.DRAGGING and event is InputEventMouseMotion:
-		# Use the saved offset so the card stays locked to the exact grab point.
 		global_position = get_global_mouse_position() + _drag_offset
+
+## ==========================================
+## HOVER ANIMATIONS
+## ==========================================
+
+func _on_mouse_entered() -> void:
+	if drag_state == DragState.DRAGGING or drag_state == DragState.PLACED:
+		return
+
+	if tween_hover and tween_hover.is_running():
+		tween_hover.kill()
+
+	tween_hover = create_tween()
+	tween_hover.set_ease(Tween.EASE_OUT)
+	tween_hover.set_trans(Tween.TRANS_ELASTIC)
+	tween_hover.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
+
+func _on_mouse_exited() -> void:
+	# --- Reset shader tilt rotation and label parallax ---
+	if tween_rot and tween_rot.is_running():
+		tween_rot.kill()
+
+	if card_texture and card_texture.material:
+		tween_rot = create_tween()
+		tween_rot.set_ease(Tween.EASE_OUT)
+		tween_rot.set_trans(Tween.TRANS_BACK)
+		tween_rot.set_parallel(true)
+		tween_rot.tween_property(card_texture.material, "shader_parameter/x_rot", 0.0, 0.5)
+		tween_rot.tween_property(card_texture.material, "shader_parameter/y_rot", 0.0, 0.5)
+		# Return all text labels to their resting positions.
+		tween_rot.tween_property(answer_label,        "position", base_label_positions["answer"],    0.5)
+		tween_rot.tween_property(likert_top_left,     "position", base_label_positions["likert_tl"], 0.5)
+		tween_rot.tween_property(likert_bottom_right, "position", base_label_positions["likert_br"], 0.5)
+
+	# --- Reset card scale ---
+	if tween_hover and tween_hover.is_running():
+		tween_hover.kill()
+
+	tween_hover = create_tween()
+	tween_hover.set_ease(Tween.EASE_OUT)
+	tween_hover.set_trans(Tween.TRANS_ELASTIC)
+	tween_hover.tween_property(self, "scale", Vector2.ONE, 0.55)
 
 ## ==========================================
 ## DRAG LIFECYCLE METHODS
 ## ==========================================
 
 func _begin_drag() -> void:
-	# Capture the current world-space position as the "home" to return to on cancel.
 	original_global_position = global_position
-
-	# Step 1: Record the offset between the card's screen position and the cursor
-	# BEFORE setting top_level. This preserves the grab point so the card doesn't jump.
 	_drag_offset = global_position - get_global_mouse_position()
-
-	# Step 2: Break free from the Hand container's layout.
 	top_level = true
-
-	# Step 3: Immediately re-lock the card to the cursor using the saved offset
-	# so there is zero visual jump on the frame top_level is applied.
 	global_position = get_global_mouse_position() + _drag_offset
-
 	drag_state = DragState.DRAGGING
+	_kill_hover_tweens()
+	scale = Vector2.ONE
+	_reset_tilt()
+	_reset_label_positions()
 
 func _end_drag() -> void:
 	drag_state = DragState.RELEASED
-
 	if _is_over_drop_zone():
 		_place_card()
 	else:
@@ -132,41 +259,79 @@ func _end_drag() -> void:
 
 func _place_card() -> void:
 	drag_state = DragState.PLACED
-
-	# Re-attach to the layout so the card is part of the CanvasLayer space again.
 	top_level = false
 
-	# Snap the card's center to the center of the DropZone.
 	if drop_zone:
 		var zone_center: Vector2 = drop_zone.global_position
 		global_position = zone_center - size / 2.0
 	else:
-		# Fallback: snap to viewport center.
 		global_position = (get_viewport_rect().size / 2.0) - (size / 2.0)
 
-	# Flatten rotation for a clean placed look.
 	rotation = 0.0
+	scale = Vector2.ONE
+	_reset_tilt()
+	_reset_label_positions()
 
 func _cancel_drag() -> void:
-	# Re-attach to the layout immediately.
 	top_level = false
-
-	# Instantly snap back to the position the card was at before dragging began.
 	global_position = original_global_position
-
 	drag_state = DragState.IDLE
+	scale = Vector2.ONE
+	_reset_label_positions()
 	reparent_requested.emit(self)
 
 func _confirm_answer() -> void:
-	# Emit the answer signal — SessionManager will handle DB write and progression.
-	answer_submitted.emit(self)
+	# Dissolve plays FIRST — answer_submitted is emitted only at the very end
+	# of the tween so SessionManager advances the level only after the card
+	# has become completely invisible.
+	animate_dissolve_and_free()
+
+## ==========================================
+## ASYNC DISSOLVE DESTRUCTION
+## ==========================================
+
+## Plays a shader dissolve animation, then emits answer_submitted and frees the node.
+## The signal is deferred to the final tween callback so the level never advances
+## before the burn-away completes visually.
+func animate_dissolve_and_free() -> void:
+	# Prevent any further mouse interaction during the dissolve.
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	# --- FIX: Save screen coordinates BEFORE escaping the container layout ---
+	var current_global_pos: Vector2 = global_position
+	top_level = true
+	global_position = current_global_pos # <-- Force it to stay exactly where it was placedeens()
+
+	# Ensure the card is detached from the Hand container so clip_contents
+	# on the parent Control cannot hide it mid-dissolve.
+	top_level = true
+
+	# Guard: if the material doesn't support dissolve_value, emit and free immediately.
+	if not (card_texture and card_texture.material):
+		answer_submitted.emit(self)
+		queue_free()
+		return
+
+	# Tween dissolve_value from 1.0 (fully visible) → 0.0 (fully dissolved).
+	var tween_dissolve: Tween = create_tween()
+	tween_dissolve.set_ease(Tween.EASE_IN)
+	tween_dissolve.set_trans(Tween.TRANS_QUAD)
+	tween_dissolve.tween_property(
+		card_texture.material,
+		"shader_parameter/dissolve_value",
+		0.0,
+		0.6
+	)
+	# Emit the answer signal and free the node only after the dissolve finishes.
+	tween_dissolve.tween_callback(func() -> void:
+		answer_submitted.emit(self)
+		queue_free()
+	)
 
 ## ==========================================
 ## DROP ZONE DETECTION
 ## ==========================================
 
-## Returns true if this card's bounding rect overlaps the DropZone's rect.
-## Works entirely in CanvasLayer/screen space — no physics needed.
 func _is_over_drop_zone() -> bool:
 	if drop_zone == null:
 		return false
@@ -187,11 +352,43 @@ func _is_over_drop_zone() -> bool:
 	return card_rect.intersects(zone_rect)
 
 ## ==========================================
+## TILT SHADER HELPERS
+## ==========================================
+
+func _set_tilt(x_rot: float, y_rot: float) -> void:
+	if card_texture and card_texture.material:
+		card_texture.material.set_shader_parameter("x_rot", x_rot)
+		card_texture.material.set_shader_parameter("y_rot", y_rot)
+	if card_shadow and card_shadow.material:
+		card_shadow.material.set_shader_parameter("x_rot", x_rot)
+		card_shadow.material.set_shader_parameter("y_rot", y_rot)
+
+func _reset_tilt() -> void:
+	_set_tilt(0.0, 0.0)
+
+## ==========================================
+## LABEL POSITION HELPERS
+## ==========================================
+
+func _reset_label_positions() -> void:
+	answer_label.position        = base_label_positions["answer"]
+	likert_top_left.position     = base_label_positions["likert_tl"]
+	likert_bottom_right.position = base_label_positions["likert_br"]
+
+## ==========================================
+## TWEEN CLEANUP HELPER
+## ==========================================
+
+func _kill_hover_tweens() -> void:
+	if tween_hover and tween_hover.is_running():
+		tween_hover.kill()
+	if tween_rot and tween_rot.is_running():
+		tween_rot.kill()
+
+## ==========================================
 ## LIKERT LABEL HELPER
 ## ==========================================
 
-## Syncs both corner labels to the current likert_value.
-## Called from the setter and from _ready() to handle deferred assignment.
 func _update_likert_labels() -> void:
 	var display_text: String = str(likert_value) if likert_value >= 0 else ""
 	if likert_top_left:
@@ -207,4 +404,4 @@ func set_dialogue_text(new_text: String) -> void:
 	if answer_label:
 		answer_label.text = new_text
 	else:
-		get_node("AnswerLabel").text = new_text
+		get_node("CardBackground/AnswerLabel").text = new_text

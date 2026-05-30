@@ -12,6 +12,12 @@
 [ext_resource type="Script" uid="uid://b10x7r0t12qfb" path="res://scenes/card_ui/card_states/card_released_state.gd" id="7_js3ux"]
 [ext_resource type="Script" uid="uid://b5pjkwvesxak6" path="res://scenes/card_ui/card_states/card_selected_state.gd" id="8_selct"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qeblu"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_opj8w"]
+noise = SubResource("FastNoiseLite_qeblu")
+seamless = true
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_opj8w"]
 shader = ExtResource("3_qeblu")
 shader_parameter/fov = 90.0
@@ -19,6 +25,17 @@ shader_parameter/cull_back = true
 shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_opj8w")
+shader_parameter/dissolve_value = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qeblu"]
+shader = ExtResource("3_qeblu")
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+shader_parameter/dissolve_value = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5x102"]
 size = Vector2(150, 210)
@@ -41,22 +58,15 @@ offset_right = 149.99304
 offset_bottom = 210.00127
 texture = ExtResource("3_ci03s")
 
-[node name="Shadow" type="TextureRect" parent="." unique_id=878228372]
-z_index = -1
-layout_mode = 0
-offset_left = 0.0005564471
-offset_top = 14.002983
-offset_right = 150.00055
-offset_bottom = 224.00424
-texture = ExtResource("4_js3ux")
-
-[node name="AnswerLabel" type="Label" parent="." unique_id=1937504643]
+[node name="AnswerLabel" type="Label" parent="CardBackground" unique_id=1937504643]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.11717293
 anchor_top = 0.13997026
 anchor_right = 0.8859374
 anchor_bottom = 0.86225116
+offset_top = -0.00017929077
+offset_bottom = -0.00018310547
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -64,18 +74,20 @@ horizontal_alignment = 1
 autowrap_mode = 2
 clip_text = true
 
-[node name="LikertValTopLeft" type="Label" parent="." unique_id=1477299215]
+[node name="LikertValTopLeft" type="Label" parent="CardBackground" unique_id=1477299215]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.059974562
 anchor_top = 0.042869646
 anchor_right = 0.172999
 anchor_bottom = 0.12382202
+offset_top = -5.4359436e-05
+offset_bottom = -5.340576e-05
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LikertValBottomRight" type="Label" parent="." unique_id=1116713205]
+[node name="LikertValBottomRight" type="Label" parent="CardBackground" unique_id=1116713205]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.833668
@@ -83,13 +95,25 @@ anchor_top = 0.8809397
 anchor_right = 0.947
 anchor_bottom = 0.9620001
 offset_left = 16.95366
-offset_top = 17.0
+offset_top = 16.998886
 offset_right = 16.907516
-offset_bottom = 16.977325
+offset_bottom = 16.976212
 rotation = 3.1415927
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Shadow" type="TextureRect" parent="." unique_id=878228372]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.7254902)
+show_behind_parent = true
+material = SubResource("ShaderMaterial_qeblu")
+layout_mode = 0
+offset_left = 0.0005564471
+offset_top = 14.002983
+offset_right = 150.00055
+offset_bottom = 224.00424
+texture = ExtResource("4_js3ux")
 
 [node name="DropPointDetector" type="Area2D" parent="." unique_id=313377560]
 visible = false
