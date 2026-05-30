@@ -2,14 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://dsc345de6wor8" path="res://assets/ICC_outside.glb" id="1_g7un6"]
 [ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_u6jjk"]
+[ext_resource type="PackedScene" uid="uid://ps4siwflgfxk" path="res://assets/arrow.glb" id="3_55g5a"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_u6jjk"]
 vertices = PackedVector3Array(-21.25, 0.5, -7.250001, -21.5, 0.5, -9.500001, -24.5, 0.5, -9.500001, -24.5, 0.5, 9.499999, -11.5, 0.5, -7.500001, -11.5, 0.5, -9.500001, -18.25, 0.5, -9.500001, -18.5, 0.5, -7.250001, -9.75, 0.5, -7.250001, -9.75, 0.5, 9.499999, -20.5, 11.5, -9.500001, -20.5, 11.5, -8.500001, -19.5, 11.5, -8.500001, -19.5, 11.5, -9.500001, -10.5, 11.5, -9.500001, -10.5, 11.5, -8.500001, -9.5, 11.5, -8.500001, -9.5, 11.5, -9.500001, -1.5, 0.5, -7.500001, -1.5, 0.5, -9.500001, -8.25, 0.5, -9.500001, -8.25, 0.5, -7.500001, 0.25, 0.5, 9.499999, 0.25, 0.5, -7.250001, -0.5, 11.5, -9.500001, -0.5, 11.5, -8.500001, 0.5, 11.5, -8.500001, 0.5, 11.5, -9.500001, 14.5, 0.5, -6.500001, 15.25, 0.5, -5.750001, 15, 0.5, -9.500001, 15.25, 0.5, 9.499999, 15.25, 0.5, 6.249999, 13.75, 0.5, 6.749999, 13.75, 0.5, -6.500001, 11.75, 0.5, -9.500001, 11.5, 0.5, -7.250001, 8.75, 0.5, -7.250001, 1.75, 0.5, -7.500001, 13.5, 0.5, 5.499999, 15, 0.5, 2.749999, 13.25, 0.5, -5.250001, 15.75, 0.5, 2.499999, 15.75, 0.5, -2.500001, 8.5, 0.5, -9.500001, 1.75, 0.5, -9.500001, 9.5, 11.5, -9.500001, 9.5, 11.5, -8.500001, 10.5, 11.5, -8.500001, 10.5, 11.5, -9.500001, -20.25, 0.5, -9.250001, -20.25, 0.5, -8.750001, -19.75, 0.5, -8.750001, -19.75, 0.5, -9.250001, -10.25, 0.5, -9.250001, -10.25, 0.5, -8.750001, -9.75, 0.5, -8.750001, -9.75, 0.5, -9.250001, -0.25, 0.5, -9.250001, -0.25, 0.5, -8.750001, 0.25, 0.5, -8.750001, 0.25, 0.5, -9.250001, 9.75, 0.5, -9.250001, 9.75, 0.5, -8.750001, 10.25, 0.5, -8.750001, 10.25, 0.5, -9.250001, 17, 0.5, -5.000001, 24.5, 0.5, -5.000001, 24.5, 0.5, -9.000001, 17, 0.5, -9.000001, 17, 0.5, -3.000001, 17, 0.5, 2.999999, 24.5, 0.5, 4.999999, 17, 0.5, 4.999999, 17, 0.5, 9.499999, 24.5, 0.5, 9.499999)
 polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(3, 0, 7), PackedInt32Array(4, 8, 7), PackedInt32Array(7, 8, 9), PackedInt32Array(7, 9, 3), PackedInt32Array(13, 12, 10), PackedInt32Array(10, 12, 11), PackedInt32Array(17, 16, 14), PackedInt32Array(14, 16, 15), PackedInt32Array(21, 20, 18), PackedInt32Array(18, 20, 19), PackedInt32Array(21, 18, 8), PackedInt32Array(8, 18, 23), PackedInt32Array(8, 23, 22), PackedInt32Array(8, 22, 9), PackedInt32Array(27, 26, 24), PackedInt32Array(24, 26, 25), PackedInt32Array(28, 30, 29), PackedInt32Array(33, 32, 31), PackedInt32Array(34, 36, 28), PackedInt32Array(28, 36, 35), PackedInt32Array(28, 35, 30), PackedInt32Array(23, 38, 37), PackedInt32Array(40, 39, 41), PackedInt32Array(41, 39, 37), PackedInt32Array(37, 39, 23), PackedInt32Array(23, 39, 22), PackedInt32Array(34, 41, 36), PackedInt32Array(36, 41, 37), PackedInt32Array(39, 33, 22), PackedInt32Array(42, 40, 43), PackedInt32Array(43, 40, 41), PackedInt32Array(45, 44, 38), PackedInt32Array(38, 44, 37), PackedInt32Array(33, 31, 22), PackedInt32Array(49, 48, 46), PackedInt32Array(46, 48, 47), PackedInt32Array(53, 52, 50), PackedInt32Array(50, 52, 51), PackedInt32Array(57, 56, 54), PackedInt32Array(54, 56, 55), PackedInt32Array(61, 60, 58), PackedInt32Array(58, 60, 59), PackedInt32Array(65, 64, 62), PackedInt32Array(62, 64, 63), PackedInt32Array(69, 68, 66), PackedInt32Array(66, 68, 67), PackedInt32Array(43, 70, 42), PackedInt32Array(42, 70, 71), PackedInt32Array(71, 70, 67), PackedInt32Array(71, 67, 72), PackedInt32Array(70, 66, 67), PackedInt32Array(72, 73, 71), PackedInt32Array(75, 74, 72), PackedInt32Array(72, 74, 73)]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_55g5a"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_x4yma"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_x4yma"]
 
 [node name="ICC_outside" type="Node3D" unique_id=119546708]
 script = ExtResource("1_u6jjk")
@@ -26,14 +25,13 @@ navigation_mesh = SubResource("NavigationMesh_u6jjk")
 
 [node name="VisualMap" parent="NavigationRegion3D" unique_id=1151766154 instance=ExtResource("1_g7un6")]
 
-[node name="ActiveWaypoint" type="Node3D" parent="." unique_id=2037866870]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6415303, 2.288241)
+[node name="ActiveWaypoint" type="Node3D" parent="." unique_id=592933599]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7199315, 0.6415303, 3.4708676)
 
-[node name="Area3D" type="Area3D" parent="ActiveWaypoint" unique_id=108778788]
+[node name="Area3D" type="Area3D" parent="ActiveWaypoint" unique_id=699064656]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D" unique_id=1006924345]
-shape = SubResource("BoxShape3D_55g5a")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D" unique_id=941090377]
+shape = SubResource("BoxShape3D_x4yma")
 
-[node name="ArrowIndicator" type="MeshInstance3D" parent="ActiveWaypoint" unique_id=1579758896]
-transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, -0.16096652, 0)
-mesh = SubResource("CapsuleMesh_x4yma")
+[node name="arrow" parent="ActiveWaypoint" unique_id=737539261 instance=ExtResource("3_55g5a")]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0.722363, 0)

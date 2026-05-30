@@ -2,14 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://3wvyo3q40wq" path="res://assets/cafe.glb" id="1_0dv7p"]
 [ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_a6vgn"]
+[ext_resource type="PackedScene" uid="uid://ps4siwflgfxk" path="res://assets/arrow.glb" id="3_de0wi"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_a6vgn"]
 vertices = PackedVector3Array(9.5, 0.5, -9.5, 8, 0.5, -9.5, 9, 0.5, -9, -8.75, 0.5, -9, -7.75, 0.5, -9.5, -9.5, 0.5, -9.5, -8.75, 0.5, -3, -7.75, 0.5, -3.5, -8.75, 0.5, -4, -8.75, 0.5, -6, -7.75, 0.5, -6.5, -8.75, 0.5, -7, 9, 0.5, 2, 9, 0.5, 3, 9.5, 0.5, 3, -9.5, 0.5, 3, -8.75, 0.5, 3, -8.75, 0.5, 2, 9, 0.5, -7, 8, 0.5, -6.75, 8, 0.5, -6.25, 9, 0.5, -6, -0.75, 0.5, 1.5, 1, 0.5, 1.5, 0.75, 0.5, -0.25, -0.75, 0.5, -0.25, 9, 0.5, -4, 8, 0.5, -3.75, 8, 0.5, -3.25, 9, 0.5, -3, -8.75, 0.5, -1, -7.75, 0.5, -0.25, -6, 0.5, 1.5, -5.25, 0.5, 2, -4.25, 0.5, 1.5, -4.25, 0.5, -0.25, -5.25, 0.5, -1, -6.25, 0.5, -0.25, -2.5, 0.5, 1.5, -1.75, 0.5, 2, -1.75, 0.5, -1, -2.75, 0.5, -0.25, 1.75, 0.5, 2, 2.75, 0.5, 1.5, 2.75, 0.5, -0.25, 1.75, 0.5, -1, 6.25, 0.5, -0.25, 5.25, 0.5, -1, 4.25, 0.5, -0.25, 4.5, 0.5, 1.5, -7.75, 0.5, 1.5, 5.25, 0.5, 2, 8, 0.5, 1.5, 8.75, 0.5, -0.75, -6, 0.5, -9.5, -5.25, 0.5, -9, -4.25, 0.5, -9.25, -2.5, 0.5, -9.5, -1.75, 0.5, -9, -0.75, 0.5, -9.25, 1, 0.5, -9.5, 1.75, 0.5, -9, 2.75, 0.5, -9.25, 4.5, 0.5, -9.5, 5.25, 0.5, -9, 6.25, 0.5, -9.25, -5.25, 0.5, -6, -4.25, 0.5, -6.25, -5, 0.5, -7, -6, 0.5, -6.75, -6, 0.5, -6.25, -1.75, 0.5, -6, -0.75, 0.5, -6.25, -1.5, 0.5, -7, -2.5, 0.5, -6.75, -2.5, 0.5, -6.25, 1.75, 0.5, -6, 2.75, 0.5, -6.25, 2, 0.5, -7, 1, 0.5, -6.75, 1, 0.5, -6.25, 5.25, 0.5, -6, 6.25, 0.5, -6.25, 5.5, 0.5, -7, 4.5, 0.5, -6.75, 4.5, 0.5, -6.25, -5.25, 0.5, -3, -4.25, 0.5, -3.25, -5, 0.5, -4, -6, 0.5, -3.75, -6, 0.5, -3.25, -1.75, 0.5, -3, -0.75, 0.5, -3.25, -1.5, 0.5, -4, -2.5, 0.5, -3.75, -2.5, 0.5, -3.25, 1.75, 0.5, -3, 2.75, 0.5, -3.25, 2, 0.5, -4, 1, 0.5, -3.75, 1, 0.5, -3.25, 5.25, 0.5, -3, 6.25, 0.5, -3.25, 5.5, 0.5, -4, 4.5, 0.5, -3.75, 4.5, 0.5, -3.25, 9, 0.5, 4, 9.5, 0.5, 9.5, -8.75, 0.5, 4, -9.5, 0.5, 9.5, 6.25, 0.5, 4.75, 5.25, 0.5, 4, 4.25, 0.5, 4.75, 2.75, 0.5, 4.75, 1.75, 0.5, 4, 0.75, 0.5, 4.75, -0.75, 0.5, 4.75, -1.75, 0.5, 4, -2.75, 0.5, 4.75, -4.25, 0.5, 4.75, -5.25, 0.5, 4, -6.25, 0.5, 4.75, 7.75, 0.5, 4.75, -7.75, 0.5, 4.75)
 polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(11, 10, 9), PackedInt32Array(14, 13, 12), PackedInt32Array(17, 16, 15), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 21), PackedInt32Array(25, 24, 22), PackedInt32Array(22, 24, 23), PackedInt32Array(27, 26, 28), PackedInt32Array(28, 26, 29), PackedInt32Array(31, 17, 30), PackedInt32Array(30, 17, 15), PackedInt32Array(33, 32, 34), PackedInt32Array(34, 32, 35), PackedInt32Array(35, 32, 37), PackedInt32Array(35, 37, 36), PackedInt32Array(39, 38, 22), PackedInt32Array(22, 38, 25), PackedInt32Array(25, 38, 41), PackedInt32Array(25, 41, 40), PackedInt32Array(42, 23, 43), PackedInt32Array(43, 23, 44), PackedInt32Array(44, 23, 24), PackedInt32Array(44, 24, 45), PackedInt32Array(47, 46, 48), PackedInt32Array(48, 46, 49), PackedInt32Array(44, 48, 43), PackedInt32Array(43, 48, 49), PackedInt32Array(31, 37, 50), PackedInt32Array(50, 37, 32), PackedInt32Array(35, 41, 34), PackedInt32Array(34, 41, 38), PackedInt32Array(18, 2, 0), PackedInt32Array(3, 11, 5), PackedInt32Array(49, 46, 51), PackedInt32Array(51, 46, 52), PackedInt32Array(52, 46, 53), PackedInt32Array(21, 18, 0), PackedInt32Array(5, 11, 9), PackedInt32Array(26, 21, 0), PackedInt32Array(5, 9, 8), PackedInt32Array(26, 0, 29), PackedInt32Array(29, 0, 14), PackedInt32Array(8, 6, 5), PackedInt32Array(5, 6, 15), PackedInt32Array(12, 53, 14), PackedInt32Array(14, 53, 29), PackedInt32Array(15, 6, 30), PackedInt32Array(53, 12, 52), PackedInt32Array(31, 50, 17), PackedInt32Array(56, 55, 54), PackedInt32Array(59, 58, 57), PackedInt32Array(62, 61, 60), PackedInt32Array(65, 64, 63), PackedInt32Array(70, 69, 66), PackedInt32Array(66, 69, 68), PackedInt32Array(66, 68, 67), PackedInt32Array(75, 74, 71), PackedInt32Array(71, 74, 73), PackedInt32Array(71, 73, 72), PackedInt32Array(80, 79, 76), PackedInt32Array(76, 79, 78), PackedInt32Array(76, 78, 77), PackedInt32Array(85, 84, 81), PackedInt32Array(81, 84, 83), PackedInt32Array(81, 83, 82), PackedInt32Array(90, 89, 86), PackedInt32Array(86, 89, 88), PackedInt32Array(86, 88, 87), PackedInt32Array(95, 94, 91), PackedInt32Array(91, 94, 93), PackedInt32Array(91, 93, 92), PackedInt32Array(100, 99, 96), PackedInt32Array(96, 99, 98), PackedInt32Array(96, 98, 97), PackedInt32Array(105, 104, 101), PackedInt32Array(101, 104, 103), PackedInt32Array(101, 103, 102), PackedInt32Array(13, 14, 106), PackedInt32Array(106, 14, 107), PackedInt32Array(16, 108, 15), PackedInt32Array(15, 108, 109), PackedInt32Array(111, 110, 112), PackedInt32Array(112, 110, 107), PackedInt32Array(115, 114, 113), PackedInt32Array(118, 117, 116), PackedInt32Array(120, 119, 121), PackedInt32Array(121, 119, 109), PackedInt32Array(112, 107, 113), PackedInt32Array(122, 106, 107), PackedInt32Array(109, 118, 116), PackedInt32Array(109, 108, 123), PackedInt32Array(109, 123, 121), PackedInt32Array(110, 122, 107), PackedInt32Array(115, 113, 107), PackedInt32Array(115, 107, 116), PackedInt32Array(116, 107, 109), PackedInt32Array(119, 118, 109)]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_de0wi"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_qifwr"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_qifwr"]
 
 [node name="cafe" type="Node3D" unique_id=960553019]
 script = ExtResource("1_a6vgn")
@@ -26,14 +25,14 @@ navigation_mesh = SubResource("NavigationMesh_a6vgn")
 
 [node name="VisualMap" parent="NavigationRegion3D" unique_id=1088174868 instance=ExtResource("1_0dv7p")]
 
-[node name="ActiveWaypoint" type="Node3D" parent="." unique_id=1299292383]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6415303, 2.288241)
+[node name="ActiveWaypoint" type="Node3D" parent="." unique_id=1537069893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4676241, 0.6415303, 0.22900844)
 
-[node name="Area3D" type="Area3D" parent="ActiveWaypoint" unique_id=1040522947]
+[node name="Area3D" type="Area3D" parent="ActiveWaypoint" unique_id=723965591]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D" unique_id=1930034377]
-shape = SubResource("BoxShape3D_de0wi")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D" unique_id=1175942973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13382375, 0)
+shape = SubResource("BoxShape3D_qifwr")
 
-[node name="ArrowIndicator" type="MeshInstance3D" parent="ActiveWaypoint" unique_id=1173379675]
-transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, -0.16096652, 0)
-mesh = SubResource("CapsuleMesh_qifwr")
+[node name="arrow" parent="ActiveWaypoint" unique_id=737539261 instance=ExtResource("3_de0wi")]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0.722363, 0)

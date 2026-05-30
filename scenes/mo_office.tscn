@@ -3,14 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://b2tf7a7rq0fxv" path="res://assets/mo_office.glb" id="1_okm2r"]
 [ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_vync6"]
 [ext_resource type="PackedScene" uid="uid://c44md7c8edwqd" path="res://assets/table.glb" id="2_vi2ji"]
+[ext_resource type="PackedScene" uid="uid://ps4siwflgfxk" path="res://assets/arrow.glb" id="4_0c86e"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_vi2ji"]
 vertices = PackedVector3Array(-9.529666, 0.5, -9.65, -9.529666, 0.5, 0.35000038, -9.279666, 0.5, -2.8999996, -8.529666, 0.5, -3.6499996, -0.52966595, 0.5, -3.6499996, -0.27966595, 0.5, -9.4, 1.720334, 0.5, -8.4, 0.97033405, 0.5, -8.15, 1.220334, 0.5, -2.6499996, 9.220334, 0.5, -2.6499996, 9.220334, 0.5, -8.65, 8.720334, 0.5, -9.15, 1.720334, 0.5, -9.15, 0.97033405, 0.5, -2.1499996, -0.27966595, 0.5, 9.6, 9.470334, 0.5, 9.6, -0.52966595, 0.5, -2.1499996, -7.279666, 0.5, -2.3999996, -7.779666, 0.5, -1.6499996, -7.779666, 0.5, 1.6000004, -9.529666, 0.5, 9.6, -9.529666, 0.5, 1.8500004)
 polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 0), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 11), PackedInt32Array(8, 11, 10), PackedInt32Array(8, 10, 9), PackedInt32Array(6, 12, 11), PackedInt32Array(8, 9, 13), PackedInt32Array(13, 9, 15), PackedInt32Array(13, 15, 14), PackedInt32Array(14, 16, 13), PackedInt32Array(18, 17, 19), PackedInt32Array(19, 17, 16), PackedInt32Array(20, 19, 14), PackedInt32Array(14, 19, 16), PackedInt32Array(20, 21, 19)]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vync6"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_0c86e"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_10m00"]
 
 [node name="MO_office" type="Node3D" unique_id=496004334]
 script = ExtResource("1_vync6")
@@ -22,25 +21,24 @@ shadow_enabled = true
 [node name="SpawnPoint" type="Marker3D" parent="." unique_id=758506585]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2231355, 0.20477223, 3.2305145)
 
+[node name="table" parent="." unique_id=92295028 instance=ExtResource("2_vi2ji")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.0391877, 0.099999905, -0.6161971)
+
+[node name="table2" parent="." unique_id=1642107882 instance=ExtResource("2_vi2ji")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.5399163, 0.099999905, -0.6161971)
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=643015747]
 navigation_mesh = SubResource("NavigationMesh_vi2ji")
 
 [node name="VisualMap" parent="NavigationRegion3D" unique_id=651077395 instance=ExtResource("1_okm2r")]
 
-[node name="ActiveWaypoint" type="Node3D" parent="." unique_id=2140005068]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6415303, 2.288241)
+[node name="ActiveWaypoint" type="Node3D" parent="." unique_id=983390727]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9922576, 0.6415303, 2.288241)
 
-[node name="Area3D" type="Area3D" parent="ActiveWaypoint" unique_id=198888259]
+[node name="Area3D" type="Area3D" parent="ActiveWaypoint" unique_id=1889251254]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D" unique_id=135734306]
-shape = SubResource("BoxShape3D_vync6")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D" unique_id=1215711082]
+shape = SubResource("BoxShape3D_10m00")
 
-[node name="ArrowIndicator" type="MeshInstance3D" parent="ActiveWaypoint" unique_id=957286340]
-transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, -0.16096652, 0)
-mesh = SubResource("CapsuleMesh_0c86e")
-
-[node name="table" parent="ActiveWaypoint" unique_id=92295028 instance=ExtResource("2_vi2ji")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.0391877, -0.5415304, -2.904438)
-
-[node name="table2" parent="ActiveWaypoint" unique_id=1642107882 instance=ExtResource("2_vi2ji")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.5399163, -0.5415304, -2.904438)
+[node name="arrow" parent="ActiveWaypoint" unique_id=737539261 instance=ExtResource("4_0c86e")]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0.722363, 0)
