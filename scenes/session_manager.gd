@@ -44,7 +44,7 @@ var session_timeline: Dictionary = {
 @onready var current_room_slot: Node3D   = $"../CurrentRoom"
 @onready var camera_3d: Camera3D         = $"../Camera3D"
 @onready var answer_ui: CanvasLayer      = $"../AnswerUI"
-@onready var prompt_label: Label         = $"../AnswerUI/PromptLabel"
+@onready var question_card: QuestionCard = $"../AnswerUI/QuestionCard"
 @onready var hand: Hand                  = $"../AnswerUI/Hand"
 @onready var results_ui: Control         = $"../ResultsUI"
 @onready var world_environment: WorldEnvironment   = $"../WorldEnvironment"
@@ -143,8 +143,13 @@ func _load_scenario(item_id: int) -> void:
 		_on_assessment_completed()
 		return
 
-	prompt_label.text = DatabaseManager.db.query_result[0]["context_text"]
-	print("[TraitDeck] Loaded item_id=%d onto PromptLabel." % item_id)
+	var question_text: String = DatabaseManager.db.query_result[0]["context_text"]
+
+	# Pass the question text and item number to the QuestionCard sub-scene.
+	if question_card:
+		question_card.setup_question(question_text, item_id)
+
+	print("[TraitDeck] Loaded item_id=%d onto QuestionCard." % item_id)
 
 	# --- Step G: Fetch the 5 answer cards for this item ---
 	var cards_sql: String = (

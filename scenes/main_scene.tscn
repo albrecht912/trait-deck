@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dsoqtrql3o4d6" path="res://scenes/camera_3d.gd" id="1_gubc5"]
 [ext_resource type="Script" uid="uid://gg58rki8i8nx" path="res://scenes/ui/hand.gd" id="2_7ykc4"]
+[ext_resource type="PackedScene" uid="uid://f81lmsl4w7wi" path="res://scenes/question_card.tscn" id="2_c1pb6"]
 [ext_resource type="Theme" uid="uid://bxy4ikbifr7mf" path="res://game_theme.tres" id="2_gubc5"]
 [ext_resource type="Script" uid="uid://c5t10x5ok571v" path="res://scenes/session_manager.gd" id="4_pu3yx"]
 [ext_resource type="PackedScene" uid="uid://6e5ltlm3bvys" path="res://scenes/results_ui.tscn" id="5_gubc5"]
@@ -75,19 +76,11 @@ script = ExtResource("1_gubc5")
 
 [node name="AnswerUI" type="CanvasLayer" parent="." unique_id=1685859080 groups=["ui_layer"]]
 
-[node name="PromptLabel" type="Label" parent="AnswerUI" unique_id=590582686]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -0.5
-offset_top = -11.5
-offset_right = 0.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_gubc5")
+[node name="QuestionCard" parent="AnswerUI" unique_id=411470493 instance=ExtResource("2_c1pb6")]
+offset_left = 760.0
+offset_top = 145.0
+offset_right = 1160.0
+offset_bottom = 354.99976
 
 [node name="Hand" type="Control" parent="AnswerUI" unique_id=60214265]
 custom_minimum_size = Vector2(1200, 210)
