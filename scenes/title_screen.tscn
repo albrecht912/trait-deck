@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://cg6v2h1lajcdm"]
+
+[ext_resource type="Theme" uid="uid://bxy4ikbifr7mf" path="res://game_theme.tres" id="1_dc4i4"]
+[ext_resource type="Shader" uid="uid://dkgtklshkoxd8" path="res://shaders/fake_3d.gdshader" id="2_e54dn"]
+[ext_resource type="Texture2D" uid="uid://bxov87g2wlbba" path="res://assets/CardFront.svg" id="3_3yumr"]
+[ext_resource type="Texture2D" uid="uid://bmwmwo01wdehg" path="res://assets/CardShadow.svg" id="4_cs5ya"]
+[ext_resource type="Texture2D" uid="uid://ciu20vhrfhott" path="res://assets/TitleLogo.png" id="5_mykxm"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tklts"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_opj8w"]
+noise = SubResource("FastNoiseLite_tklts")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u26n3"]
+shader = ExtResource("2_e54dn")
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_opj8w")
+shader_parameter/dissolve_value = 1.0
+
+[node name="TitleScreen" type="Control" unique_id=410677420]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_dc4i4")
+
+[node name="TitleCard" type="TextureRect" parent="." unique_id=569144556]
+material = SubResource("ShaderMaterial_u26n3")
+layout_mode = 0
+offset_left = 1330.0001
+offset_top = 526.0
+offset_right = 1480.0001
+offset_bottom = 736.0012
+rotation = 0.24169074
+scale = Vector2(2.2266514, 2.2266514)
+pivot_offset = Vector2(75, 105)
+theme = ExtResource("1_dc4i4")
+texture = ExtResource("3_3yumr")
+
+[node name="Label" type="Label" parent="TitleCard" unique_id=1801589465]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 27.0
+offset_right = 109.0
+offset_bottom = 50.0
+text = "TraitDeck"
+
+[node name="TitleCardShadow" type="TextureRect" parent="TitleCard" unique_id=1211841673]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_u26n3")
+layout_mode = 0
+offset_top = 11.0
+offset_right = 150.0
+offset_bottom = 221.00122
+texture = ExtResource("4_cs5ya")
+
+[node name="StartButton" type="Button" parent="." unique_id=810439133]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0921875
+anchor_top = 0.50185186
+anchor_right = 0.3985171
+anchor_bottom = 0.62685186
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 84
+text = "Start"
+metadata/_edit_use_anchors_ = true
+
+[node name="QuitButton" type="Button" parent="." unique_id=1361524636]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0921875
+anchor_top = 0.66851854
+anchor_right = 0.3985171
+anchor_bottom = 0.79351854
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 84
+text = "Quit
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=1536531092]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.090625
+anchor_top = 0.33333334
+anchor_right = 0.396875
+anchor_bottom = 0.45833334
+theme_override_font_sizes/font_size = 64
+placeholder_text = "Player Name..."
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=792342928]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.123934574, 0.15554163, 0.34317455, 1)
+
+[node name="TitleLogo" type="TextureRect" parent="." unique_id=533047282]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00625
+anchor_top = -0.15277778
+anchor_right = 0.99375
+anchor_bottom = 0.8472222
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.693495, 0.693495)
+texture = ExtResource("5_mykxm")
+metadata/_edit_use_anchors_ = true
