@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bivhx3v5ukxs6"]
 
 [ext_resource type="Script" uid="uid://dsoqtrql3o4d6" path="res://scenes/camera_3d.gd" id="1_gubc5"]
+[ext_resource type="Script" uid="uid://d105622epd3h0" path="res://scenes/main_scene.gd" id="1_mngbo"]
 [ext_resource type="PackedScene" uid="uid://weejvkfvps5q" path="res://scenes/ui/player.tscn" id="2_6wevv"]
 [ext_resource type="Script" uid="uid://gg58rki8i8nx" path="res://scenes/ui/hand.gd" id="2_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://f81lmsl4w7wi" path="res://scenes/question_card.tscn" id="2_c1pb6"]
@@ -42,7 +43,7 @@ size = Vector2(640, 436)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_c1pb6"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_opj8w"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4w45t"]
 noise = SubResource("FastNoiseLite_c1pb6")
 seamless = true
 
@@ -53,10 +54,11 @@ shader_parameter/cull_back = true
 shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
-shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_opj8w")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_4w45t")
 shader_parameter/dissolve_value = 1.0
 
 [node name="MainScene" type="Node3D" unique_id=1976559943]
+script = ExtResource("1_mngbo")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=840672313]
 environment = SubResource("Environment_rt2n2")

@@ -9,7 +9,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tklts"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_opj8w"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e54dn"]
 noise = SubResource("FastNoiseLite_tklts")
 seamless = true
 
@@ -20,7 +20,7 @@ shader_parameter/cull_back = true
 shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
-shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_opj8w")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_e54dn")
 shader_parameter/dissolve_value = 1.0
 
 [node name="TitleScreen" type="Control" unique_id=410677420]
@@ -54,7 +54,8 @@ text = "Tutorial:
 2. Move to Marker to load Questions and Answers
 3. Click and Card to the middle of screen to mark for submission
 4. Click card again to submit"
-metadata/_edit_use_anchors_ = true
+fit_content = true
+scroll_active = false
 
 [node name="TitleCard" type="TextureRect" parent="." unique_id=569144556]
 material = SubResource("ShaderMaterial_u26n3")
@@ -100,7 +101,6 @@ grow_vertical = 2
 scale = Vector2(0.693495, 0.693495)
 mouse_filter = 2
 texture = ExtResource("5_mykxm")
-metadata/_edit_use_anchors_ = true
 
 [node name="StartButton" type="Button" parent="." unique_id=810439133]
 layout_mode = 1
@@ -113,7 +113,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 84
 text = "Start"
-metadata/_edit_use_anchors_ = true
 
 [node name="QuitButton" type="Button" parent="." unique_id=1361524636]
 layout_mode = 1
@@ -127,7 +126,6 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 84
 text = "Quit
 "
-metadata/_edit_use_anchors_ = true
 
 [node name="LineEdit" type="LineEdit" parent="." unique_id=1536531092]
 layout_mode = 1
@@ -139,7 +137,6 @@ anchor_bottom = 0.45833334
 theme_override_font_sizes/font_size = 64
 placeholder_text = "Player Name..."
 alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
