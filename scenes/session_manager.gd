@@ -94,6 +94,7 @@ func _start_new_playthrough(student_name: String) -> void:
 ## 2. SCENARIO LOADING — EXPLORE PHASE
 ## Loads the room, teleports the player, hides the UI, and enables movement.
 ## The assessment phase begins only when the player reaches the ActiveWaypoint.
+## This function is async to allow physics-frame deferral after teleport.
 ## ==========================================
 
 func _load_scenario(item_id: int) -> void:
@@ -106,11 +107,21 @@ func _load_scenario(item_id: int) -> void:
 	# --- Step A: Resolve scene path ---
 	var target_scene_path: String = session_timeline[item_id]
 
-	# --- Step B: Clear old room ---
+	# --- Step B: Hard-purge old room — always, even for identical scene paths.
+	# remove_child + queue_free forces the PhysicsServer to flush the previous
+	# room's overlap cache tables, preventing stale collision hits on reload.
 	for old_child in current_room_slot.get_children():
+		current_room_slot.remove_child(old_child)
 		old_child.queue_free()
 
-	# --- Step C: Load and instance new room ---
+	# --- Step C: Lock player input and freeze movement immediately ---
+	# Prevents the player from clicking during the transition frame.
+	if mouse_click_detector:
+		mouse_click_detector.input_enabled = false
+	if player:
+		player.velocity = Vector3.ZERO
+
+	# --- Step D: Load and instance new room ---
 	var packed: PackedScene = load(target_scene_path) as PackedScene
 	if packed == null:
 		push_error("[TraitDeck] Failed to load scene: %s" % target_scene_path)
@@ -126,7 +137,18 @@ func _load_scenario(item_id: int) -> void:
 	current_room_slot.add_child(new_room)
 	print("[TraitDeck] Loaded room: %s" % target_scene_path)
 
-	# --- Step D: Teleport player to SpawnPoint ---
+	# --- Step E: Disable the ActiveWaypoint Area3D BEFORE teleporting ---
+	# This prevents the physics server from firing body_entered while the player
+	# is being repositioned on top of or near the waypoint volume.
+	var waypoint_area: Area3D = null
+	var waypoint_node: Node = new_room.find_child("ActiveWaypoint", true, false)
+	if waypoint_node:
+		waypoint_area = waypoint_node.get_node_or_null("Area3D") as Area3D
+	if waypoint_area:
+		waypoint_area.monitoring = false
+		print("[TraitDeck] ActiveWaypoint monitoring disabled for safe teleport.")
+
+	# --- Step F: Teleport player to SpawnPoint and flush nav agent cache ---
 	var spawn_node: Node3D = new_room.find_child("SpawnPoint", true, false) as Node3D
 	if spawn_node:
 		if player and player.has_method("teleport_to_position"):
@@ -135,15 +157,26 @@ func _load_scenario(item_id: int) -> void:
 	else:
 		push_warning("[TraitDeck] Room '%s' is missing a 'SpawnPoint' node!" % new_room.name)
 
-	# --- Step E: Sync camera ---
+	# --- Step G: Sync camera ---
 	camera_3d.setup_camera_for_room(
 		new_room.camera_mode,
 		new_room.custom_camera_position,
 		new_room.custom_camera_rotation
 	)
 
-	# --- Step F: Pre-fetch and cache question data for this item ---
-	# We fetch now so the data is ready the instant the player hits the waypoint.
+	# --- Step H: Await two physics frames so the PhysicsServer fully updates
+	# the world matrix and clears any lingering collision overlap flags from
+	# the previous room or the teleport repositioning.
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	# --- Step I: Re-enable the waypoint Area3D now that the player is anchored ---
+	if waypoint_area:
+		waypoint_area.monitoring = true
+		print("[TraitDeck] ActiveWaypoint monitoring re-enabled.")
+
+	# --- Step J: Pre-fetch and cache question data for this item ---
+	# Fetched after the physics settle so DB work doesn't block the frame deferral.
 	var item_sql: String = "SELECT item_id, context_text FROM ITEM WHERE item_id = %d;" % item_id
 	DatabaseManager.db.query(item_sql)
 
@@ -164,12 +197,12 @@ func _load_scenario(item_id: int) -> void:
 	_current_card_rows = DatabaseManager.db.query_result
 	print("[TraitDeck] Cached %d card options for item_id=%d." % [_current_card_rows.size(), item_id])
 
-	# --- Step G: EXPLORE PHASE — hide UI, enable player movement ---
+	# --- Step K: EXPLORE PHASE — hide UI, unlock player movement ---
 	answer_ui.visible = false
 	if mouse_click_detector:
 		mouse_click_detector.input_enabled = true
 
-	# --- Step H: Update global lighting ---
+	# --- Step L: Update global lighting ---
 	_process_environmental_updates()
 
 ## ==========================================
