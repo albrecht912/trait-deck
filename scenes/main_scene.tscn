@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bivhx3v5ukxs6"]
 
 [ext_resource type="Script" uid="uid://dsoqtrql3o4d6" path="res://scenes/camera_3d.gd" id="1_gubc5"]
+[ext_resource type="PackedScene" uid="uid://weejvkfvps5q" path="res://scenes/ui/player.tscn" id="2_6wevv"]
 [ext_resource type="Script" uid="uid://gg58rki8i8nx" path="res://scenes/ui/hand.gd" id="2_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://f81lmsl4w7wi" path="res://scenes/question_card.tscn" id="2_c1pb6"]
 [ext_resource type="Theme" uid="uid://bxy4ikbifr7mf" path="res://game_theme.tres" id="2_gubc5"]
@@ -67,6 +68,8 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 0.91435295, 0.40491816, 0, -0.40491816, 0.91435295, 9.09981, 6.750951, 10.498167)
 fov = 90.0
 script = ExtResource("1_gubc5")
+
+[node name="Player" parent="." unique_id=1181312386 instance=ExtResource("2_6wevv")]
 
 [node name="CurrentRoom" type="Node3D" parent="." unique_id=82714281]
 

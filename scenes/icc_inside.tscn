@@ -13,6 +13,7 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Arr
 
 [node name="ICC_inside" type="Node3D" unique_id=295292395]
 script = ExtResource("1_divyu")
+custom_camera_position = Vector3(0, 9, 6)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1640671589]
 transform = Transform3D(0.9981348, 0.058712903, -0.016724812, 0, 0.27395925, 0.9617413, 0.06104854, -0.95994747, 0.27344826, 0, 0, 0)

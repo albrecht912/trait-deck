@@ -145,11 +145,12 @@ func _load_scenario(item_id: int) -> void:
 
 	var question_text: String = DatabaseManager.db.query_result[0]["context_text"]
 
-	# Pass the question text and item number to the QuestionCard sub-scene.
+	# Slide the QuestionCard in from the right with fresh content.
+	# The card snaps off-screen, updates its labels, then tweens to center.
 	if question_card:
-		question_card.setup_question(question_text, item_id)
+		question_card.slide_in_from_right(question_text, item_id)
 
-	print("[TraitDeck] Loaded item_id=%d onto QuestionCard." % item_id)
+	print("[TraitDeck] Sliding QuestionCard in for item_id=%d." % item_id)
 
 	# --- Step G: Fetch the 5 answer cards for this item ---
 	var cards_sql: String = (
@@ -181,12 +182,22 @@ func _on_card_answer_submitted(card: CardUI) -> void:
 	# Step A: Persist the player's choice to the database.
 	_save_response(card.card_db_id)
 
-	# Step B: Remove the submitted card node from the scene tree.
-	card.queue_free()
+	# Step B: The submitted card's dissolve animation (0.6s) has already finished
+	# and queue_free() has been called by CardUI.animate_dissolve_and_free() before
+	# this signal fires. Now slide the QuestionCard out and wait for it to leave
+	# the screen before loading the next scenario.
+	_advance_to_next_scenario()
 
-	# Step C: Advance to the next item and load the next room + scenario.
-	# _load_scenario() already calls _process_environmental_updates() at the end,
-	# so global lighting is refreshed automatically with the new score.
+## Async advance: slide the QuestionCard out, then load the next scenario.
+## Using a separate function keeps _on_card_answer_submitted non-async.
+func _advance_to_next_scenario() -> void:
+	# Slide the question card off-screen to the right and wait for it to finish.
+	if question_card:
+		question_card.slide_out_to_left()
+		await question_card.slide_out_finished
+
+	# Advance the item counter and load the next room + scenario.
+	# _load_scenario() calls slide_in_from_right() and _process_environmental_updates().
 	current_item_id += 1
 	_load_scenario(current_item_id)
 
