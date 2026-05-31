@@ -12,6 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://bxov87g2wlbba" path="res://assets/CardFront.svg" id="7_18nlu"]
 [ext_resource type="Script" uid="uid://bupa3tmga3i1a" path="res://scenes/mouse_click_detector.gd" id="7_e1cbu"]
 [ext_resource type="Texture2D" uid="uid://bmwmwo01wdehg" path="res://assets/CardShadow.svg" id="8_18nlu"]
+[ext_resource type="AudioStream" uid="uid://bfbcn25skrbll" path="res://sounds/swipe.wav" id="13_4w45t"]
+[ext_resource type="AudioStream" uid="uid://blkbrf47xohx" path="res://sounds/swoosh.wav" id="14_r6p65"]
+[ext_resource type="AudioStream" uid="uid://dvfoncbru4teh" path="res://sounds/fizz.mp3" id="15_si52b"]
+[ext_resource type="AudioStream" uid="uid://d32vj4ku1hpq5" path="res://sounds/click.mp3" id="16_01n6w"]
+[ext_resource type="AudioStream" uid="uid://bk0feodb2l5no" path="res://sounds/success.wav" id="17_6u1mn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pu3yx"]
 sky_top_color = Color(0.5686275, 0.59607846, 0.92941177, 1)
@@ -146,3 +151,26 @@ offset_top = 11.0
 offset_right = 150.0
 offset_bottom = 221.00122
 texture = ExtResource("8_18nlu")
+
+[node name="Sounds" type="Node" parent="." unique_id=1035473548]
+
+[node name="swipe" type="AudioStreamPlayer" parent="Sounds" unique_id=450771030]
+stream = ExtResource("13_4w45t")
+
+[node name="swoosh" type="AudioStreamPlayer" parent="Sounds" unique_id=1027756781]
+stream = ExtResource("14_r6p65")
+
+[node name="fizz" type="AudioStreamPlayer" parent="Sounds" unique_id=1721517581]
+stream = ExtResource("15_si52b")
+volume_db = -10.0
+pitch_scale = 0.65
+
+[node name="click" type="AudioStreamPlayer" parent="Sounds" unique_id=147422132]
+stream = ExtResource("16_01n6w")
+volume_db = -10.0
+pitch_scale = 0.79
+
+[node name="success" type="AudioStreamPlayer" parent="Sounds" unique_id=394105641]
+stream = ExtResource("17_6u1mn")
+volume_db = -10.0
+pitch_scale = 0.79

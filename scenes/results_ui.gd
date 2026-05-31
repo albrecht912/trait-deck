@@ -11,6 +11,7 @@ signal restart_requested
 @onready var restart_button: Button = $CenterContainer/MainLayout/RestartButton
 # 1. Grab a clean reference to the ReturnButton node path
 @onready var return_button: Button = $CenterContainer/MainLayout/ReturnButton
+@onready var click: AudioStreamPlayer = $Sounds/click
 
 func _ready() -> void:
 	# Wire up the restart signal handler safely
@@ -29,11 +30,14 @@ func display_scores(e: float, n: float, a: float, c: float, o: float) -> void:
 	o_value.text = "%.2f / 5.0" % o
 
 func _on_restart_pressed() -> void:
+	click.play()
 	restart_requested.emit()
 
 # 3. Add the callback method to execution switch back to your title layout file
 func _on_return_button_pressed() -> void:
+	click.play()
 	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
 
 func _on_quit_button_pressed() -> void:
+	click.play()
 	get_tree().quit()

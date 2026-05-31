@@ -18,6 +18,7 @@ extends Node
 
 @onready var camera_3d: Camera3D = $"../Camera3D"
 @onready var player: Player      = $"../Player"
+@onready var click: AudioStreamPlayer = $"../Sounds/click"
 
 ## ==========================================
 ## RAY CAST DEPTH
@@ -52,6 +53,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	var mb := event as InputEventMouseButton
 	if mb.button_index != MOUSE_BUTTON_LEFT or not mb.pressed:
+		click.play()
 		return
 
 	# Cast the ray and move the player if we hit something.

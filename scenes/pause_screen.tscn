@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bxov87g2wlbba" path="res://assets/CardFront.svg" id="3_o31j6"]
 [ext_resource type="Texture2D" uid="uid://bmwmwo01wdehg" path="res://assets/CardShadow.svg" id="4_213y4"]
 [ext_resource type="Texture2D" uid="uid://ciu20vhrfhott" path="res://assets/TitleLogo.png" id="5_lubob"]
+[ext_resource type="AudioStream" uid="uid://d32vj4ku1hpq5" path="res://sounds/click.mp3" id="7_o31j6"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3d274"]
 
@@ -131,6 +132,13 @@ theme_override_font_sizes/font_size = 84
 text = "Quit
 "
 metadata/_edit_use_anchors_ = true
+
+[node name="Sounds" type="Node" parent="." unique_id=1381134377]
+
+[node name="click" type="AudioStreamPlayer" parent="Sounds" unique_id=1064547142]
+stream = ExtResource("7_o31j6")
+volume_db = -10.0
+pitch_scale = 0.79
 
 [connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

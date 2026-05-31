@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bxov87g2wlbba" path="res://assets/CardFront.svg" id="3_3yumr"]
 [ext_resource type="Texture2D" uid="uid://bmwmwo01wdehg" path="res://assets/CardShadow.svg" id="4_cs5ya"]
 [ext_resource type="Texture2D" uid="uid://ciu20vhrfhott" path="res://assets/TitleLogo.png" id="5_mykxm"]
+[ext_resource type="AudioStream" uid="uid://d32vj4ku1hpq5" path="res://sounds/click.mp3" id="7_3yumr"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tklts"]
 
@@ -137,6 +138,13 @@ anchor_bottom = 0.45833334
 theme_override_font_sizes/font_size = 64
 placeholder_text = "Player Name..."
 alignment = 1
+
+[node name="Sounds" type="Node" parent="." unique_id=786416911]
+
+[node name="click" type="AudioStreamPlayer" parent="Sounds" unique_id=435064280]
+stream = ExtResource("7_3yumr")
+volume_db = -10.0
+pitch_scale = 0.79
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

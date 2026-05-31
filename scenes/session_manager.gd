@@ -62,6 +62,7 @@ var session_timeline: Dictionary = {
 @onready var mouse_click_detector: Node       = $"../MouseClickDetector"
 @onready var world_environment: WorldEnvironment   = $"../WorldEnvironment"
 @onready var directional_light: DirectionalLight3D = $"../DirectionalLight3D"
+@onready var success: AudioStreamPlayer = $"../Sounds/success"
 
 ## ==========================================
 ## LIFECYCLE
@@ -113,6 +114,7 @@ func _load_scenario(item_id: int) -> void:
 	# --- Guard: assessment complete ---
 	if not session_timeline.has(item_id):
 		push_warning("[TraitDeck] No room mapped for item_id=%d. Triggering completion." % item_id)
+		success.play()
 		_on_assessment_completed()
 		return
 

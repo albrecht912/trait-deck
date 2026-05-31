@@ -20,6 +20,7 @@ const MAIN_SCENE_PATH: String = "res://scenes/main_scene.tscn"
 @onready var start_button: Button   = $StartButton
 @onready var quit_button: Button    = $QuitButton
 @onready var name_field: LineEdit   = $LineEdit
+@onready var click: AudioStreamPlayer = $Sounds/click
 
 ## ==========================================
 ## RUNTIME-CREATED NODES
@@ -60,6 +61,7 @@ func _ready() -> void:
 func _on_start_button_pressed() -> void:
 	# Strip leading/trailing whitespace before validation.
 	var player_name: String = name_field.text.strip_edges()
+	click.play()
 
 	# --- Case A: Empty name — show warning and abort ---
 	if player_name.is_empty():
@@ -72,6 +74,7 @@ func _on_start_button_pressed() -> void:
 	get_tree().change_scene_to_file(MAIN_SCENE_PATH)
 
 func _on_quit_button_pressed() -> void:
+	click.play()
 	get_tree().quit()
 
 ## ==========================================

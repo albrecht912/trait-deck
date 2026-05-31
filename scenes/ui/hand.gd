@@ -13,6 +13,8 @@ signal card_answer_submitted(card: CardUI)
 @export var x_separation: float = 10.0
 @export var y_min: float = 0.0
 @export var y_max: float = -15.0
+@onready var swipe: AudioStreamPlayer = $"../../Sounds/swipe"
+@onready var swoosh: AudioStreamPlayer = $"../../Sounds/swoosh"
 
 ## ==========================================
 ## CONSTANTS
@@ -86,6 +88,7 @@ func populate_hand_with_choices(cards_data_array: Array) -> void:
 
 		# Add to Hand so it is part of the scene tree.
 		add_child(card)
+		swoosh.play()
 
 		# --- Initial state: card sits at the pile, invisible (scale zero) ---
 		# top_level = true frees it from the Hand container's layout so we can
@@ -116,7 +119,7 @@ func populate_hand_with_choices(cards_data_array: Array) -> void:
 		# Fly from pile to fan slot.
 		deal_tween.tween_property(card, "global_position", final_global_pos, DEAL_DURATION)\
 			.set_delay(delay)
-
+			
 		# Rotate from flat to fan angle.
 		deal_tween.tween_property(card, "rotation", rot_rad, DEAL_DURATION)\
 			.set_delay(delay)
@@ -139,6 +142,7 @@ func populate_hand_with_choices(cards_data_array: Array) -> void:
 			card.drag_state            = CardUI.DragState.IDLE
 			card.original_global_position = card.global_position
 			card.mouse_filter          = Control.MOUSE_FILTER_STOP
+			swipe.play()
 		)
 
 ## ==========================================

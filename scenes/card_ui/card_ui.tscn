@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://bge4v2oi5selh" path="res://scenes/card_ui/card_states/card_dragging_state.gd" id="6_ci03s"]
 [ext_resource type="Script" uid="uid://b10x7r0t12qfb" path="res://scenes/card_ui/card_states/card_released_state.gd" id="7_js3ux"]
 [ext_resource type="Script" uid="uid://b5pjkwvesxak6" path="res://scenes/card_ui/card_states/card_selected_state.gd" id="8_selct"]
+[ext_resource type="AudioStream" uid="uid://dvfoncbru4teh" path="res://sounds/fizz.mp3" id="12_opj8w"]
+[ext_resource type="AudioStream" uid="uid://d32vj4ku1hpq5" path="res://sounds/click.mp3" id="13_25o76"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qeblu"]
 
@@ -145,6 +147,18 @@ state = 4
 [node name="CardSelectedState" type="Node" parent="CardStateMachine" unique_id=123456789]
 script = ExtResource("8_selct")
 state = 5
+
+[node name="Sounds" type="Node" parent="." unique_id=2035955132]
+
+[node name="fizz" type="AudioStreamPlayer" parent="Sounds" unique_id=296637249]
+stream = ExtResource("12_opj8w")
+volume_db = -10.0
+pitch_scale = 0.65
+
+[node name="click" type="AudioStreamPlayer" parent="Sounds" unique_id=595889840]
+stream = ExtResource("13_25o76")
+volume_db = -10.0
+pitch_scale = 0.79
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

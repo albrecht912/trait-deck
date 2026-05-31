@@ -17,6 +17,7 @@ extends CanvasLayer
 
 @onready var resume_button: Button = $ResumeButton
 @onready var quit_button: Button   = $QuitButton
+@onready var click: AudioStreamPlayer = $Sounds/click
 
 ## ==========================================
 ## LIFECYCLE
@@ -55,11 +56,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ## Unpauses the engine and removes this overlay from the scene tree.
 func _on_resume_button_pressed() -> void:
+	click.play()
 	get_tree().paused = false
 	queue_free()
 
 ## Exits the application immediately.
 func _on_quit_button_pressed() -> void:
 	# Unpause first so the engine shuts down cleanly without hanging.
+	click.play()
 	get_tree().paused = false
 	get_tree().quit()

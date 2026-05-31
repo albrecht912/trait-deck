@@ -1,6 +1,8 @@
 class_name CardUI
 extends Control
 
+@onready var fizz: AudioStreamPlayer = $Sounds/fizz
+
 ## ==========================================
 ## SIGNALS
 ## ==========================================
@@ -88,6 +90,7 @@ var tween_rot: Tween
 @onready var answer_label: Label        = $CardBackground/AnswerLabel
 @onready var likert_top_left: Label     = $CardBackground/LikertValTopLeft
 @onready var likert_bottom_right: Label = $CardBackground/LikertValBottomRight
+@onready var click: AudioStreamPlayer = $Sounds/click
 
 ## ==========================================
 ## LIFECYCLE
@@ -161,6 +164,8 @@ func _gui_input(event: InputEvent) -> void:
 		elif mb.button_index == MOUSE_BUTTON_RIGHT and mb.pressed:
 			if drag_state == DragState.DRAGGING or drag_state == DragState.PLACED:
 				_cancel_drag()
+		
+		click.play()
 
 	# --- Tilt shader: skip when dragging or placed ---
 	if drag_state == DragState.DRAGGING or drag_state == DragState.PLACED:
@@ -298,6 +303,7 @@ func _confirm_answer() -> void:
 	# of the tween so SessionManager advances the level only after the card
 	# has become completely invisible.
 	animate_dissolve_and_free()
+	fizz.play()
 
 ## ==========================================
 ## ASYNC DISSOLVE DESTRUCTION
