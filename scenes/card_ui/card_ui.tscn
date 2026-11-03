@@ -3,14 +3,8 @@
 [ext_resource type="Theme" uid="uid://bxy4ikbifr7mf" path="res://game_theme.tres" id="1_5x102"]
 [ext_resource type="Script" uid="uid://buijflaec8qbs" path="res://scenes/card_ui/card_ui.gd" id="2_e1hm3"]
 [ext_resource type="Texture2D" uid="uid://ckcnfkgd12l6e" path="res://assets/CardBG.svg" id="3_ci03s"]
-[ext_resource type="Script" uid="uid://b04p3d6yqyjsg" path="res://scenes/card_ui/card_state_machine.gd" id="3_psaan"]
 [ext_resource type="Shader" uid="uid://dkgtklshkoxd8" path="res://shaders/fake_3d.gdshader" id="3_qeblu"]
 [ext_resource type="Texture2D" uid="uid://bmwmwo01wdehg" path="res://assets/CardShadow.svg" id="4_js3ux"]
-[ext_resource type="Script" uid="uid://do6eybnm3jxgo" path="res://scenes/card_ui/card_states/card_base_state.gd" id="4_orrkt"]
-[ext_resource type="Script" uid="uid://dhkrmje4nc4nw" path="res://scenes/card_ui/card_states/card_clicked_state.gd" id="5_yxx8x"]
-[ext_resource type="Script" uid="uid://bge4v2oi5selh" path="res://scenes/card_ui/card_states/card_dragging_state.gd" id="6_ci03s"]
-[ext_resource type="Script" uid="uid://b10x7r0t12qfb" path="res://scenes/card_ui/card_states/card_released_state.gd" id="7_js3ux"]
-[ext_resource type="Script" uid="uid://b5pjkwvesxak6" path="res://scenes/card_ui/card_states/card_selected_state.gd" id="8_selct"]
 [ext_resource type="AudioStream" uid="uid://dvfoncbru4teh" path="res://sounds/fizz.mp3" id="12_opj8w"]
 [ext_resource type="AudioStream" uid="uid://d32vj4ku1hpq5" path="res://sounds/click.mp3" id="13_25o76"]
 
@@ -124,29 +118,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropPointDetector" unique_id=562213137]
 position = Vector2(75, 105)
 shape = SubResource("RectangleShape2D_5x102")
-
-[node name="CardStateMachine" type="Node" parent="." unique_id=552372330 node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_psaan")
-initial_state = NodePath("CardBaseState")
-
-[node name="CardBaseState" type="Node" parent="CardStateMachine" unique_id=5817484]
-script = ExtResource("4_orrkt")
-
-[node name="CardClickedState" type="Node" parent="CardStateMachine" unique_id=546331165]
-script = ExtResource("5_yxx8x")
-state = 1
-
-[node name="CardDraggingState" type="Node" parent="CardStateMachine" unique_id=605192894]
-script = ExtResource("6_ci03s")
-state = 2
-
-[node name="CardReleasedState" type="Node" parent="CardStateMachine" unique_id=866253230]
-script = ExtResource("7_js3ux")
-state = 4
-
-[node name="CardSelectedState" type="Node" parent="CardStateMachine" unique_id=123456789]
-script = ExtResource("8_selct")
-state = 5
 
 [node name="Sounds" type="Node" parent="." unique_id=2035955132]
 

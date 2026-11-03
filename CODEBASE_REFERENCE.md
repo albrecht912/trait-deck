@@ -1,7 +1,7 @@
 # TraitDeck — Codebase Function Reference
 
 > Auto-generated from `map_project` on 2026-06-03.  
-> **20 scripts · 6 signal connections** across the project.
+> **13 scripts · 6 signal connections** across the project.
 
 ---
 
@@ -20,13 +20,6 @@
 11. [question_card.gd (QuestionCard)](#11-question_cardgd--questioncard--scenesui)
 12. [hand.gd (Hand)](#12-handgd--hand--scenesui)
 13. [card_ui.gd (CardUI)](#13-card_uigd--cardui--scenescard_ui)
-14. [card_state_machine.gd (CardStateMachine)](#14-card_state_machinegd--cardstatemachine--scenescard_ui)
-15. [card_state.gd (CardState)](#15-card_stategdscenes--card_uicard_states)
-16. [card_base_state.gd](#16-card_base_stategdscenes--card_uicard_states)
-17. [card_clicked_state.gd](#17-card_clicked_stategdscenes--card_uicard_states)
-18. [card_dragging_state.gd](#18-card_dragging_stategdscenes--card_uicard_states)
-19. [card_released_state.gd](#19-card_released_stategdscenes--card_uicard_states)
-20. [card_selected_state.gd](#20-card_selected_stategdscenes--card_uicard_states)
 
 ---
 
@@ -237,99 +230,6 @@
 | `_kill_hover_tweens()` | `() → void` | Kills `tween_hover` and `tween_rot` if they are currently running, preventing animation conflicts during drag pickup. |
 | `_update_likert_labels()` | `() → void` | Updates both corner Likert value labels to display `likert_value` as a string, or an empty string if the value is negative (unset). |
 | `set_dialogue_text(new_text)` | `(new_text: String) → void` | Public API called by `Hand.populate_hand_with_choices()`. Sets the `answer_label` text to the card's dialogue string from the database. |
-
----
-
-## 14. `card_state_machine.gd` — `CardStateMachine` — `scenes/card_ui/`
-**Path:** `res://scenes/card_ui/card_state_machine.gd`  
-**Class:** `CardStateMachine`  
-**Extends:** `Node`  
-**Purpose:** Finite State Machine controller for `CardUI`. Manages state transitions and routes input events to the active state.
-
-| Function | Signature | Description |
-|---|---|---|
-| `init(card)` | `(card: CardUI) → void` | Called by `CardUI._ready()`. Iterates all `CardState` children, registers them in the `states` dictionary keyed by their `State` enum value, connects each state's `transition_requested` signal to `_on_transition_requested()`, and assigns the `card_ui` reference. Enters the `initial_state`. |
-| `on_input(event)` | `(event: InputEvent) → void` | Forwards global `_input` events to `current_state.on_input()`. |
-| `on_gui_input(event)` | `(event: InputEvent) → void` | Forwards `_gui_input` events to `current_state.on_gui_input()`. |
-| `_on_transition_requested(from, to)` | `(from: CardState, to: CardState.State) → void` | Signal handler. Guards against stale transitions (ignores if `from != current_state`). Calls `current_state.exit()`, then `new_state.enter()`, and updates `current_state`. |
-| `on_mouse_entered()` | `() → void` | Forwards mouse-entered events to `current_state.on_mouse_entered()`. |
-| `on_mouse_exited()` | `() → void` | Forwards mouse-exited events to `current_state.on_mouse_exited()`. |
-
----
-
-## 15. `card_state.gd` — `scenes/card_ui/card_states/`
-**Path:** `res://scenes/card_ui/card_states/card_state.gd`  
-**Class:** `CardState`  
-**Extends:** `Node`  
-**Purpose:** Abstract base class for all card FSM states. Defines the interface every concrete state must implement and declares the `transition_requested` signal used to request state changes.
-
-| Function | Signature | Description |
-|---|---|---|
-| `enter()` | `() → void` | Called by `CardStateMachine` when this state becomes active. Override in subclasses to set up state-specific visuals and behavior. |
-| `exit()` | `() → void` | Called by `CardStateMachine` just before transitioning away from this state. Override to clean up. |
-| `on_input(_event)` | `(_event: InputEvent) → void` | Receives forwarded global `_input` events. Override to handle keyboard/mouse input that applies globally (not just to the card's GUI area). |
-| `on_gui_input(_event)` | `(_event: InputEvent) → void` | Receives forwarded `_gui_input` events (clicks/motion within the card's bounds). Override to handle card-specific interaction. |
-| `on_mouse_entered()` | `() → void` | Called when the cursor enters the card's bounds. Override for hover-in effects. |
-| `on_mouse_exited()` | `() → void` | Called when the cursor leaves the card's bounds. Override for hover-out effects. |
-
----
-
-## 16. `card_base_state.gd` — `scenes/card_ui/card_states/`
-**Path:** `res://scenes/card_ui/card_states/card_base_state.gd`  
-**Extends:** `CardState`  
-**Purpose:** The card's resting state. The card sits in the Hand fan layout, waiting for a left-click.
-
-| Function | Signature | Description |
-|---|---|---|
-| `enter()` | `() → void` | Awaits `card_ui.ready` if the node isn't ready yet. Emits `reparent_requested` so `Hand` moves the card back to its slot. Sets debug color to green and state label to `"BASE"`. Resets `pivot_offset` to zero. Disables the `drop_point_detector` Area2D. |
-| `on_gui_input(event)` | `(event: InputEvent) → void` | On `left_mouse` press: captures the card's current sibling index into `hand_index`, stores `global_position` as `original_position`, and emits `transition_requested` to move to `CLICKED`. |
-
----
-
-## 17. `card_clicked_state.gd` — `scenes/card_ui/card_states/`
-**Path:** `res://scenes/card_ui/card_states/card_clicked_state.gd`  
-**Extends:** `CardState`  
-**Purpose:** Transient state immediately after a left-click. Waits to see if the player moves the mouse (drag) or right-clicks (cancel).
-
-| Function | Signature | Description |
-|---|---|---|
-| `enter()` | `() → void` | Sets debug color to orange and state label to `"CLICKED"`. Enables the `drop_point_detector` Area2D. Reparents the card to the `ui_layer` CanvasLayer group so it renders above all other UI elements. |
-| `on_input(event)` | `(event: InputEvent) → void` | Any `InputEventMouseMotion` → transitions to `DRAGGING`. `right_mouse` press → transitions to `BASE` (cancel). |
-
----
-
-## 18. `card_dragging_state.gd` — `scenes/card_ui/card_states/`
-**Path:** `res://scenes/card_ui/card_states/card_dragging_state.gd`  
-**Extends:** `CardState`  
-**Purpose:** Active drag state. The card follows the cursor. A minimum drag time threshold prevents accidental releases.
-
-| Function | Signature | Description |
-|---|---|---|
-| `enter()` | `() → void` | Sets debug color to navy blue and state label to `"DRAGGING"`. Sets `pivot_offset` to the card's center. Starts a `SceneTreeTimer` for `DRAG_MINIMUM_THRESHOLD` seconds; when it fires, sets `_minimum_drag_time_elapsed = true`. |
-| `on_input(event)` | `(event: InputEvent) → void` | `InputEventMouseMotion` → positions the card center under the cursor. `right_mouse` press → transitions to `BASE`. Left mouse button released (after minimum threshold) → marks input as handled and transitions to `RELEASED`. |
-
----
-
-## 19. `card_released_state.gd` — `scenes/card_ui/card_states/`
-**Path:** `res://scenes/card_ui/card_states/card_released_state.gd`  
-**Extends:** `CardState`  
-**Purpose:** Momentary evaluation state after the mouse button is released. Decides whether the card landed on a valid drop zone.
-
-| Function | Signature | Description |
-|---|---|---|
-| `enter()` | `() → void` | Sets debug color to dark violet and state label to `"RELEASED"`. Checks `card_ui.targets` (the list of overlapping Area2D bodies from `drop_point_detector`). If not empty → transitions to `SELECTED`. If empty → transitions to `BASE` (card returns to hand). |
-
----
-
-## 20. `card_selected_state.gd` — `scenes/card_ui/card_states/`
-**Path:** `res://scenes/card_ui/card_states/card_selected_state.gd`  
-**Extends:** `CardState`  
-**Purpose:** The card is placed on the drop zone and awaiting confirmation. A second left-click confirms; right-click cancels.
-
-| Function | Signature | Description |
-|---|---|---|
-| `enter()` | `() → void` | Sets debug color to gold and state label to `"SELECTED"`. Snaps the card to the center of the drop zone. |
-| `on_input(event)` | `(event: InputEvent) → void` | `right_mouse` press → transitions to `BASE`, returning the card to the hand. (Left-click confirmation is handled directly by `CardUI._gui_input()` which calls `_confirm_answer()` when `drag_state == PLACED`.) |
 
 ---
 
