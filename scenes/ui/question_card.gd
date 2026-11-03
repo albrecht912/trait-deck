@@ -95,7 +95,3 @@ func _update_labels(text: String, number: int) -> void:
 		q_number_top_left.text = q_num_str
 	if q_number_bottom_right:
 		q_number_bottom_right.text = q_num_str
-
-## Legacy helper kept for compatibility — delegates to slide_in_from_right.
-func setup_question(text: String, number: int) -> void:
-	slide_in_from_right(text, number)

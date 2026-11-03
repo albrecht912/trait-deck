@@ -98,7 +98,7 @@ func _ready() -> void:
 ## ==========================================
 
 func _start_new_playthrough(student_name: String) -> void:
-	var sql: String = "INSERT INTO SESSION (student_name, current_scene) VALUES ('%s', 1);" % student_name
+	var sql: String = "INSERT INTO SESSION (student_name, current_scene) VALUES ('%s', 1);" % student_name.replace("'", "''")
 	DatabaseManager.db.query(sql)
 	active_session_id = DatabaseManager.db.get_last_insert_rowid()
 	print("[TraitDeck] Session started. active_session_id = %d" % active_session_id)

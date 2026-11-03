@@ -224,34 +224,12 @@ func update_fan_layout() -> void:
 	if num_cards == 0:
 		return
 
-	if num_cards == 1:
-		var card: CardUI = active_cards[0] as CardUI
-		if card:
-			card.position         = Vector2((custom_minimum_size.x - CARD_WIDTH) / 2.0, y_min)
-			card.rotation_degrees = 0.0
-		return
-
-	var total_width: float = (CARD_WIDTH * float(num_cards)) + (x_separation * float(num_cards - 1))
-	var final_x_sep: float = x_separation
-
-	if total_width > custom_minimum_size.x:
-		final_x_sep = (custom_minimum_size.x - (CARD_WIDTH * float(num_cards))) / float(num_cards - 1)
-		total_width  = custom_minimum_size.x
-
-	var x_offset: float = (custom_minimum_size.x - total_width) / 2.0
-
+	var fan_targets: Array = _compute_fan_targets(num_cards)
 	for i in range(num_cards):
 		var card: CardUI = active_cards[i] as CardUI
 		if not card:
 			continue
 
-		var ratio: float = float(i) / float(num_cards - 1)
-
-		var y_curve_value: float = hand_curve.sample(ratio)
-		var r_curve_value: float = rotation_curve.sample(ratio)
-
-		var final_x: float = x_offset + (float(i) * (CARD_WIDTH + final_x_sep))
-		var final_y: float = y_min + (y_curve_value * y_max)
-
-		card.position         = Vector2(final_x, final_y)
-		card.rotation_degrees = r_curve_value * max_rotation_degrees
+		var target: Dictionary = fan_targets[i]
+		card.position = target["position"]
+		card.rotation = target["rotation_rad"]

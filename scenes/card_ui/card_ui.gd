@@ -1,8 +1,6 @@
 class_name CardUI
 extends Control
 
-@onready var fizz: AudioStreamPlayer = $Sounds/fizz
-
 ## ==========================================
 ## SIGNALS
 ## ==========================================
@@ -91,6 +89,7 @@ var tween_rot: Tween
 @onready var likert_top_left: Label     = $CardBackground/LikertValTopLeft
 @onready var likert_bottom_right: Label = $CardBackground/LikertValBottomRight
 @onready var click: AudioStreamPlayer = $Sounds/click
+@onready var fizz: AudioStreamPlayer = $Sounds/fizz
 
 ## ==========================================
 ## LIFECYCLE
@@ -110,8 +109,6 @@ func _ready() -> void:
 
 	_update_likert_labels()
 	drag_state = DragState.IDLE
-	# mouse_entered.connect(_on_mouse_entered)
-	# mouse_exited.connect(_on_mouse_exited)
 
 ## ==========================================
 ## PROCESS (shadow update every frame)
@@ -220,10 +217,9 @@ func _on_mouse_entered() -> void:
 	tween_hover.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
 
 func _on_mouse_exited() -> void:
-	# --- Reset shader tilt rotation and label parallax ---
-	if tween_rot and tween_rot.is_running():
-		tween_rot.kill()
+	_kill_hover_tweens()
 
+	# --- Reset shader tilt rotation and label parallax ---
 	if card_texture and card_texture.material:
 		tween_rot = create_tween()
 		tween_rot.set_ease(Tween.EASE_OUT)
@@ -237,9 +233,6 @@ func _on_mouse_exited() -> void:
 		tween_rot.tween_property(likert_bottom_right, "position", base_label_positions["likert_br"], 0.5)
 
 	# --- Reset card scale ---
-	if tween_hover and tween_hover.is_running():
-		tween_hover.kill()
-
 	tween_hover = create_tween()
 	tween_hover.set_ease(Tween.EASE_OUT)
 	tween_hover.set_trans(Tween.TRANS_ELASTIC)
@@ -257,7 +250,7 @@ func _begin_drag() -> void:
 	drag_state = DragState.DRAGGING
 	_kill_hover_tweens()
 	scale = Vector2.ONE
-	_reset_tilt()
+	_set_tilt(0.0, 0.0)
 	_reset_label_positions()
 
 	# Juice A: Squash-and-stretch pickup spring — card elastically pops up on lift.
@@ -282,7 +275,7 @@ func _place_card() -> void:
 
 	rotation = 0.0
 	scale = Vector2.ONE
-	_reset_tilt()
+	_set_tilt(0.0, 0.0)
 	_reset_label_positions()
 
 func _cancel_drag() -> void:
@@ -378,9 +371,6 @@ func _set_tilt(x_rot: float, y_rot: float) -> void:
 	if card_shadow and card_shadow.material:
 		card_shadow.material.set_shader_parameter("x_rot", x_rot)
 		card_shadow.material.set_shader_parameter("y_rot", y_rot)
-
-func _reset_tilt() -> void:
-	_set_tilt(0.0, 0.0)
 
 ## ==========================================
 ## LABEL POSITION HELPERS

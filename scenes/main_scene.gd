@@ -6,20 +6,11 @@ const PAUSE_SCREEN_SCENE: PackedScene = preload("res://scenes/pause_screen.tscn"
 # Keep track of the active instance so we don't open duplicate pause menus
 var _active_pause_screen: Node = null
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
 func _unhandled_input(event: InputEvent) -> void:
 	# 2. Check for your pause action mapping or Escape (ui_cancel is Escape by default)
 	if event.is_action_pressed("ui_cancel"):
 		# Ensure the game isn't already paused and an overlay doesn't already exist
-		if _active_pause_screen == null:
+		if not is_instance_valid(_active_pause_screen):
 			_open_pause_menu()
 
 

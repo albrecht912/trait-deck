@@ -78,9 +78,6 @@ func _physics_process(_delta: float) -> void:
 	velocity.z = direction.z * speed
 	velocity.y = 0.0           # No gravity — navmesh keeps the agent on the floor.
 
-	# Feed the desired velocity into the avoidance system (if enabled).
-	# nav_agent.set_velocity(velocity)  ← uncomment if RVO avoidance is active.
-
 	move_and_slide()
 
 ## ==========================================

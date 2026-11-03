@@ -131,6 +131,5 @@ stream = ExtResource("4_5p13c")
 volume_db = -10.0
 pitch_scale = 0.79
 
-[connection signal="pressed" from="CenterContainer/MainLayout/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="CenterContainer/MainLayout/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="CenterContainer/MainLayout/QuitButton" to="." method="_on_quit_button_pressed"]

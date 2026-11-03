@@ -181,7 +181,6 @@
 | `slide_in_from_right(text, question_number)` | `(text: String, question_number: int) → void` | Snaps the card to `POS_OFF_RIGHT`, updates all labels via `_update_labels()`, then tweens `position` to `POS_CENTER` using a cubic ease-out over `SLIDE_IN_DURATION` seconds. |
 | `slide_out_to_left()` | `() → void` | Tweens `position` to `POS_OFF_LEFT` using a cubic ease-in. At the end of the tween, emits the `slide_out_finished` signal so `SessionManager._advance_to_next_scenario()` can `await` it before loading the next room. |
 | `_update_labels(text, number)` | `(text: String, number: int) → void` | Internal helper. Sets `prompt_label.text` to the question text and both corner number labels (`q_number_top_left`, `q_number_bottom_right`) to the string form of the question number. |
-| `setup_question(text, number)` | `(text: String, number: int) → void` | Legacy compatibility wrapper. Delegates directly to `slide_in_from_right()`. |
 
 ---
 
@@ -225,7 +224,6 @@
 | `animate_dissolve_and_free()` | `() → void` | Sets `mouse_filter` to `IGNORE` to block further input. Saves `global_position` before setting `top_level = true`. Tweens the shader's `dissolve_value` from 1.0 → 0.0 over 0.6 seconds. At the end of the tween, emits `answer_submitted` and calls `queue_free()`. |
 | `_is_over_drop_zone()` | `() → bool` | Checks if the card's `Rect2` intersects the `drop_zone` Area2D's `RectangleShape2D` collision bounds. Returns `false` if `drop_zone` is null or has no valid shape. |
 | `_set_tilt(x_rot, y_rot)` | `(x_rot: float, y_rot: float) → void` | Sets the `x_rot` and `y_rot` shader parameters on both `CardBackground` and `Shadow` materials to create a perspective tilt effect. |
-| `_reset_tilt()` | `() → void` | Convenience wrapper — calls `_set_tilt(0.0, 0.0)`. |
 | `_reset_label_positions()` | `() → void` | Restores `answer_label`, `likert_top_left`, and `likert_bottom_right` to their captured resting positions from `base_label_positions`. |
 | `_kill_hover_tweens()` | `() → void` | Kills `tween_hover` and `tween_rot` if they are currently running, preventing animation conflicts during drag pickup. |
 | `_update_likert_labels()` | `() → void` | Updates both corner Likert value labels to display `likert_value` as a string, or an empty string if the value is negative (unset). |
