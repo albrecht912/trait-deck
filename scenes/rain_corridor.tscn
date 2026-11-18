@@ -1,0 +1,87 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/mahallah_room.gd" id="room_gd"]
+[ext_resource type="PackedScene" path="res://assets/rooms/rain_corridor.glb" id="visual"]
+[ext_resource type="PackedScene" path="res://assets/arrow.glb" id="arrow"]
+[ext_resource type="Script" path="res://scenes/floor_snap.gd" id="snap_fs"]
+[ext_resource type="PackedScene" path="res://scenes/unmarked_collectible.tscn" id="coll"]
+[ext_resource type="PackedScene" path="res://scenes/optional_interactable.tscn" id="opt"]
+[ext_resource type="PackedScene" path="res://assets/characters/crowd_student_b.glb" id="chr_crowd_student_b"]
+[ext_resource type="PackedScene" path="res://assets/characters/crowd_student_a.glb" id="chr_crowd_student_a"]
+
+[sub_resource type="NavigationMesh" id="nav"]
+vertices = PackedVector3Array(6.5, 0, 3.5, -6.5, 0, 3.5, -6.5, 0, -6.0, 6.5, 0, -6.0)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[sub_resource type="BoxShape3D" id="wp_shape"]
+
+[sub_resource type="ParticleProcessMaterial" id="rain_pm"]
+emission_shape = 3
+emission_box_extents = Vector3(10, 0.5, 7)
+direction = Vector3(0.08, -1, 0)
+spread = 2.0
+initial_velocity_min = 13.0
+initial_velocity_max = 16.0
+gravity = Vector3(0, -9.8, 0)
+
+[sub_resource type="StandardMaterial3D" id="rain_mat"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.78, 0.88, 1, 0.45)
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="rain_mesh"]
+material = SubResource("rain_mat")
+size = Vector2(0.025, 0.55)
+
+[node name="RainCorridor" type="Node3D"]
+script = ExtResource("room_gd")
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0, 0, 2.5)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("nav")
+
+[node name="VisualMap" parent="NavigationRegion3D" instance=ExtResource("visual")]
+
+[node name="ActiveWaypoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.5, -3.4)
+
+[node name="Area3D" type="Area3D" parent="ActiveWaypoint"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D"]
+shape = SubResource("wp_shape")
+
+[node name="arrow" parent="ActiveWaypoint" instance=ExtResource("arrow")]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0.722363, 0)
+
+[node name="Collectible_ors_packets" parent="." instance=ExtResource("coll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0, 0, -5.0)
+item_id = "ors_packets"
+
+[node name="OldNoticeboard" parent="." instance=ExtResource("opt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 0, -5.6)
+kind = "poi"
+interact_id = "old_noticeboard"
+line = "Faded notices: 'Wing under renovation. Use the main corridor.'"
+
+[node name="Decor0" parent="." instance=ExtResource("chr_crowd_student_b")]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.5, 0.33, -4.6)
+
+[node name="Decor1" parent="." instance=ExtResource("chr_crowd_student_a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -4.0)
+script = ExtResource("snap_fs")
+
+[node name="Rain" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -1)
+amount = 1800
+lifetime = 0.9
+preprocess = 1.0
+visibility_aabb = AABB(-11, -11, -8, 22, 12, 16)
+process_material = SubResource("rain_pm")
+draw_pass_1 = SubResource("rain_mesh")
+
+[connection signal="body_entered" from="ActiveWaypoint/Area3D" to="." method="_on_area_3d_body_entered"]

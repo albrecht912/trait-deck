@@ -1,0 +1,2721 @@
+{
+  "schema_version": 1,
+  "art_direction_brief": "docs/art-direction-brief.md",
+  "assets": [
+    {
+      "id": "mahallah_room",
+      "kind": "room",
+      "role": "existing room upgrade",
+      "path": "assets/rooms/mahallah_room.glb",
+      "status": "approved",
+      "technical": {
+        "format": "glb",
+        "anchor": "world origin, floor top y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 40000,
+        "actual_tris": 37048
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_hero.py -> art/src/hero_room304.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "project owner (2026-11-18)",
+        "review_captures": "docs/hero_review/"
+      },
+      "used_in": "scenes/mahallah_room.tscn",
+      "note": "replaces assets/room.glb; keeps old footprint, floor top y=0.1; includes clutter and outside surroundings"
+    },
+    {
+      "id": "mo_office",
+      "kind": "room",
+      "role": "existing room upgrade",
+      "path": "assets/rooms/mo_office.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "world origin, floor top y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 40000,
+        "actual_tris": 21384
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_rooms.py + build_new_rooms.py (layout: new_rooms_spec.py) -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/mo_office.tscn",
+      "note": "replaces assets/mo_office.glb"
+    },
+    {
+      "id": "cafe",
+      "kind": "room",
+      "role": "existing room upgrade",
+      "path": "assets/rooms/cafe.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "world origin, floor top y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 40000,
+        "actual_tris": 28672
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_rooms.py + build_new_rooms.py (layout: new_rooms_spec.py) -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/cafe.tscn",
+      "note": "replaces assets/cafe.glb"
+    },
+    {
+      "id": "icc_inside",
+      "kind": "room",
+      "role": "existing room upgrade",
+      "path": "assets/rooms/icc_inside.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "world origin, floor top y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 40000,
+        "actual_tris": 27788
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_rooms.py + build_new_rooms.py (layout: new_rooms_spec.py) -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/icc_inside.tscn",
+      "note": "replaces assets/ICC_inside.glb; rebuild floor at y=0, re-place 4 markers from y=7.94"
+    },
+    {
+      "id": "icc_outside",
+      "kind": "room",
+      "role": "existing room upgrade",
+      "path": "assets/rooms/icc_outside.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "world origin, floor top y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 40000,
+        "actual_tris": 26328
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_rooms.py + build_new_rooms.py (layout: new_rooms_spec.py) -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/icc_outside.tscn",
+      "note": "replaces assets/ICC_outside.glb"
+    },
+    {
+      "id": "musolla",
+      "kind": "room",
+      "role": "existing room upgrade",
+      "path": "assets/rooms/musolla.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "world origin, floor top y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 40000,
+        "actual_tris": 21400
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_rooms.py + build_new_rooms.py (layout: new_rooms_spec.py) -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/musolla.tscn",
+      "note": "replaces assets/musolla.glb"
+    },
+    {
+      "id": "sports_centre",
+      "kind": "room",
+      "role": "existing room upgrade",
+      "path": "assets/rooms/sports_centre.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "world origin, floor top y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 90000,
+        "actual_tris": 83708
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_rooms.py + build_new_rooms.py (layout: new_rooms_spec.py) -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/sports_centre.tscn",
+      "note": "outdoor stadium with ~45 trees; budget raised"
+    },
+    {
+      "id": "shas_foyer",
+      "kind": "room",
+      "role": "new room for item 13 (now icc_inside)",
+      "path": "assets/rooms/shas_foyer.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "world origin, floor top y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 40000,
+        "actual_tris": 32568
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_rooms.py + build_new_rooms.py (layout: new_rooms_spec.py) -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/shas_foyer.tscn (new)",
+      "note": "RHB/ASNB/NotebookLM booths (plain + Label3D, no logos), queue stanchions"
+    },
+    {
+      "id": "mosque_walkway",
+      "kind": "room",
+      "role": "new room for item 14 (now icc_outside)",
+      "path": "assets/rooms/mosque_walkway.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "world origin, floor top y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 40000,
+        "actual_tris": 23692
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_rooms.py + build_new_rooms.py (layout: new_rooms_spec.py) -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/mosque_walkway.tscn (new)",
+      "note": "covered stone walkway, stone bench, kitten spot"
+    },
+    {
+      "id": "kulliyyah_courtyard",
+      "kind": "room",
+      "role": "new room for item 15 (now icc_outside)",
+      "path": "assets/rooms/kulliyyah_courtyard.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "world origin, floor top y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 40000,
+        "actual_tris": 31744
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_rooms.py + build_new_rooms.py (layout: new_rooms_spec.py) -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/kulliyyah_courtyard.tscn (new)",
+      "note": "faculty corridors, directory board, lost freshman spot"
+    },
+    {
+      "id": "rain_corridor",
+      "kind": "room",
+      "role": "new room for item 16 + rain_collapse QTE (now icc_outside)",
+      "path": "assets/rooms/rain_corridor.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "world origin, floor top y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 40000,
+        "actual_tris": 21440
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_rooms.py + build_new_rooms.py (layout: new_rooms_spec.py) -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/rain_corridor.tscn (new)",
+      "note": "old admin wing, overhang, rain sluice; must read under storm mood"
+    },
+    {
+      "id": "iium_clinic",
+      "kind": "room",
+      "role": "new room for post-collapse (not yet in session_timeline)",
+      "path": "assets/rooms/iium_clinic.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "world origin, floor top y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 40000,
+        "actual_tris": 25584
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_rooms.py + build_new_rooms.py (layout: new_rooms_spec.py) -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/iium_clinic.tscn (new)",
+      "note": "built with scenes/iium_clinic.tscn but NOT in session_timeline (no story beat uses it yet)"
+    },
+    {
+      "id": "bed",
+      "kind": "prop",
+      "role": "shared furniture/POI prop",
+      "path": "assets/props/bed.glb",
+      "status": "approved",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 3000,
+        "actual_tris": 2720
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_hero.py -> art/src/hero_room304.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "project owner (2026-11-18)",
+        "review_captures": "docs/hero_review/"
+      },
+      "note": "budget raised to 3000 for chunkier bevels"
+    },
+    {
+      "id": "locker",
+      "kind": "prop",
+      "role": "shared furniture/POI prop",
+      "path": "assets/props/locker.glb",
+      "status": "approved",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000,
+        "actual_tris": 2128
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_hero.py -> art/src/hero_room304.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "project owner (2026-11-18)",
+        "review_captures": "docs/hero_review/"
+      }
+    },
+    {
+      "id": "table",
+      "kind": "prop",
+      "role": "shared furniture/POI prop",
+      "path": "assets/props/table.glb",
+      "status": "approved",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000,
+        "actual_tris": 1172
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_hero.py -> art/src/hero_room304.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "project owner (2026-11-18)",
+        "review_captures": "docs/hero_review/"
+      }
+    },
+    {
+      "id": "chair",
+      "kind": "prop",
+      "role": "shared furniture/POI prop",
+      "path": "assets/props/chair.glb",
+      "status": "merged-into-rooms",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/chair.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "note": "built inside each room glb (art/src/build_rooms.py) instead of a separate prop file"
+    },
+    {
+      "id": "bench_stone",
+      "kind": "prop",
+      "role": "shared furniture/POI prop",
+      "path": "assets/props/bench_stone.glb",
+      "status": "merged-into-rooms",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/bench_stone.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "note": "built inside each room glb (art/src/build_rooms.py) instead of a separate prop file"
+    },
+    {
+      "id": "noticeboard",
+      "kind": "prop",
+      "role": "shared furniture/POI prop",
+      "path": "assets/props/noticeboard.glb",
+      "status": "merged-into-rooms",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/noticeboard.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "note": "built inside each room glb (art/src/build_rooms.py) instead of a separate prop file"
+    },
+    {
+      "id": "club_booth",
+      "kind": "prop",
+      "role": "shared furniture/POI prop",
+      "path": "assets/props/club_booth.glb",
+      "status": "merged-into-rooms",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/club_booth.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "note": "built inside each room glb (art/src/build_rooms.py) instead of a separate prop file"
+    },
+    {
+      "id": "water_cooler",
+      "kind": "prop",
+      "role": "shared furniture/POI prop",
+      "path": "assets/props/water_cooler.glb",
+      "status": "merged-into-rooms",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/water_cooler.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "note": "built inside each room glb (art/src/build_rooms.py) instead of a separate prop file"
+    },
+    {
+      "id": "queue_stanchion",
+      "kind": "prop",
+      "role": "shared furniture/POI prop",
+      "path": "assets/props/queue_stanchion.glb",
+      "status": "merged-into-rooms",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/queue_stanchion.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "note": "built inside each room glb (art/src/build_rooms.py) instead of a separate prop file"
+    },
+    {
+      "id": "plant_pot",
+      "kind": "prop",
+      "role": "shared furniture/POI prop",
+      "path": "assets/props/plant_pot.glb",
+      "status": "merged-into-rooms",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/plant_pot.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "note": "built inside each room glb (art/src/build_rooms.py) instead of a separate prop file"
+    },
+    {
+      "id": "highlighter_pen",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/highlighter_pen.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 664
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn in mo_office"
+    },
+    {
+      "id": "wet_wipes",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/wet_wipes.glb",
+      "status": "approved",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 504
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_hero.py -> art/src/hero_room304.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "project owner (2026-11-18)",
+        "review_captures": "docs/hero_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn in mahallah_room"
+    },
+    {
+      "id": "adapter_plug",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/adapter_plug.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 620
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn (room placement TBD)"
+    },
+    {
+      "id": "cat_treats",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/cat_treats.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 326
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn in cafe"
+    },
+    {
+      "id": "campus_map",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/campus_map.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 416
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn in musolla"
+    },
+    {
+      "id": "pocket_notebook",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/pocket_notebook.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 344
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn (room placement TBD)"
+    },
+    {
+      "id": "electrolyte_sachet",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/electrolyte_sachet.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 424
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn in icc_inside"
+    },
+    {
+      "id": "plastic_dish",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/plastic_dish.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 392
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn in icc_outside"
+    },
+    {
+      "id": "lozenges",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/lozenges.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 816
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn (room placement TBD)",
+      "note": "in-game name 'Dextrose Tablets' (inventory_manager.gd); modelled as a tablet blister card"
+    },
+    {
+      "id": "umbrella",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/umbrella.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 848
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn (room placement TBD)"
+    },
+    {
+      "id": "flashlight_whistle",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/flashlight_whistle.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 744
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn (room placement TBD)"
+    },
+    {
+      "id": "ors_packets",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/ors_packets.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 540
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn (room placement TBD)"
+    },
+    {
+      "id": "lapel_pin",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/lapel_pin.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 760
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn (room placement TBD)"
+    },
+    {
+      "id": "club_handbook",
+      "kind": "collectible",
+      "role": "unmarked collectible mesh (glint shader)",
+      "path": "assets/collectibles/club_handbook.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 800,
+        "actual_tris": 416
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn (room placement TBD)"
+    },
+    {
+      "id": "collectible_glint",
+      "kind": "shader",
+      "role": "proximity rim/sparkle glint",
+      "path": "shaders/collectible_glint.gdshader",
+      "status": "approved",
+      "technical": {
+        "format": "gdshader",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "project owner (2026-11-18)"
+      },
+      "used_in": "scenes/unmarked_collectible.tscn"
+    },
+    {
+      "id": "tidy_desk_books",
+      "kind": "prop",
+      "role": "Room 304 tidy task, messy+tidy nodes in one glb",
+      "path": "assets/props/tidy_desk_books.glb",
+      "status": "approved",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000,
+        "actual_tris": 1696
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_hero.py -> art/src/hero_room304.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "project owner (2026-11-18)",
+        "review_captures": "docs/hero_review/"
+      },
+      "used_in": "scenes/tidy_task.tscn",
+      "note": "scattered books/notes -> stacked"
+    },
+    {
+      "id": "tidy_desk_stationery",
+      "kind": "prop",
+      "role": "Room 304 tidy task, messy+tidy nodes in one glb",
+      "path": "assets/props/tidy_desk_stationery.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000,
+        "actual_tris": 2036
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/tidy_task.tscn",
+      "note": "tangled cables + pens -> cup + coiled cable"
+    },
+    {
+      "id": "tidy_luggage",
+      "kind": "prop",
+      "role": "Room 304 tidy task, messy+tidy nodes in one glb",
+      "path": "assets/props/tidy_luggage.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000,
+        "actual_tris": 1292
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/tidy_task.tscn",
+      "note": "open suitcase spilling clothes -> closed upright"
+    },
+    {
+      "id": "tidy_backpack",
+      "kind": "prop",
+      "role": "Room 304 tidy task, messy+tidy nodes in one glb",
+      "path": "assets/props/tidy_backpack.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 2000,
+        "actual_tris": 900
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_batch.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/tidy_task.tscn",
+      "note": "dumped backpack + rumpled clothes -> hung/folded"
+    },
+    {
+      "id": "protagonist",
+      "kind": "character",
+      "role": "stylized character (static mesh; idle bob via tween)",
+      "path": "assets/characters/protagonist.glb",
+      "status": "approved",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center, feet at y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 8000,
+        "actual_tris": 6604
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "2.5-head proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_hero.py -> art/src/hero_room304.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "project owner (2026-11-18)",
+        "review_captures": "docs/hero_review/"
+      },
+      "used_in": "scenes/optional_interactable.tscn / crowd markers",
+      "note": "replaces assets/Player.glb in scenes/ui/player.tscn; static mesh under 'Model'; import root_type CharacterBody3D; budget raised to 8000 for smooth head and hair"
+    },
+    {
+      "id": "haris",
+      "kind": "character",
+      "role": "stylized character (static mesh; idle bob via tween)",
+      "path": "assets/characters/haris.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center, feet at y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 8000,
+        "actual_tris": 6740
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "2.5-head proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_characters.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/optional_interactable.tscn / crowd markers",
+      "note": "roommate"
+    },
+    {
+      "id": "facilitator_m",
+      "kind": "character",
+      "role": "stylized character (static mesh; idle bob via tween)",
+      "path": "assets/characters/facilitator_m.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center, feet at y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 8000,
+        "actual_tris": 7320
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "2.5-head proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_characters.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/optional_interactable.tscn / crowd markers"
+    },
+    {
+      "id": "facilitator_f",
+      "kind": "character",
+      "role": "stylized character (static mesh; idle bob via tween)",
+      "path": "assets/characters/facilitator_f.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center, feet at y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 8000,
+        "actual_tris": 5464
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "2.5-head proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_characters.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/optional_interactable.tscn / crowd markers"
+    },
+    {
+      "id": "pakcik_stall",
+      "kind": "character",
+      "role": "stylized character (static mesh; idle bob via tween)",
+      "path": "assets/characters/pakcik_stall.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center, feet at y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 8000,
+        "actual_tris": 5320
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "2.5-head proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_characters.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/optional_interactable.tscn / crowd markers",
+      "note": "cafe drink stall uncle"
+    },
+    {
+      "id": "lost_freshman",
+      "kind": "character",
+      "role": "stylized character (static mesh; idle bob via tween)",
+      "path": "assets/characters/lost_freshman.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center, feet at y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 8000,
+        "actual_tris": 5652
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "2.5-head proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_characters.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/optional_interactable.tscn / crowd markers"
+    },
+    {
+      "id": "international_student",
+      "kind": "character",
+      "role": "stylized character (static mesh; idle bob via tween)",
+      "path": "assets/characters/international_student.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center, feet at y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 8000,
+        "actual_tris": 6372
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "2.5-head proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_characters.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/optional_interactable.tscn / crowd markers",
+      "note": "mo_office NPC"
+    },
+    {
+      "id": "crowd_student_a",
+      "kind": "character",
+      "role": "stylized character (static mesh; idle bob via tween)",
+      "path": "assets/characters/crowd_student_a.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center, feet at y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 8000,
+        "actual_tris": 6604
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "2.5-head proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_characters.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/optional_interactable.tscn / crowd markers",
+      "note": "crowd cluster filler"
+    },
+    {
+      "id": "crowd_student_b",
+      "kind": "character",
+      "role": "stylized character (static mesh; idle bob via tween)",
+      "path": "assets/characters/crowd_student_b.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center, feet at y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 8000,
+        "actual_tris": 5464
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "2.5-head proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_characters.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/optional_interactable.tscn / crowd markers",
+      "note": "crowd cluster filler"
+    },
+    {
+      "id": "stray_kitten",
+      "kind": "character",
+      "role": "stylized character (static mesh; idle bob via tween)",
+      "path": "assets/characters/stray_kitten.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center, feet at y=0",
+        "scale": "1u=1m, transforms applied",
+        "max_tris": 8000,
+        "actual_tris": 1836
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "2.5-head proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_characters.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      },
+      "used_in": "scenes/optional_interactable.tscn / crowd markers",
+      "note": "hungry kitten, mosque_walkway"
+    },
+    {
+      "id": "card_dialogue",
+      "kind": "ui",
+      "role": "card frame",
+      "path": "assets/ui/card_dialogue.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "scenes/card_ui/card_ui.tscn",
+      "note": "mint accent"
+    },
+    {
+      "id": "card_action",
+      "kind": "ui",
+      "role": "card frame",
+      "path": "assets/ui/card_action.svg",
+      "status": "approved",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "hand-authored SVG"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "project owner (2026-11-18)",
+        "review_captures": "docs/hero_review/"
+      },
+      "used_in": "scenes/card_ui/card_ui.tscn",
+      "note": "peach accent"
+    },
+    {
+      "id": "card_inventory",
+      "kind": "ui",
+      "role": "card frame",
+      "path": "assets/ui/card_inventory.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "scenes/card_ui/card_ui.tscn",
+      "note": "butter accent"
+    },
+    {
+      "id": "card_emotion",
+      "kind": "ui",
+      "role": "card frame",
+      "path": "assets/ui/card_emotion.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "scenes/card_ui/card_ui.tscn",
+      "note": "lilac accent"
+    },
+    {
+      "id": "icon_highlighter_pen",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/highlighter_pen.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_wet_wipes",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/wet_wipes.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_adapter_plug",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/adapter_plug.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_cat_treats",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/cat_treats.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_campus_map",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/campus_map.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_pocket_notebook",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/pocket_notebook.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_electrolyte_sachet",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/electrolyte_sachet.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_plastic_dish",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/plastic_dish.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_lozenges",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/lozenges.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_umbrella",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/umbrella.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_flashlight_whistle",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/flashlight_whistle.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_ors_packets",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/ors_packets.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_lapel_pin",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/lapel_pin.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "icon_club_handbook",
+      "kind": "ui",
+      "role": "inventory HUD icon",
+      "path": "assets/ui/icons/club_handbook.svg",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "inventory HUD"
+    },
+    {
+      "id": "hud_inventory_bar",
+      "kind": "ui",
+      "role": "inventory bar + pickup toast panel",
+      "path": "scenes/ui/inventory_hud.tscn",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "svg",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "new HUD CanvasLayer"
+    },
+    {
+      "id": "qte_bar",
+      "kind": "ui",
+      "role": "styled QTE bar (StyleBoxFlat in game_theme.tres)",
+      "path": "game_theme.tres",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "tres",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "scenes/ui/qte_ui.tscn"
+    },
+    {
+      "id": "results_layout_fix",
+      "kind": "ui",
+      "role": "layout fix: archetype+summary below scores, clear of TitleLogo",
+      "path": "scenes/results_ui.tscn",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "tscn",
+        "anchor": "n/a",
+        "scale": "1u=1m, transforms applied"
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "bevel/weighted-normal edges",
+        "chunky inflated proportions",
+        "upper-left key light, no baked light"
+      ],
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written SVG/Godot scene (Claude Sonnet subagent)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": false,
+        "approved_by": ""
+      },
+      "used_in": "scenes/results_ui.tscn",
+      "note": "code/layout task, no new art"
+    },
+    {
+      "id": "cozy_sky",
+      "kind": "shader",
+      "role": "shared stylised sky (all rooms)",
+      "path": "shaders/cozy_sky.gdshader",
+      "status": "approved",
+      "technical": {
+        "format": "gdshader",
+        "anchor": "n/a"
+      },
+      "visual_locks": [
+        "palette",
+        "toon cloud edge"
+      ],
+      "used_in": "scenes/main_scene.tscn WorldEnvironment",
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written Godot shader (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "project owner (2026-11-18)",
+        "review_captures": "docs/hero_review/"
+      }
+    },
+    {
+      "id": "crowd_student_c",
+      "kind": "character",
+      "role": "crowd filler variant",
+      "path": "assets/characters/crowd_student_c.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center, feet at y=0",
+        "scale": "1u=1m, transforms applied",
+        "actual_tris": 6740,
+        "max_tris": 8000
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "2.5-head proportions"
+      ],
+      "used_in": "crowd_cluster.glb, shas_foyer queue",
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_characters.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      }
+    },
+    {
+      "id": "crowd_cluster",
+      "kind": "character",
+      "role": "5-student chatting ring placed under Crowd markers (FloorSnap)",
+      "path": "assets/characters/crowd_cluster.glb",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "glb",
+        "anchor": "bottom-center, feet at y=0",
+        "scale": "1u=1m, transforms applied",
+        "actual_tris": 30876,
+        "max_tris": 8000
+      },
+      "visual_locks": [
+        "pal_* palette",
+        "2.5-head proportions"
+      ],
+      "used_in": "mo_office, cafe, icc_inside, mosque_walkway, kulliyyah_courtyard",
+      "note": "about 31k tris: five full students; fine on desktop Forward+, merge or decimate if targeting low-end",
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": "art/src/build_characters.py -> art/src/batch.blend"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "review_captures": "docs/batch_review/"
+      }
+    }
+  ]
+}

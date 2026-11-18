@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bxy4ikbifr7mf" path="res://game_theme.tres" id="1_6f23y"]
 [ext_resource type="Shader" uid="uid://dkgtklshkoxd8" path="res://shaders/fake_3d.gdshader" id="1_kwf6q"]
-[ext_resource type="Texture2D" uid="uid://05jjdamt3svh" path="res://assets/QCard.svg" id="2_6f23y"]
+[ext_resource type="Texture2D" path="res://assets/ui/card_dialogue.svg" id="2_6f23y"]
 [ext_resource type="Script" uid="uid://cafe3s4ykde4x" path="res://scenes/ui/question_card.gd" id="3_hy6qy"]
 [ext_resource type="Texture2D" uid="uid://dgnwha6s4hu2x" path="res://assets/QCardShadow.svg" id="4_1eu0x"]
 
@@ -62,6 +62,7 @@ offset_top = -0.00017929077
 offset_bottom = -0.00018310547
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.29, 0.231, 0.2, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -79,6 +80,7 @@ offset_top = 1.9973822
 offset_right = -11.989807
 offset_bottom = 7.997383
 scale = Vector2(0.46662664, 1.0452741)
+theme_override_colors/font_color = Color(0.29, 0.231, 0.2, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -95,6 +97,7 @@ offset_right = 34.486603
 offset_bottom = 18.979996
 rotation = 3.1415927
 scale = Vector2(-0.46011078, 1.0230271)
+theme_override_colors/font_color = Color(0.29, 0.231, 0.2, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 

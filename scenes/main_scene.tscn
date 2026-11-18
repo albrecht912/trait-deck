@@ -9,30 +9,33 @@
 [ext_resource type="Script" uid="uid://c5t10x5ok571v" path="res://scenes/session_manager.gd" id="4_pu3yx"]
 [ext_resource type="PackedScene" uid="uid://6e5ltlm3bvys" path="res://scenes/results_ui.tscn" id="5_gubc5"]
 [ext_resource type="Shader" uid="uid://dkgtklshkoxd8" path="res://shaders/fake_3d.gdshader" id="6_c16ls"]
+[ext_resource type="Shader" path="res://shaders/cozy_sky.gdshader" id="20_sky"]
 [ext_resource type="Texture2D" uid="uid://bxov87g2wlbba" path="res://assets/CardFront.svg" id="7_18nlu"]
 [ext_resource type="Script" uid="uid://bupa3tmga3i1a" path="res://scenes/mouse_click_detector.gd" id="7_e1cbu"]
 [ext_resource type="Texture2D" uid="uid://bmwmwo01wdehg" path="res://assets/CardShadow.svg" id="8_18nlu"]
+[ext_resource type="PackedScene" path="res://scenes/ui/inventory_hud.tscn" id="21_hud"]
 [ext_resource type="AudioStream" uid="uid://bfbcn25skrbll" path="res://sounds/swipe.wav" id="13_4w45t"]
 [ext_resource type="AudioStream" uid="uid://blkbrf47xohx" path="res://sounds/swoosh.wav" id="14_r6p65"]
 [ext_resource type="AudioStream" uid="uid://dvfoncbru4teh" path="res://sounds/fizz.mp3" id="15_si52b"]
 [ext_resource type="AudioStream" uid="uid://d32vj4ku1hpq5" path="res://sounds/click.mp3" id="16_01n6w"]
 [ext_resource type="AudioStream" uid="uid://bk0feodb2l5no" path="res://sounds/success.wav" id="17_6u1mn"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pu3yx"]
-sky_top_color = Color(0.5686275, 0.59607846, 0.92941177, 1)
-sky_horizon_color = Color(0.8481749, 0.84728765, 0.921621, 1)
-ground_horizon_color = Color(0.8481749, 0.84728765, 0.921621, 1)
+[sub_resource type="ShaderMaterial" id="ProceduralSkyMaterial_pu3yx"]
+shader = ExtResource("20_sky")
 
 [sub_resource type="Sky" id="Sky_gubc5"]
 sky_material = SubResource("ProceduralSkyMaterial_pu3yx")
 
 [sub_resource type="Environment" id="Environment_rt2n2"]
+background_mode = 2
 background_color = Color(0.20511743, 0.20511743, 0.20511743, 1)
 sky = SubResource("Sky_gubc5")
 ambient_light_source = 2
-ambient_light_color = Color(0.6901961, 0.6901961, 0.6901961, 1)
+ambient_light_color = Color(0.8, 0.75, 0.7, 1)
 tonemap_mode = 2
 glow_enabled = true
+adjustment_enabled = true
+adjustment_saturation = 1.15
 
 [sub_resource type="Curve" id="Curve_rt2n2"]
 _data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.0, 0.0, 0, 0]
@@ -115,6 +118,8 @@ position = Vector2(960, 540)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnswerUI/DropZone" unique_id=1003156704]
 shape = SubResource("RectangleShape2D_w2twt")
+
+[node name="InventoryHUD" parent="." instance=ExtResource("21_hud")]
 
 [node name="ResultsUI" parent="." unique_id=1399925077 instance=ExtResource("5_gubc5")]
 visible = false

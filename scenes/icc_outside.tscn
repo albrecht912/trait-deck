@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://kwu1sg1j2wrb"]
 
-[ext_resource type="PackedScene" uid="uid://dsc345de6wor8" path="res://assets/ICC_outside.glb" id="1_g7un6"]
+[ext_resource type="PackedScene" path="res://assets/rooms/icc_outside.glb" id="1_g7un6"]
 [ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_u6jjk"]
 [ext_resource type="PackedScene" uid="uid://ps4siwflgfxk" path="res://assets/arrow.glb" id="3_55g5a"]
 [ext_resource type="PackedScene" path="res://scenes/unmarked_collectible.tscn" id="99_coll"]

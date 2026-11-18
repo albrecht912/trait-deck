@@ -1,0 +1,109 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/mahallah_room.gd" id="room_gd"]
+[ext_resource type="PackedScene" path="res://assets/rooms/shas_foyer.glb" id="visual"]
+[ext_resource type="PackedScene" path="res://assets/arrow.glb" id="arrow"]
+[ext_resource type="Script" path="res://scenes/floor_snap.gd" id="snap_fs"]
+[ext_resource type="PackedScene" path="res://scenes/unmarked_collectible.tscn" id="coll"]
+[ext_resource type="PackedScene" path="res://scenes/optional_interactable.tscn" id="opt"]
+[ext_resource type="PackedScene" path="res://assets/characters/crowd_student_a.glb" id="chr_crowd_student_a"]
+[ext_resource type="PackedScene" path="res://assets/characters/crowd_student_b.glb" id="chr_crowd_student_b"]
+[ext_resource type="PackedScene" path="res://assets/characters/crowd_student_c.glb" id="chr_crowd_student_c"]
+
+[sub_resource type="NavigationMesh" id="nav"]
+vertices = PackedVector3Array(6.5, 0, 3.5, -6.5, 0, 3.5, -6.5, 0, -6.0, 6.5, 0, -6.0)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[sub_resource type="BoxShape3D" id="wp_shape"]
+
+[node name="ShasFoyer" type="Node3D"]
+script = ExtResource("room_gd")
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 0, 3.0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("nav")
+
+[node name="VisualMap" parent="NavigationRegion3D" instance=ExtResource("visual")]
+
+[node name="ActiveWaypoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0.5, -2.2)
+
+[node name="Area3D" type="Area3D" parent="ActiveWaypoint"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D"]
+shape = SubResource("wp_shape")
+
+[node name="arrow" parent="ActiveWaypoint" instance=ExtResource("arrow")]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0.722363, 0)
+
+[node name="Collectible_adapter_plug" parent="." instance=ExtResource("coll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0, 0, 1.0)
+item_id = "adapter_plug"
+
+[node name="Collectible_lapel_pin" parent="." instance=ExtResource("coll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0, 0, -3.0)
+item_id = "lapel_pin"
+
+[node name="FoyerFacilitator" parent="." instance=ExtResource("opt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0, 0, -2.0)
+kind = "npc"
+interact_id = "foyer_facilitator"
+line = "Assalamualaikum! RHB card activation on the left, ASNB in the middle, NotebookLM workshop sign-up on the right."
+character = "facilitator_f"
+
+[node name="PrayerTimesBoard" parent="." instance=ExtResource("opt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3, 0, 0.5)
+kind = "poi"
+interact_id = "prayer_times_board"
+line = "Today's prayer times, plus the Ta'aruf Week schedule for the SHAS Mosque."
+
+[node name="Crowd" type="Marker3D" parent="." groups=["crowd"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, -4.5)
+
+[node name="Decor0" parent="." instance=ExtResource("chr_crowd_student_a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, -6.0)
+script = ExtResource("snap_fs")
+
+[node name="Decor1" parent="." instance=ExtResource("chr_crowd_student_b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, -5.1)
+script = ExtResource("snap_fs")
+
+[node name="Decor2" parent="." instance=ExtResource("chr_crowd_student_c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, -4.2)
+script = ExtResource("snap_fs")
+
+[node name="Decor3" parent="." instance=ExtResource("chr_crowd_student_b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, -3.3)
+script = ExtResource("snap_fs")
+
+[node name="Label0" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 2.75, -7.3)
+pixel_size = 0.006
+text = "RHB"
+font_size = 72
+outline_size = 16
+modulate = Color(0.29, 0.231, 0.2, 1)
+outline_modulate = Color(1, 0.953, 0.863, 1)
+
+[node name="Label1" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 2.75, -7.3)
+pixel_size = 0.006
+text = "ASNB"
+font_size = 72
+outline_size = 16
+modulate = Color(0.29, 0.231, 0.2, 1)
+outline_modulate = Color(1, 0.953, 0.863, 1)
+
+[node name="Label2" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 2.75, -7.3)
+pixel_size = 0.006
+text = "NotebookLM"
+font_size = 72
+outline_size = 16
+modulate = Color(0.29, 0.231, 0.2, 1)
+outline_modulate = Color(1, 0.953, 0.863, 1)
+
+[connection signal="body_entered" from="ActiveWaypoint/Area3D" to="." method="_on_area_3d_body_entered"]

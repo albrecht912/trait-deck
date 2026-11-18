@@ -34,7 +34,6 @@ var _current_card_rows: Array      = []
 ## PROGRESSION TIMELINE MAP
 ## ==========================================
 
-# shortcut: items 13-16 use placeholder rooms; swap in SHAS foyer / walkway / Kulliyyah / rain corridor scenes when built.
 var session_timeline: Array = [
 	[1, "res://scenes/mo_office.tscn"],
 	[2, "res://scenes/mo_office.tscn"],
@@ -42,15 +41,15 @@ var session_timeline: Array = [
 	[4, "res://scenes/icc_outside.tscn"],
 	[5, "res://scenes/cafe.tscn"],
 	[6, "res://scenes/icc_inside.tscn"],
-	[13, "res://scenes/icc_inside.tscn"],
-	[14, "res://scenes/icc_outside.tscn"],
+	[13, "res://scenes/shas_foyer.tscn"],
+	[14, "res://scenes/mosque_walkway.tscn"],
 	[7, "res://scenes/sports_centre.tscn"],
 	[8, "res://scenes/musolla.tscn"],
 	[9, "res://scenes/musolla.tscn"],
 	[10, "res://scenes/musolla.tscn"],
 	[11, "res://scenes/mahallah_room.tscn"],
-	[15, "res://scenes/icc_outside.tscn"],
-	[16, "res://scenes/icc_outside.tscn", "rain_collapse"],  # optional 3rd entry: QTEUI sequence played before the cards
+	[15, "res://scenes/kulliyyah_courtyard.tscn"],
+	[16, "res://scenes/rain_corridor.tscn", "rain_collapse"],  # optional 3rd entry: QTEUI sequence played before the cards
 	[12, "res://scenes/icc_inside.tscn"],
 ]
 
@@ -402,6 +401,9 @@ func _process_environmental_updates() -> void:
 	if world_environment and world_environment.environment:
 		world_environment.environment.fog_enabled = mood == "storm"
 		world_environment.environment.fog_density = 0.04
+		var sky := world_environment.environment.sky
+		if sky and sky.sky_material is ShaderMaterial:
+			(sky.sky_material as ShaderMaterial).set_shader_parameter("overcast", 1.0 if mood == "storm" else 0.0)
 	if not directional_light:
 		return
 

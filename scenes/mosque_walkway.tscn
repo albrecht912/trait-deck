@@ -1,0 +1,67 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/mahallah_room.gd" id="room_gd"]
+[ext_resource type="PackedScene" path="res://assets/rooms/mosque_walkway.glb" id="visual"]
+[ext_resource type="PackedScene" path="res://assets/arrow.glb" id="arrow"]
+[ext_resource type="Script" path="res://scenes/floor_snap.gd" id="snap_fs"]
+[ext_resource type="PackedScene" path="res://scenes/unmarked_collectible.tscn" id="coll"]
+[ext_resource type="PackedScene" path="res://scenes/optional_interactable.tscn" id="opt"]
+[ext_resource type="PackedScene" path="res://assets/characters/crowd_cluster.glb" id="crowd_cc"]
+
+[sub_resource type="NavigationMesh" id="nav"]
+vertices = PackedVector3Array(6.5, 0, 3.5, -6.5, 0, 3.5, -6.5, 0, -6.0, 6.5, 0, -6.0)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[sub_resource type="BoxShape3D" id="wp_shape"]
+
+[node name="MosqueWalkway" type="Node3D"]
+script = ExtResource("room_gd")
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0, 0, 2.5)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("nav")
+
+[node name="VisualMap" parent="NavigationRegion3D" instance=ExtResource("visual")]
+
+[node name="ActiveWaypoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.5, -3.2)
+
+[node name="Area3D" type="Area3D" parent="ActiveWaypoint"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D"]
+shape = SubResource("wp_shape")
+
+[node name="arrow" parent="ActiveWaypoint" instance=ExtResource("arrow")]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0.722363, 0)
+
+[node name="Collectible_umbrella" parent="." instance=ExtResource("coll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0, 0, -5.0)
+item_id = "umbrella"
+
+[node name="Collectible_lozenges" parent="." instance=ExtResource("coll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 2.0)
+item_id = "lozenges"
+
+[node name="StrayKitten" parent="." instance=ExtResource("opt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -3.9)
+kind = "npc"
+interact_id = "stray_kitten"
+line = "Mew... (the kitten is shivering, and it looks hungry)"
+character = "stray_kitten"
+
+[node name="WalkwaySign" parent="." instance=ExtResource("opt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0, 0, -5.6)
+kind = "poi"
+interact_id = "walkway_sign"
+line = "A small sign: 'Please keep the walkway clean. Remove shoes beyond this line.'"
+
+[node name="Crowd" type="Marker3D" parent="." groups=["crowd"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0, 0, -5.4)
+
+[node name="CrowdVisual" parent="Crowd" instance=ExtResource("crowd_cc")]
+script = ExtResource("snap_fs")
+
+[connection signal="body_entered" from="ActiveWaypoint/Area3D" to="." method="_on_area_3d_body_entered"]

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 210">
+  <!-- TraitDeck Emotion card frame: emotion accent, same 150x210 layout and corner-badge positions as CardBG.svg -->
+  <rect x="1" y="1" width="148" height="208" rx="18" fill="#D7C8F0"/>
+  <rect x="6" y="6" width="138" height="198" rx="14" fill="#FFF6E6"/>
+  <rect x="10" y="10" width="130" height="190" rx="11" fill="none" stroke="#A892D6" stroke-width="1.5" stroke-dasharray="4 3" stroke-linecap="round"/>
+  <rect x="22" y="32" width="106" height="146" rx="12" fill="#EBE2F8"/>
+  <path d="M75 15 L77.2 20.8 L83 23 L77.2 25.2 L75 31 L72.8 25.2 L67 23 L72.8 20.8 Z" fill="#E8B64C"/>
+  <circle cx="17.4" cy="17.4" r="11" fill="#D7C8F0" stroke="#A892D6" stroke-width="1.5"/>
+  <circle cx="134" cy="194" r="11" fill="#D7C8F0" stroke="#A892D6" stroke-width="1.5"/>
+</svg>

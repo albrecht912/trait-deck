@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dlxiy1ppymb25"]
 
-[ext_resource type="PackedScene" uid="uid://sywvvv6oo6eg" path="res://assets/sports_centre.glb" id="1_07t8t"]
+[ext_resource type="PackedScene" path="res://assets/rooms/sports_centre.glb" id="1_07t8t"]
 [ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_tgu6s"]
 [ext_resource type="PackedScene" uid="uid://ps4siwflgfxk" path="res://assets/arrow.glb" id="3_ppj64"]
 

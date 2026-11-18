@@ -1,0 +1,71 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/mahallah_room.gd" id="room_gd"]
+[ext_resource type="PackedScene" path="res://assets/rooms/kulliyyah_courtyard.glb" id="visual"]
+[ext_resource type="PackedScene" path="res://assets/arrow.glb" id="arrow"]
+[ext_resource type="Script" path="res://scenes/floor_snap.gd" id="snap_fs"]
+[ext_resource type="PackedScene" path="res://scenes/unmarked_collectible.tscn" id="coll"]
+[ext_resource type="PackedScene" path="res://scenes/optional_interactable.tscn" id="opt"]
+[ext_resource type="PackedScene" path="res://assets/characters/crowd_cluster.glb" id="crowd_cc"]
+
+[sub_resource type="NavigationMesh" id="nav"]
+vertices = PackedVector3Array(6.5, 0, 3.5, -6.5, 0, 3.5, -6.5, 0, -6.0, 6.5, 0, -6.0)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+
+[sub_resource type="BoxShape3D" id="wp_shape"]
+
+[node name="KulliyyahCourtyard" type="Node3D"]
+script = ExtResource("room_gd")
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 0, 3.0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("nav")
+
+[node name="VisualMap" parent="NavigationRegion3D" instance=ExtResource("visual")]
+
+[node name="ActiveWaypoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, -1.5)
+
+[node name="Area3D" type="Area3D" parent="ActiveWaypoint"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActiveWaypoint/Area3D"]
+shape = SubResource("wp_shape")
+
+[node name="arrow" parent="ActiveWaypoint" instance=ExtResource("arrow")]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0.722363, 0)
+
+[node name="Collectible_pocket_notebook" parent="." instance=ExtResource("coll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -5.0)
+item_id = "pocket_notebook"
+
+[node name="Collectible_club_handbook" parent="." instance=ExtResource("coll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0, 0, 1.5)
+item_id = "club_handbook"
+
+[node name="Collectible_flashlight_whistle" parent="." instance=ExtResource("coll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0, 0, 2.5)
+item_id = "flashlight_whistle"
+
+[node name="LostFreshman" parent="." instance=ExtResource("opt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -2.5)
+kind = "npc"
+interact_id = "lost_freshman"
+line = "Um... do you know where the Insan Madani session is? This map makes no sense..."
+character = "lost_freshman"
+
+[node name="KulliyyahDirectory" parent="." instance=ExtResource("opt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0, -5.4)
+kind = "poi"
+interact_id = "kulliyyah_directory"
+line = "Directory: KICT, KENMS, AIKOL, KIRKHS, KOE, KAED. Insan Madani session: Main Auditorium."
+
+[node name="Crowd" type="Marker3D" parent="." groups=["crowd"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0, 0, -4.8)
+
+[node name="CrowdVisual" parent="Crowd" instance=ExtResource("crowd_cc")]
+script = ExtResource("snap_fs")
+
+[connection signal="body_entered" from="ActiveWaypoint/Area3D" to="." method="_on_area_3d_body_entered"]

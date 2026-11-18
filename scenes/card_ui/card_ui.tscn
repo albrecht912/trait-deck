@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bxy4ikbifr7mf" path="res://game_theme.tres" id="1_5x102"]
 [ext_resource type="Script" uid="uid://buijflaec8qbs" path="res://scenes/card_ui/card_ui.gd" id="2_e1hm3"]
-[ext_resource type="Texture2D" uid="uid://ckcnfkgd12l6e" path="res://assets/CardBG.svg" id="3_ci03s"]
+[ext_resource type="Texture2D" path="res://assets/ui/card_action.svg" id="3_ci03s"]
 [ext_resource type="Shader" uid="uid://dkgtklshkoxd8" path="res://shaders/fake_3d.gdshader" id="3_qeblu"]
 [ext_resource type="Texture2D" uid="uid://bmwmwo01wdehg" path="res://assets/CardShadow.svg" id="4_js3ux"]
 [ext_resource type="AudioStream" uid="uid://dvfoncbru4teh" path="res://sounds/fizz.mp3" id="12_opj8w"]
@@ -65,7 +65,7 @@ offset_top = -0.00017929077
 offset_bottom = -0.00018310547
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.29, 0.231, 0.2, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 clip_text = true
@@ -79,7 +79,7 @@ anchor_right = 0.172999
 anchor_bottom = 0.12382202
 offset_top = -5.4359436e-05
 offset_bottom = -5.340576e-05
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.29, 0.231, 0.2, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -95,7 +95,7 @@ offset_top = 16.998886
 offset_right = 16.907516
 offset_bottom = 16.976212
 rotation = 3.1415927
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.29, 0.231, 0.2, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 

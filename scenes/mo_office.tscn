@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://cdwedbh2kcl72"]
 
-[ext_resource type="PackedScene" uid="uid://b2tf7a7rq0fxv" path="res://assets/mo_office.glb" id="1_okm2r"]
+[ext_resource type="PackedScene" path="res://assets/rooms/mo_office.glb" id="1_okm2r"]
 [ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_vync6"]
-[ext_resource type="PackedScene" uid="uid://c44md7c8edwqd" path="res://assets/table.glb" id="2_vi2ji"]
+[ext_resource type="PackedScene" path="res://assets/props/table.glb" id="2_vi2ji"]
 [ext_resource type="PackedScene" uid="uid://ps4siwflgfxk" path="res://assets/arrow.glb" id="4_0c86e"]
 [ext_resource type="PackedScene" path="res://scenes/optional_interactable.tscn" id="98_opt"]
 [ext_resource type="PackedScene" path="res://scenes/unmarked_collectible.tscn" id="99_coll"]
+[ext_resource type="Script" path="res://scenes/floor_snap.gd" id="snap_fs"]
+[ext_resource type="PackedScene" path="res://assets/characters/crowd_cluster.glb" id="crowd_cc"]
+[ext_resource type="PackedScene" path="res://assets/characters/facilitator_m.glb" id="chr_fm"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_vi2ji"]
 vertices = PackedVector3Array(-9.529666, 0.5, -9.65, -9.529666, 0.5, 0.35000038, -9.279666, 0.5, -2.8999996, -8.529666, 0.5, -3.6499996, -0.52966595, 0.5, -3.6499996, -0.27966595, 0.5, -9.4, 1.720334, 0.5, -8.4, 0.97033405, 0.5, -8.15, 1.220334, 0.5, -2.6499996, 9.220334, 0.5, -2.6499996, 9.220334, 0.5, -8.65, 8.720334, 0.5, -9.15, 1.720334, 0.5, -9.15, 0.97033405, 0.5, -2.1499996, -0.27966595, 0.5, 9.6, 9.470334, 0.5, 9.6, -0.52966595, 0.5, -2.1499996, -7.279666, 0.5, -2.3999996, -7.779666, 0.5, -1.6499996, -7.779666, 0.5, 1.6000004, -9.529666, 0.5, 9.6, -9.529666, 0.5, 1.8500004)
@@ -64,5 +67,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.20477223, 4.5)
 kind = "npc"
 interact_id = "international_student"
 line = "Excuse me... do you know where registration for Block C is?"
+character = "international_student"
+
+
+[node name="CrowdVisual" parent="Crowd" instance=ExtResource("crowd_cc")]
+script = ExtResource("snap_fs")
+
+
+[node name="Facilitator" parent="." instance=ExtResource("chr_fm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 0.1, -1.25)
+script = ExtResource("snap_fs")
 
 [connection signal="body_entered" from="ActiveWaypoint/Area3D" to="." method="_on_area_3d_body_entered"]

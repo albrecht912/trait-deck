@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://c1d7syc67o6ml"]
 
 [ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_hfpep"]
-[ext_resource type="PackedScene" uid="uid://1qmjxn3w0wxn" path="res://assets/room.glb" id="1_o2kia"]
-[ext_resource type="PackedScene" uid="uid://5fju1pdqid6q" path="res://assets/locker.glb" id="3_o58tt"]
-[ext_resource type="PackedScene" uid="uid://dlidr0urc5awb" path="res://assets/bed.glb" id="4_o0843"]
-[ext_resource type="PackedScene" uid="uid://c44md7c8edwqd" path="res://assets/table.glb" id="5_4gwge"]
+[ext_resource type="PackedScene" uid="uid://dt5m4hlc15bwb" path="res://assets/rooms/mahallah_room.glb" id="1_o2kia"]
+[ext_resource type="PackedScene" uid="uid://fe5bjfim8ve5" path="res://assets/props/locker.glb" id="3_o58tt"]
+[ext_resource type="PackedScene" uid="uid://cssiq64cxspbm" path="res://assets/props/bed.glb" id="4_o0843"]
+[ext_resource type="PackedScene" uid="uid://b4lps83vsrrnw" path="res://assets/props/table.glb" id="5_4gwge"]
 [ext_resource type="PackedScene" uid="uid://ps4siwflgfxk" path="res://assets/arrow.glb" id="5_11iv8"]
 [ext_resource type="PackedScene" path="res://scenes/tidy_task.tscn" id="97_tidy"]
 [ext_resource type="PackedScene" path="res://scenes/unmarked_collectible.tscn" id="99_coll"]
+[ext_resource type="PackedScene" uid="uid://bqhnswd1i2b7b" path="res://assets/characters/haris.glb" id="chr_haris"]
+[ext_resource type="Script" uid="uid://bgjr60w2ku03n" path="res://scenes/floor_snap.gd" id="snap_fs"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o2kia"]
 vertices = PackedVector3Array(-2.3500004, 0.5, -1.3747096, -2.3500004, 0.5, 0.3752904, -1.6000004, 0.5, 0.3752904, -0.6000004, 0.5, -1.3747096, -0.6000004, 0.5, 1.3752904, 1.3999996, 0.5, 0.6252904, 0.6499996, 0.5, -1.3747096, 0.39999962, 0.5, 1.6252904, 1.3999996, 0.5, 1.3752904, -1.3500004, 0.5, 1.3752904, -1.6000004, 0.5, 2.3752904, -1.3500004, 0.5, 3.3752904, 1.3999996, 0.5, 3.3752904, -4.3500004, 0.5, 3.3752904, -2.6000004, 0.5, 3.3752904, -2.3500004, 0.5, 2.3752904, -4.3500004, 0.5, 1.6252904, 2.3999996, 0.5, 0.3752904, 2.3999996, 0.5, -1.3747096, 2.3999996, 0.5, 2.3752904, 4.3999996, 0.5, 1.6252904, 1.6499996, 0.5, 2.3752904, 2.6499996, 0.5, 3.3752904, 4.3999996, 0.5, 3.3752904)
@@ -80,18 +82,18 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.4
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0.47244716, 0.10000038, -1.0260425)
 
 [node name="UnmarkedCollectible" parent="." unique_id=173043139 instance=ExtResource("99_coll")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91, 0.205, 4.58)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0.1, 2.5)
 item_id = "wet_wipes"
 
 [node name="TidyDeskBooks" parent="." unique_id=820000001 instance=ExtResource("97_tidy")]
-transform = Transform3D(0.819152, 0, 0.573576, 0, 1, 0, -0.573576, 0, 0.819152, -2.8, 0.205, 2.2)
+transform = Transform3D(0.819152, 0, 0.573576, 0, 1, 0, -0.573576, 0, 0.819152, -2.8, 0.1, 2.2)
 task_id = "desk_books"
-tidy_position = Vector3(-3.92, 0.85, 1.48)
+tidy_position = Vector3(-3.92, 0.88, 1.48)
 
 [node name="TidyDeskStationery" parent="." unique_id=820000002 instance=ExtResource("97_tidy")]
 transform = Transform3D(0.642788, 0, -0.766044, 0, 1, 0, 0.766044, 0, 0.642788, -0.3, 0.205, 0.3)
 task_id = "desk_stationery"
-tidy_position = Vector3(-0.46, 0.85, -1.03)
+tidy_position = Vector3(-0.46, 0.88, -1.03)
 
 [node name="TidyLuggage" parent="." unique_id=820000003 instance=ExtResource("97_tidy")]
 transform = Transform3D(0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, 0.34202, -1.9, 0.205, 4.2)
@@ -103,5 +105,9 @@ tidy_rotation_deg = Vector3(0, 90, 0)
 transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, 0.2, 0.205, 3.9)
 task_id = "backpack"
 tidy_position = Vector3(-1, 0.1, 1.2)
+
+[node name="Haris" parent="." unique_id=315699059 instance=ExtResource("chr_haris")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.1, -1.6)
+script = ExtResource("snap_fs")
 
 [connection signal="body_entered" from="ActiveWaypoint/Area3D" to="." method="_on_area_3d_body_entered"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bk6ws3htfhmvq"]
 
 [ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_6lrwl"]
-[ext_resource type="PackedScene" uid="uid://dsq7x3dte520r" path="res://assets/musolla.glb" id="1_bl406"]
+[ext_resource type="PackedScene" path="res://assets/rooms/musolla.glb" id="1_bl406"]
 [ext_resource type="PackedScene" uid="uid://ps4siwflgfxk" path="res://assets/arrow.glb" id="3_non5e"]
 [ext_resource type="PackedScene" path="res://scenes/unmarked_collectible.tscn" id="99_coll"]
 

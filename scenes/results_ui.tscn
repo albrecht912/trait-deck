@@ -15,17 +15,18 @@ script = ExtResource("2_wkr8k")
 
 [node name="TitleLogo" type="TextureRect" parent="." unique_id=1685643432]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.29687497
-anchor_top = 0.029629627
-anchor_right = 0.696875
-anchor_bottom = 0.42962962
-offset_right = 1152.0
-offset_bottom = 648.0
-scale = Vector2(0.4, 0.4)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -230.0
+offset_top = 10.0
+offset_right = 230.0
+offset_bottom = 260.0
+grow_horizontal = 2
 mouse_filter = 2
 texture = ExtResource("3_vislc")
-metadata/_edit_use_anchors_ = true
+expand_mode = 1
+stretch_mode = 5
 
 [node name="BackgroundColor" type="ColorRect" parent="." unique_id=1447423462]
 show_behind_parent = true
@@ -37,21 +38,16 @@ color = Color(0.123934574, 0.15554163, 0.34317455, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=6793263]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -146.0
-offset_top = -141.5
-offset_right = 146.0
-offset_bottom = 141.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 270.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainLayout" type="VBoxContainer" parent="CenterContainer" unique_id=140861708]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="CenterContainer/MainLayout" unique_id=830896877]
 layout_mode = 2
@@ -61,7 +57,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Spacer2" type="Control" parent="CenterContainer/MainLayout" unique_id=269942181]
-custom_minimum_size = Vector2(0, 30)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="ScoresGrid" type="GridContainer" parent="CenterContainer/MainLayout" unique_id=299485720]
@@ -115,14 +111,14 @@ text = "The Steady Newcomer"
 horizontal_alignment = 1
 
 [node name="Summary" type="Label" parent="CenterContainer/MainLayout" unique_id=830000002]
-custom_minimum_size = Vector2(1000, 0)
+custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 text = "..."
 horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Spacer" type="Control" parent="CenterContainer/MainLayout" unique_id=594594076]
-custom_minimum_size = Vector2(0, 30)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="RestartButton" type="Button" parent="CenterContainer/MainLayout" unique_id=979649679]
