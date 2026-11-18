@@ -20,6 +20,7 @@ extends Node
 var active_session_id: int = -1
 var current_item_id: int   = 1
 var current_step: int      = 0
+const QTE_SCENE: PackedScene = preload("res://scenes/ui/qte_ui.tscn")
 
 ## Active player name — resolved from the database on _ready().
 var current_student_name: String = ""
@@ -49,7 +50,7 @@ var session_timeline: Array = [
 	[10, "res://scenes/musolla.tscn"],
 	[11, "res://scenes/mahallah_room.tscn"],
 	[15, "res://scenes/icc_outside.tscn"],
-	[16, "res://scenes/icc_outside.tscn"],
+	[16, "res://scenes/icc_outside.tscn", "rain_collapse"],  # optional 3rd entry: QTEUI sequence played before the cards
 	[12, "res://scenes/icc_inside.tscn"],
 ]
 
@@ -246,6 +247,14 @@ func _on_player_reached_waypoint() -> void:
 	# Stop any residual navigation momentum.
 	if player:
 		player.velocity = Vector3.ZERO
+
+	# --- Crisis QTEs (e.g. Haris's collapse) run before the reflection cards ---
+	var entry: Array = session_timeline[current_step]
+	if entry.size() > 2:
+		var qte: QTEUI = QTE_SCENE.instantiate()
+		add_child(qte)
+		await qte.run_sequence(entry[2])
+		qte.queue_free()
 
 	# --- Show the AnswerUI ---
 	answer_ui.visible = true
