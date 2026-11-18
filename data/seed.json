@@ -1,0 +1,724 @@
+{
+  "DOMAIN": [
+    {
+      "domain_id": 1,
+      "name": "Extraversion",
+      "base_math_val": 0
+    },
+    {
+      "domain_id": 2,
+      "name": "Agreeableness",
+      "base_math_val": 0
+    },
+    {
+      "domain_id": 3,
+      "name": "Conscientiousness",
+      "base_math_val": 0
+    },
+    {
+      "domain_id": 4,
+      "name": "Negative Emotionality",
+      "base_math_val": 0
+    },
+    {
+      "domain_id": 5,
+      "name": "Open-Mindedness",
+      "base_math_val": 0
+    }
+  ],
+  "ITEM": [
+    {
+      "item_id": 1,
+      "domain_id": 1,
+      "item_number": 1,
+      "context_text": "You see a group of students talking to each other during registration. How would you interact with them?",
+      "is_reverse": 0
+    },
+    {
+      "item_id": 2,
+      "domain_id": 1,
+      "item_number": 16,
+      "context_text": "The Facilitator called you for your turn during registration. He tries to engage in small talk with you.",
+      "is_reverse": 1
+    },
+    {
+      "item_id": 3,
+      "domain_id": 1,
+      "item_number": 11,
+      "context_text": "Your roommates are talking late at night about the official schedules starting tomorrow. One said, \"I can’t wait for the opening ceremony tomorrow!\"",
+      "is_reverse": 1
+    },
+    {
+      "item_id": 4,
+      "domain_id": 1,
+      "item_number": 41,
+      "context_text": "A facilitator walks down the crowded queue, holding up a massive stack of orientation brochures, and asks: \"Could someone with some energy please help me hand these out to the rest of the queue?\"",
+      "is_reverse": 0
+    },
+    {
+      "item_id": 5,
+      "domain_id": 1,
+      "item_number": 31,
+      "context_text": "You look around your Mahallah Cafe holding your food, looking for a place to sit. The only open spot is next to a group of laughing seniors.",
+      "is_reverse": 1
+    },
+    {
+      "item_id": 6,
+      "domain_id": 1,
+      "item_number": 6,
+      "context_text": "You return from the washroom to find someone has taken your seat, despite your belongings being there. What do you do?",
+      "is_reverse": 0
+    },
+    {
+      "item_id": 7,
+      "domain_id": 1,
+      "item_number": 26,
+      "context_text": "Early morning at the sports complex, facilitators blast upbeat music and asks everyone to follow along to their aerobics routine.",
+      "is_reverse": 1
+    },
+    {
+      "item_id": 8,
+      "domain_id": 1,
+      "item_number": 46,
+      "context_text": "Your facilitator splits everyone into small usrah circles. The microphone is finally passed to you for your introduction.",
+      "is_reverse": 0
+    },
+    {
+      "item_id": 9,
+      "domain_id": 1,
+      "item_number": 36,
+      "context_text": "Your team is completely stuck on ideas for your group chant. You have a concept that could help out your group.",
+      "is_reverse": 1
+    },
+    {
+      "item_id": 10,
+      "domain_id": 1,
+      "item_number": 51,
+      "context_text": "Your facilitator is asking for every group to elect a leader. Do you let others take the charge or will you lead?",
+      "is_reverse": 1
+    },
+    {
+      "item_id": 11,
+      "domain_id": 1,
+      "item_number": 21,
+      "context_text": "Your roommates are arguing whether to put your shoes and slippers inside or outside the room. What do you do?",
+      "is_reverse": 0
+    },
+    {
+      "item_id": 12,
+      "domain_id": 1,
+      "item_number": 56,
+      "context_text": "A final montage is played after the Bai’ah Ceremony. It is a compilation of everyone’s activities and events that happened throughout the week.",
+      "is_reverse": 0
+    },
+    {
+      "item_id": 13,
+      "domain_id": 1,
+      "item_number": 0,
+      "context_text": "In the packed SHAS Mosque Foyer queue for RHB card activation, a student barges in right in front of you and a pale, dizzy Haris. What do you do?",
+      "is_reverse": 0
+    },
+    {
+      "item_id": 14,
+      "domain_id": 2,
+      "item_number": 0,
+      "context_text": "After the Murabbi Session, a tiny, shivering stray kitten mews beneath a stone bench by the mosque walkway. Maghrib is close and Haris looks exhausted.",
+      "is_reverse": 0
+    },
+    {
+      "item_id": 15,
+      "domain_id": 1,
+      "item_number": 0,
+      "context_text": "Ten minutes before the Insan Madani session, a freshman in the Kulliyyah courtyard stares at their phone map, close to tears — they're at the wrong block.",
+      "is_reverse": 0
+    },
+    {
+      "item_id": 16,
+      "domain_id": 4,
+      "item_number": 0,
+      "context_text": "The ambulance is on its way. How are you feeling right now?",
+      "is_reverse": 1
+    }
+  ],
+  "CARD_OPTION": [
+    {
+      "card_id": 1,
+      "item_id": 1,
+      "likert_value": 1,
+      "dialogue_text": "I'll quietly stay far away from them and focus on my own things.",
+      "requires_item": null
+    },
+    {
+      "card_id": 2,
+      "item_id": 1,
+      "likert_value": 2,
+      "dialogue_text": "I'll sit near the group, but keep to myself unless one of them speaks to me.",
+      "requires_item": null
+    },
+    {
+      "card_id": 3,
+      "item_id": 1,
+      "likert_value": 3,
+      "dialogue_text": "I'd sit nearby and listen to their conversation, waiting for a natural moment to offer a comment.",
+      "requires_item": null
+    },
+    {
+      "card_id": 4,
+      "item_id": 1,
+      "likert_value": 4,
+      "dialogue_text": "I would walk up, introduce myself quickly, and ask if I could join their discussion.",
+      "requires_item": null
+    },
+    {
+      "card_id": 5,
+      "item_id": 1,
+      "likert_value": 5,
+      "dialogue_text": "I will join in, introduce myself loudly, and be very friendly and outspoken.",
+      "requires_item": null
+    },
+    {
+      "card_id": 6,
+      "item_id": 2,
+      "likert_value": 1,
+      "dialogue_text": "Engages enthusiastically, tells a lot about your life and journey, and asks multiple follow-up questions.",
+      "requires_item": null
+    },
+    {
+      "card_id": 7,
+      "item_id": 2,
+      "likert_value": 2,
+      "dialogue_text": "Answers, shares one piece of light personal information, and asks a simple return question.",
+      "requires_item": null
+    },
+    {
+      "card_id": 8,
+      "item_id": 2,
+      "likert_value": 3,
+      "dialogue_text": "Answers politely with a neutral, short response.",
+      "requires_item": null
+    },
+    {
+      "card_id": 9,
+      "item_id": 2,
+      "likert_value": 4,
+      "dialogue_text": "Gives a brief, one-word answer and immediately returns focus to the registration process.",
+      "requires_item": null
+    },
+    {
+      "card_id": 10,
+      "item_id": 2,
+      "likert_value": 5,
+      "dialogue_text": "Just a simple nod and agree.",
+      "requires_item": null
+    },
+    {
+      "card_id": 11,
+      "item_id": 3,
+      "likert_value": 1,
+      "dialogue_text": "Absolutely! I've been looking forward to starting university life for months!",
+      "requires_item": null
+    },
+    {
+      "card_id": 12,
+      "item_id": 3,
+      "likert_value": 2,
+      "dialogue_text": "Yeah, it sounds pretty exciting. Can't wait to see the campus crowd.",
+      "requires_item": null
+    },
+    {
+      "card_id": 13,
+      "item_id": 3,
+      "likert_value": 3,
+      "dialogue_text": "It's fine, probably just another standard assembly.",
+      "requires_item": null
+    },
+    {
+      "card_id": 14,
+      "item_id": 3,
+      "likert_value": 4,
+      "dialogue_text": "Not really. It's probably just going to be hours of formal speeches.",
+      "requires_item": null
+    },
+    {
+      "card_id": 15,
+      "item_id": 3,
+      "likert_value": 5,
+      "dialogue_text": "Honestly, I feel completely indifferent about it. I just want this week to be over.",
+      "requires_item": null
+    },
+    {
+      "card_id": 16,
+      "item_id": 4,
+      "likert_value": 1,
+      "dialogue_text": "Pretends not to hear the question, focusing entirely on a phone/the ground.",
+      "requires_item": null
+    },
+    {
+      "card_id": 17,
+      "item_id": 4,
+      "likert_value": 2,
+      "dialogue_text": "Shakes head subtly and avoids eye contact, hoping someone else volunteers.",
+      "requires_item": null
+    },
+    {
+      "card_id": 18,
+      "item_id": 4,
+      "likert_value": 3,
+      "dialogue_text": "Looks around to see if anyone else is stepping up, but doesn't move.",
+      "requires_item": null
+    },
+    {
+      "card_id": 19,
+      "item_id": 4,
+      "likert_value": 4,
+      "dialogue_text": "Politely offers to help the facilitator distribute the brochures for the small area nearby.",
+      "requires_item": null
+    },
+    {
+      "card_id": 20,
+      "item_id": 4,
+      "likert_value": 5,
+      "dialogue_text": "Immediately calls out, takes the entire stack, and walks up and down the queue energetically handing them out.",
+      "requires_item": null
+    },
+    {
+      "card_id": 21,
+      "item_id": 5,
+      "likert_value": 1,
+      "dialogue_text": "Hey guys! I couldn’t help but be interested in what you’re laughing about. May I join you?",
+      "requires_item": null
+    },
+    {
+      "card_id": 22,
+      "item_id": 5,
+      "likert_value": 2,
+      "dialogue_text": "Hello, is this seat taken? Thanks. (Sits down and offers a polite smile)",
+      "requires_item": null
+    },
+    {
+      "card_id": 23,
+      "item_id": 5,
+      "likert_value": 3,
+      "dialogue_text": "(Sits down quietly without making eye contact, focusing on your meal)",
+      "requires_item": null
+    },
+    {
+      "card_id": 24,
+      "item_id": 5,
+      "likert_value": 4,
+      "dialogue_text": "(Hesitates, feels awkward, and looks for an emptier table at the far corner instead)",
+      "requires_item": null
+    },
+    {
+      "card_id": 25,
+      "item_id": 5,
+      "likert_value": 5,
+      "dialogue_text": "(Completely avoids the crowded hall and decides to eat back in your dorm room alone)",
+      "requires_item": null
+    },
+    {
+      "card_id": 26,
+      "item_id": 6,
+      "likert_value": 1,
+      "dialogue_text": "Quietly find another seat far away, assuming you must have been gone too long.",
+      "requires_item": null
+    },
+    {
+      "card_id": 27,
+      "item_id": 6,
+      "likert_value": 2,
+      "dialogue_text": "Wait near the seat, hoping the person notices your belongings and offers to move.",
+      "requires_item": null
+    },
+    {
+      "card_id": 28,
+      "item_id": 6,
+      "likert_value": 3,
+      "dialogue_text": "Politely ask, \"Excuse me, I think this was my seat? No worries if you need it, but I left my book here.\"",
+      "requires_item": null
+    },
+    {
+      "card_id": 29,
+      "item_id": 6,
+      "likert_value": 4,
+      "dialogue_text": "Directly say, \"Pardon me, I was sitting here. Can I please have my seat back?\"",
+      "requires_item": null
+    },
+    {
+      "card_id": 30,
+      "item_id": 6,
+      "likert_value": 5,
+      "dialogue_text": "Assertively state, \"You took my seat. My belongings are right here, please move now.\"",
+      "requires_item": null
+    },
+    {
+      "card_id": 31,
+      "item_id": 7,
+      "likert_value": 1,
+      "dialogue_text": "Go to the front row and move along with maximum energy.",
+      "requires_item": null
+    },
+    {
+      "card_id": 32,
+      "item_id": 7,
+      "likert_value": 2,
+      "dialogue_text": "Follow along with decent energy and a positive attitude.",
+      "requires_item": null
+    },
+    {
+      "card_id": 33,
+      "item_id": 7,
+      "likert_value": 3,
+      "dialogue_text": "Performs basic movements at a neutral pace.",
+      "requires_item": null
+    },
+    {
+      "card_id": 34,
+      "item_id": 7,
+      "likert_value": 4,
+      "dialogue_text": "Follow slowly, doing the bare minimum to participate.",
+      "requires_item": null
+    },
+    {
+      "card_id": 35,
+      "item_id": 7,
+      "likert_value": 5,
+      "dialogue_text": "Stands still at the back, waiting for the routine to end.",
+      "requires_item": null
+    },
+    {
+      "card_id": 36,
+      "item_id": 8,
+      "likert_value": 1,
+      "dialogue_text": "Hi. Nice to meet everyone.",
+      "requires_item": null
+    },
+    {
+      "card_id": 37,
+      "item_id": 8,
+      "likert_value": 2,
+      "dialogue_text": "Hello everyone. I'm here to study at IIUM. It's great to meet you all.",
+      "requires_item": null
+    },
+    {
+      "card_id": 38,
+      "item_id": 8,
+      "likert_value": 3,
+      "dialogue_text": "Hi. I'm looking forward to getting involved in campus life. I also enjoy a few hobbies. Glad to be here.",
+      "requires_item": null
+    },
+    {
+      "card_id": 39,
+      "item_id": 8,
+      "likert_value": 4,
+      "dialogue_text": "Hey guys! I love meeting new people and I'm excited about starting this journey. Let's definitely connect outside of this usrah!",
+      "requires_item": null
+    },
+    {
+      "card_id": 40,
+      "item_id": 8,
+      "likert_value": 5,
+      "dialogue_text": "What's up everyone! I'm generally pretty outgoing, so don't hesitate to say hi. I can't wait to get to know all of you! Who's next?",
+      "requires_item": null
+    },
+    {
+      "card_id": 41,
+      "item_id": 9,
+      "likert_value": 1,
+      "dialogue_text": "Listen up everyone! I have the perfect cheer idea that will definitely win us the prize. Let’s do it!",
+      "requires_item": null
+    },
+    {
+      "card_id": 42,
+      "item_id": 9,
+      "likert_value": 2,
+      "dialogue_text": "I think my idea could work really well if we try doing it together.",
+      "requires_item": null
+    },
+    {
+      "card_id": 43,
+      "item_id": 9,
+      "likert_value": 3,
+      "dialogue_text": "Here's an idea, it's okay if you guys want to use it or not.",
+      "requires_item": null
+    },
+    {
+      "card_id": 44,
+      "item_id": 9,
+      "likert_value": 4,
+      "dialogue_text": "I have a small suggestion... but it's fine, if you guys don’t want it.",
+      "requires_item": null
+    },
+    {
+      "card_id": 45,
+      "item_id": 9,
+      "likert_value": 5,
+      "dialogue_text": "(Keeps the concept to yourself entirely, assuming the group will ignore your input anyway)",
+      "requires_item": null
+    },
+    {
+      "card_id": 46,
+      "item_id": 10,
+      "likert_value": 1,
+      "dialogue_text": "Let me be the leader. I’m the best one here.",
+      "requires_item": null
+    },
+    {
+      "card_id": 47,
+      "item_id": 10,
+      "likert_value": 2,
+      "dialogue_text": "I'll step up to lead, if there are no objections.",
+      "requires_item": null
+    },
+    {
+      "card_id": 48,
+      "item_id": 10,
+      "likert_value": 3,
+      "dialogue_text": "I'm okay with leading, but we should hold a vote.",
+      "requires_item": null
+    },
+    {
+      "card_id": 49,
+      "item_id": 10,
+      "likert_value": 4,
+      "dialogue_text": "I don't mind, I'll follow whoever wants to step up and lead.",
+      "requires_item": null
+    },
+    {
+      "card_id": 50,
+      "item_id": 10,
+      "likert_value": 5,
+      "dialogue_text": "I’m not very good at leading. I’ll pass on this.",
+      "requires_item": null
+    },
+    {
+      "card_id": 51,
+      "item_id": 11,
+      "likert_value": 1,
+      "dialogue_text": "I suggest we put it to a group vote. I'm happy to go with whatever the majority decides.",
+      "requires_item": null
+    },
+    {
+      "card_id": 52,
+      "item_id": 11,
+      "likert_value": 2,
+      "dialogue_text": "I'll state my preference calmly, then step back and let the others discuss and decide.",
+      "requires_item": null
+    },
+    {
+      "card_id": 53,
+      "item_id": 11,
+      "likert_value": 3,
+      "dialogue_text": "I intervene immediately and suggest a compromise that respects both sides.",
+      "requires_item": null
+    },
+    {
+      "card_id": 54,
+      "item_id": 11,
+      "likert_value": 4,
+      "dialogue_text": "I clearly state what I think is the most logical solution and give reasons why it should be adopted.",
+      "requires_item": null
+    },
+    {
+      "card_id": 55,
+      "item_id": 11,
+      "likert_value": 5,
+      "dialogue_text": "I settle the argument immediately by confidently stating the final rule: 'We're doing it this way, end of discussion.'",
+      "requires_item": null
+    },
+    {
+      "card_id": 56,
+      "item_id": 12,
+      "likert_value": 1,
+      "dialogue_text": "This is dragging on. When is this ever going to end?",
+      "requires_item": null
+    },
+    {
+      "card_id": 57,
+      "item_id": 12,
+      "likert_value": 2,
+      "dialogue_text": "I guess that was okay, but when can we leave?",
+      "requires_item": null
+    },
+    {
+      "card_id": 58,
+      "item_id": 12,
+      "likert_value": 3,
+      "dialogue_text": "A nice summary, definitely a decent way to end the week.",
+      "requires_item": null
+    },
+    {
+      "card_id": 59,
+      "item_id": 12,
+      "likert_value": 4,
+      "dialogue_text": "That was enjoyable! It was quite heartwarming.",
+      "requires_item": null
+    },
+    {
+      "card_id": 60,
+      "item_id": 12,
+      "likert_value": 5,
+      "dialogue_text": "That was fantastic! I’m so glad I came. (Claps enthusiastically)",
+      "requires_item": null
+    },
+    {
+      "card_id": 61,
+      "item_id": 13,
+      "likert_value": 1,
+      "dialogue_text": "Look down at your shoes and let him cut in silently, hoping the line still moves fast enough for Haris.",
+      "requires_item": null
+    },
+    {
+      "card_id": 62,
+      "item_id": 13,
+      "likert_value": 2,
+      "dialogue_text": "Sigh audibly and whisper to Haris that people have no manners, waiting to see if the booth staff notices.",
+      "requires_item": null
+    },
+    {
+      "card_id": 63,
+      "item_id": 13,
+      "likert_value": 3,
+      "dialogue_text": "Tap the student's shoulder gently: \"Excuse me bro, the end of the queue is back there—my friend isn't feeling too well.\"",
+      "requires_item": null
+    },
+    {
+      "card_id": 64,
+      "item_id": 13,
+      "likert_value": 4,
+      "dialogue_text": "Step forward clearly: \"Hey, we've been waiting our turn for half an hour and my friend needs to sit down soon. Please queue at the back.\"",
+      "requires_item": null
+    },
+    {
+      "card_id": 65,
+      "item_id": 13,
+      "likert_value": 5,
+      "dialogue_text": "Call him out loudly in front of the whole line and demand he step out of the queue immediately.",
+      "requires_item": null
+    },
+    {
+      "card_id": 66,
+      "item_id": 14,
+      "likert_value": 1,
+      "dialogue_text": "Keep walking past without slowing down; campus cats fend for themselves and you don't want to be late.",
+      "requires_item": null
+    },
+    {
+      "card_id": 67,
+      "item_id": 14,
+      "likert_value": 2,
+      "dialogue_text": "Feel a pang of pity and pause for a second, but decide someone else with actual cat food will probably help it later.",
+      "requires_item": null
+    },
+    {
+      "card_id": 68,
+      "item_id": 14,
+      "likert_value": 3,
+      "dialogue_text": "Share a small piece of the bread/bun in your bag, leave it on a napkin, and hurry back to the Mahallah.",
+      "requires_item": null
+    },
+    {
+      "card_id": 69,
+      "item_id": 14,
+      "likert_value": 4,
+      "dialogue_text": "Kneel down calmly, break up your snack and pour clean drinking water into a bottle cap for the kitten while asking Haris to sit on the bench and rest for five minutes.",
+      "requires_item": null
+    },
+    {
+      "card_id": 70,
+      "item_id": 14,
+      "likert_value": 5,
+      "dialogue_text": "Sprint to the nearest kiosk/convenience stall to buy proper wet food for the kitten and gently move it to a dry, sheltered corner before heading back.",
+      "requires_item": null
+    },
+    {
+      "card_id": 71,
+      "item_id": 14,
+      "likert_value": 5,
+      "dialogue_text": "[Use Cat Food from Inventory] Open the pouch of cat treats and feed the kitten right here, while Haris catches his breath on the bench.",
+      "requires_item": "cat_treats"
+    },
+    {
+      "card_id": 72,
+      "item_id": 15,
+      "likert_value": 1,
+      "dialogue_text": "Avoid eye contact and slip into your lecture hall quickly; approaching a stranger alone makes your chest tighten.",
+      "requires_item": null
+    },
+    {
+      "card_id": 73,
+      "item_id": 15,
+      "likert_value": 2,
+      "dialogue_text": "Hover nearby hoping a committee facilitator spots them so you don't have to speak up.",
+      "requires_item": null
+    },
+    {
+      "card_id": 74,
+      "item_id": 15,
+      "likert_value": 3,
+      "dialogue_text": "Wait until the student looks your way, then point them toward the main directory signboard with brief directions.",
+      "requires_item": null
+    },
+    {
+      "card_id": 75,
+      "item_id": 15,
+      "likert_value": 4,
+      "dialogue_text": "Walk over gently, ask which Kulliyyah they're looking for, and pull up the campus map together to show them the exact shortcut.",
+      "requires_item": null
+    },
+    {
+      "card_id": 76,
+      "item_id": 15,
+      "likert_value": 5,
+      "dialogue_text": "Reassure them warmly, text Haris to save your seat, and personally walk the student halfway to the neighboring Kulliyyah corridor so they don't get lost again.",
+      "requires_item": null
+    },
+    {
+      "card_id": 77,
+      "item_id": 16,
+      "likert_value": 1,
+      "dialogue_text": "My heart won't stop pounding; I feel sick with dread.",
+      "requires_item": null
+    },
+    {
+      "card_id": 78,
+      "item_id": 16,
+      "likert_value": 2,
+      "dialogue_text": "[DRAFT] My heart is racing and my hands are shaking, but I'm trying hard not to fall apart.",
+      "requires_item": null
+    },
+    {
+      "card_id": 79,
+      "item_id": 16,
+      "likert_value": 3,
+      "dialogue_text": "[DRAFT] I'm shaken, but I'm holding on and keeping an eye on Haris.",
+      "requires_item": null
+    },
+    {
+      "card_id": 80,
+      "item_id": 16,
+      "likert_value": 4,
+      "dialogue_text": "[DRAFT] I'm still rattled, but steady enough to keep Haris calm and focused.",
+      "requires_item": null
+    },
+    {
+      "card_id": 81,
+      "item_id": 16,
+      "likert_value": 5,
+      "dialogue_text": "Terrified, but I had to keep a level head for Haris.",
+      "requires_item": null
+    }
+  ],
+  "CARD_EFFECT": [
+    {
+      "card_id": 71,
+      "domain_id": 2,
+      "value": 5
+    },
+    {
+      "card_id": 71,
+      "domain_id": 3,
+      "value": 5
+    }
+  ]
+}

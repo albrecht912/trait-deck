@@ -101,6 +101,7 @@ func _start_new_playthrough(student_name: String) -> void:
 	var sql: String = "INSERT INTO SESSION (student_name, current_scene) VALUES ('%s', 1);" % student_name.replace("'", "''")
 	DatabaseManager.db.query(sql)
 	active_session_id = DatabaseManager.db.get_last_insert_rowid()
+	DatabaseManager.active_session_id = active_session_id
 	print("[TraitDeck] Session started. active_session_id = %d" % active_session_id)
 
 ## ==========================================
@@ -202,13 +203,14 @@ func _load_scenario(item_id: int) -> void:
 	_current_question_text = DatabaseManager.db.query_result[0]["context_text"]
 
 	var cards_sql: String = (
-		"SELECT card_id, item_id, likert_value, dialogue_text "
+		"SELECT card_id, item_id, likert_value, dialogue_text, requires_item "
 		+ "FROM CARD_OPTION "
 		+ "WHERE item_id = %d " % item_id
 		+ "ORDER BY likert_value ASC;"
 	)
 	DatabaseManager.db.query(cards_sql)
-	_current_card_rows = DatabaseManager.db.query_result
+	_current_card_rows = DatabaseManager.db.query_result.filter(
+		func(r): return r["requires_item"] == null or InventoryManager.has(r["requires_item"]))
 	print("[TraitDeck] Cached %d card options for item_id=%d." % [_current_card_rows.size(), item_id])
 
 	# --- Step K: EXPLORE PHASE — hide UI, unlock player movement ---
@@ -281,6 +283,22 @@ func _save_response(played_card_id: int) -> void:
 	DatabaseManager.db.query(sql)
 	print("[TraitDeck] Saved response → session_id=%d, card_id=%d" % [active_session_id, played_card_id])
 
+	# --- Telemetry (query_result is overwritten by each query, so copy it) ---
+	var db = DatabaseManager.db
+	var meta := {"card_id": played_card_id, "item_id": current_item_id}
+	db.query_with_bindings("SELECT d.name AS name, e.value AS value FROM CARD_EFFECT e JOIN DOMAIN d ON e.domain_id = d.domain_id WHERE e.card_id = ?;", [played_card_id])
+	var effects: Array = db.query_result.duplicate()
+	for e in effects:
+		DatabaseManager.log_event(e["name"], "card_choice", float(e["value"]), 1.0, meta)
+	db.query_with_bindings("SELECT d.name AS name, i.is_reverse AS is_reverse, c.likert_value AS likert, c.requires_item AS req FROM CARD_OPTION c JOIN ITEM i ON c.item_id = i.item_id JOIN DOMAIN d ON i.domain_id = d.domain_id WHERE c.card_id = ?;", [played_card_id])
+	if not db.query_result.is_empty():
+		var r: Dictionary = db.query_result[0]
+		if effects.is_empty():
+			var likert: int = int(r["likert"])
+			DatabaseManager.log_event(r["name"], "card_choice", float(6 - likert if int(r["is_reverse"]) == 1 else likert), 1.0, meta)
+		if r["req"] != null:
+			InventoryManager.consume(r["req"])
+
 	_process_environmental_updates()
 
 ## ==========================================
@@ -314,6 +332,7 @@ func _on_restart_requested() -> void:
 	results_ui.visible = false
 	answer_ui.visible  = false
 
+	InventoryManager.clear()
 	_start_new_playthrough(current_student_name)
 
 	current_item_id = 1
@@ -324,28 +343,7 @@ func _on_restart_requested() -> void:
 ## ==========================================
 
 func _get_domain_average(domain_name: String) -> float:
-	var sql: String = """
-		SELECT AVG(
-			CASE
-				WHEN i.is_reverse = 1 THEN (6 - c.likert_value)
-				ELSE c.likert_value
-			END
-		) AS domain_average
-		FROM PLAYER_RESPONSE pr
-		JOIN CARD_OPTION c ON pr.card_id = c.card_id
-		JOIN ITEM i ON c.item_id = i.item_id
-		JOIN DOMAIN d ON i.domain_id = d.domain_id
-		WHERE pr.session_id = %d AND d.name = '%s';
-	""" % [active_session_id, domain_name]
-
-	DatabaseManager.db.query(sql)
-
-	if not DatabaseManager.db.query_result.is_empty():
-		var result = DatabaseManager.db.query_result[0].get("domain_average")
-		if result != null:
-			return float(result)
-
-	return 3.0
+	return DatabaseManager.get_domain_score(domain_name)
 
 ## ==========================================
 ## 9. GLOBAL LIGHTING — Extraversion-driven
