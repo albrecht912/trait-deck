@@ -261,7 +261,8 @@ func _on_player_reached_waypoint() -> void:
 
 	# --- Slide the QuestionCard in with cached question data ---
 	if question_card:
-		question_card.slide_in_from_right(_current_question_text, current_step + 1)
+		var haris: String = TraitProfile.haris_line(current_item_id, _scores())
+		question_card.slide_in_from_right(_current_question_text + ("\n\n" + haris if haris != "" else ""), current_step + 1)
 
 	# --- Populate the card hand with cached answer options ---
 	hand.populate_hand_with_choices(_current_card_rows)
@@ -340,6 +341,14 @@ func _on_assessment_completed() -> void:
 
 	results_ui.display_scores(extraversion, neuroticism, agreeableness, conscientiousness, openness)
 
+	# item_id -> likert of the card chosen this session, for story-moment lines.
+	var choices := {}
+	DatabaseManager.db.query_with_bindings("SELECT c.item_id AS item_id, c.likert_value AS likert FROM PLAYER_RESPONSE pr JOIN CARD_OPTION c ON pr.card_id = c.card_id WHERE pr.session_id = ?;", [active_session_id])
+	for row in DatabaseManager.db.query_result:
+		choices[int(row["item_id"])] = int(row["likert"])
+	var scores := _scores()
+	results_ui.display_profile(TraitProfile.archetype(scores), TraitProfile.summary(scores, choices))
+
 	answer_ui.visible  = false
 	results_ui.visible = true
 
@@ -371,18 +380,40 @@ func _get_domain_average(domain_name: String) -> float:
 ## 9. GLOBAL LIGHTING — Extraversion-driven
 ## ==========================================
 
+## Story moods override the trait-driven lighting for key beats (doc: Act I cool morning,
+## first dinner golden hour, Thursday storm, sunlit Bai'ah). Keyed by ITEM id.
+const ITEM_MOODS := {1: "act1", 2: "act1", 3: "act1", 8: "act1", 9: "act1", 10: "act1",
+	5: "golden", 16: "storm", 12: "bright"}
+const MOOD_LIGHT := {
+	"act1":   [Color(0.62, 0.72, 0.9), 0.7],
+	"golden": [Color(1.0, 0.8, 0.55), 1.1],
+	"storm":  [Color(0.35, 0.42, 0.55), 0.35],
+	"bright": [Color(1.0, 0.93, 0.78), 1.6],
+}
+
+func _scores() -> Dictionary:
+	var s := {}
+	for d in TraitProfile.DOMAINS:
+		s[d] = _get_domain_average(d)
+	return s
+
 func _process_environmental_updates() -> void:
-	var extraversion_avg: float = _get_domain_average("Extraversion")
-	var blend: float = clampf((extraversion_avg - 1.0) / 4.0, 0.0, 1.0)
+	var mood: String = ITEM_MOODS.get(current_item_id, "")
+	if world_environment and world_environment.environment:
+		world_environment.environment.fog_enabled = mood == "storm"
+		world_environment.environment.fog_density = 0.04
+	if not directional_light:
+		return
 
-	print("[TraitDeck] Lighting update → Extraversion: %.2f | Blend: %.2f" % [extraversion_avg, blend])
+	if mood != "":
+		directional_light.light_color = MOOD_LIGHT[mood][0]
+		directional_light.light_energy = MOOD_LIGHT[mood][1]
+	else:
+		# Act II: Extraversion warms the hue, Negative Emotionality dims it.
+		var e_blend: float = clampf((_get_domain_average("Extraversion") - 1.0) / 4.0, 0.0, 1.0)
+		var n_blend: float = clampf((_get_domain_average("Negative Emotionality") - 1.0) / 4.0, 0.0, 1.0)
+		directional_light.light_color = Color(0.6, 0.75, 1.0).lerp(Color(1.0, 0.85, 0.6), e_blend)
+		directional_light.light_energy = lerp(0.5, 1.5, e_blend) * lerp(1.1, 0.75, n_blend)
 
-	if directional_light:
-		var introverted_color := Color(0.6, 0.75, 1.0)
-		var extroverted_color := Color(1.0, 0.85, 0.6)
-
-		directional_light.light_color  = introverted_color.lerp(extroverted_color, blend)
-		directional_light.light_energy = lerp(0.5, 1.5, blend)
-
-		print("[TraitDeck] DirectionalLight3D → color=%s | energy=%.2f"
-			% [directional_light.light_color, directional_light.light_energy])
+	print("[TraitDeck] Lighting → mood=%s | color=%s | energy=%.2f"
+		% [mood if mood != "" else "traits", directional_light.light_color, directional_light.light_energy])

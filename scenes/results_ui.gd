@@ -8,6 +8,9 @@ signal restart_requested
 @onready var c_value: Label = $CenterContainer/MainLayout/ScoresGrid/C_Value
 @onready var o_value: Label = $CenterContainer/MainLayout/ScoresGrid/O_Value
 
+@onready var archetype_label: Label = $CenterContainer/MainLayout/Archetype
+@onready var summary_label: Label = $CenterContainer/MainLayout/Summary
+
 @onready var restart_button: Button = $CenterContainer/MainLayout/RestartButton
 # 1. Grab a clean reference to the ReturnButton node path
 @onready var return_button: Button = $CenterContainer/MainLayout/ReturnButton
@@ -28,6 +31,10 @@ func display_scores(e: float, n: float, a: float, c: float, o: float) -> void:
 	a_value.text = "%.2f / 5.0" % a
 	c_value.text = "%.2f / 5.0" % c
 	o_value.text = "%.2f / 5.0" % o
+
+func display_profile(archetype: String, summary: String) -> void:
+	archetype_label.text = archetype
+	summary_label.text = summary
 
 func _on_restart_pressed() -> void:
 	click.play()
