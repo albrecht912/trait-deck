@@ -1553,7 +1553,7 @@
         "review_captures": "docs/hero_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "replaces assets/Player.glb in scenes/ui/player.tscn; static mesh under 'Model'; import root_type CharacterBody3D; budget raised to 8000 for smooth head and hair; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
+      "note": "replaces assets/Player.glb in scenes/ui/player.tscn; static mesh under 'Model'; import root_type CharacterBody3D; budget raised to 8000 for smooth head and hair; has HeadPivot, HipPivotL/R and ShoulderPivotL/R (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "haris",
@@ -1591,7 +1591,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "roommate; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
+      "note": "roommate; has HeadPivot, HipPivotL/R and ShoulderPivotL/R (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "facilitator_m",
@@ -1629,7 +1629,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
+      "note": "has HeadPivot, HipPivotL/R and ShoulderPivotL/R (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "facilitator_f",
@@ -1667,7 +1667,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
+      "note": "has HeadPivot, HipPivotL/R and ShoulderPivotL/R (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "pakcik_stall",
@@ -1705,7 +1705,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "cafe drink stall uncle; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
+      "note": "cafe drink stall uncle; has HeadPivot, HipPivotL/R and ShoulderPivotL/R (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "lost_freshman",
@@ -1743,7 +1743,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
+      "note": "has HeadPivot, HipPivotL/R and ShoulderPivotL/R (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "international_student",
@@ -1781,7 +1781,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "mo_office NPC; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
+      "note": "mo_office NPC; has HeadPivot, HipPivotL/R and ShoulderPivotL/R (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "crowd_student_a",
@@ -1819,7 +1819,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "crowd cluster filler; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
+      "note": "crowd cluster filler; has HeadPivot, HipPivotL/R and ShoulderPivotL/R (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "crowd_student_b",
@@ -1857,7 +1857,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "crowd cluster filler; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
+      "note": "crowd cluster filler; has HeadPivot, HipPivotL/R and ShoulderPivotL/R (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "stray_kitten",
@@ -1895,7 +1895,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "hungry kitten, mosque_walkway; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
+      "note": "hungry kitten, mosque_walkway; has HeadPivot, HipPivotL/R and ShoulderPivotL/R (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "card_dialogue",
@@ -2683,7 +2683,7 @@
         "approved_by": "",
         "review_captures": "docs/batch_review/"
       },
-      "note": "has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
+      "note": "has HeadPivot, HipPivotL/R and ShoulderPivotL/R (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "crowd_cluster",
@@ -2703,7 +2703,7 @@
         "2.5-head proportions"
       ],
       "used_in": "mo_office, cafe, icc_inside, mosque_walkway, kulliyyah_courtyard",
-      "note": "about 31k tris: five full students; fine on desktop Forward+, merge or decimate if targeting low-end; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation",
+      "note": "about 31k tris: five full students; fine on desktop Forward+, merge or decimate if targeting low-end; has HeadPivot, HipPivotL/R and ShoulderPivotL/R (kitten: EarPivotL/R, TailPivot) for the idle animation",
       "source": {
         "kind": "authored",
         "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
@@ -2722,10 +2722,10 @@
       }
     },
     {
-      "id": "idle_animation",
+      "id": "character_animation",
       "kind": "animation",
-      "role": "looping idle for protagonist and all NPCs: breathing, weight shift, head turn; kitten ear twitch and tail swish",
-      "path": "scenes/idle_animator.gd",
+      "role": "looping 'idle' (breathing, weight shift, head turn; kitten ear twitch + tail swish) for every character, plus a 0.5 s 'walk' cycle (leg/arm swing from HipPivot*/ShoulderPivot*, step bob, footfall squash, head nod)",
+      "path": "scenes/character_animator.gd",
       "status": "built-awaiting-in-game-review",
       "technical": {
         "format": "gd",
@@ -2734,7 +2734,7 @@
       "visual_locks": [
         "subtle, looping, Animal Crossing-style motion"
       ],
-      "used_in": "player.gd, optional_interactable.gd, floor_snap.gd (decor and crowds)",
+      "used_in": "player.gd (idle/walk by velocity, body turns to face travel), optional_interactable.gd, floor_snap.gd",
       "note": "AnimationPlayer + 'idle' clip built at runtime from HeadPivot/EarPivot/TailPivot empties in each character glb; random speed and phase per instance",
       "source": {
         "kind": "authored",
@@ -2750,7 +2750,7 @@
         "in_engine_reviewed": false,
         "technical_checks_passed": true,
         "approved_by": "",
-        "tests": "tests/test_idle.gd"
+        "tests": "tests/test_animation.gd"
       }
     },
     {

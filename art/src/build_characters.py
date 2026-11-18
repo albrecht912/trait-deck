@@ -125,6 +125,12 @@ def add_pivots(P, root, kitten=False):
     else:
         hp = empty("HeadPivot", P, loc=(0, 0, 0.74), parent=root)
         _reparent([o for o in kids if _base(o) in HEAD_PARTS], hp)
+        # walk-cycle pivots: legs/shoes swing from the hips, sleeves/arms/hands from the shoulders
+        for s, side in ((-1, "L"), (1, "R")):
+            hip = empty(f"HipPivot{side}", P, loc=(s * 0.11, 0, 0.33), parent=root)
+            _reparent([o for o in kids if _base(o) in ("Leg", "Shoe") and o.location.x * s > 0], hip)
+            sh = empty(f"ShoulderPivot{side}", P, loc=(s * 0.25, 0, 0.62), parent=root)
+            _reparent([o for o in kids if _base(o) in ("Sleeve", "Arm", "Hand") and o.location.x * s > 0], sh)
 
 def build_characters():
     _use_scene(); out = {}

@@ -21,6 +21,12 @@ extends CharacterBody3D
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 
+## Idle/walk clips on the protagonist model (see CharacterAnimator).
+var _anim: AnimationPlayer
+
+## How fast the body turns to face its walking direction (higher = snappier).
+const TURN_SPEED := 12.0
+
 ## ==========================================
 ## LIFECYCLE
 ## ==========================================
@@ -29,7 +35,7 @@ func _ready() -> void:
 	# NavigationAgent3D requires one deferred frame after the scene tree is
 	# ready before its path queries are valid.
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
-	IdleAnimator.attach(self)  # breathing / head-turn loop on the protagonist model
+	_anim = CharacterAnimator.attach(self)
 
 ## ==========================================
 ## PUBLIC API
@@ -47,8 +53,10 @@ func teleport_to_position(target_global_pos: Vector3) -> void:
 	# 1. Override position cleanly.
 	global_position = target_global_pos
 
-	# 2. Halt all momentum so the player doesn't slide on arrival.
+	# 2. Halt all momentum so the player doesn't slide on arrival, and face the camera again.
 	velocity = Vector3.ZERO
+	rotation.y = 0.0
+	CharacterAnimator.set_walking(_anim, false)
 
 	# 3. Flush the navigation agent's waypoint cache so it doesn't try to
 	#    resume a stale path from the previous room.
@@ -59,11 +67,12 @@ func teleport_to_position(target_global_pos: Vector3) -> void:
 ## PHYSICS LOOP
 ## ==========================================
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# Nothing to do if the agent has already reached its destination.
 	if nav_agent.is_navigation_finished():
 		velocity = Vector3.ZERO
 		move_and_slide()
+		CharacterAnimator.set_walking(_anim, false)
 		return
 
 	# Retrieve the next waypoint along the baked navmesh path.
@@ -78,6 +87,11 @@ func _physics_process(_delta: float) -> void:
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
 	velocity.y = 0.0           # No gravity — navmesh keeps the agent on the floor.
+
+	# Face the walking direction (the model faces +Z) and play the walk cycle.
+	if direction.length_squared() > 0.0:
+		rotation.y = lerp_angle(rotation.y, atan2(direction.x, direction.z), clampf(TURN_SPEED * delta, 0.0, 1.0))
+	CharacterAnimator.set_walking(_anim, direction.length_squared() > 0.0)
 
 	move_and_slide()
 
