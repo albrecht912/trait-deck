@@ -21,6 +21,7 @@ MCPRuntime="*uid://daqdv5hbmeqa3"
 DatabaseManager="*uid://fjwhnb67d1j2"
 DampedOscillator="*uid://bkqabubjo4g5a"
 InventoryManager="*res://inventory_manager.gd"
+TelemetryTracker="*res://telemetry_tracker.gd"
 
 [display]
 

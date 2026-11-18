@@ -5,6 +5,7 @@ extends Area3D
 @export var item_id: String
 
 func _ready() -> void:
+	add_to_group("collectible")  # TelemetryTracker counts available collectibles via this group
 	if InventoryManager.was_found(item_id):
 		queue_free()
 		return

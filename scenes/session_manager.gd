@@ -224,6 +224,7 @@ func _load_scenario(step: int) -> void:
 	answer_ui.visible = false
 	if mouse_click_detector:
 		mouse_click_detector.input_enabled = true
+	TelemetryTracker.begin_room(new_room, player)
 
 	# --- Step L: Update global lighting ---
 	_process_environmental_updates()
@@ -235,6 +236,8 @@ func _load_scenario(step: int) -> void:
 
 func _on_player_reached_waypoint() -> void:
 	print("[TraitDeck] Waypoint reached — entering assessment phase for item_id=%d." % current_item_id)
+
+	TelemetryTracker.end_room()
 
 	# --- Lock player movement ---
 	if mouse_click_detector:
@@ -315,6 +318,8 @@ func _save_response(played_card_id: int) -> void:
 func _on_assessment_completed() -> void:
 	print("[TraitDeck] *** Assessment complete! All %d items answered. ***" % session_timeline.size())
 
+	TelemetryTracker.finish()
+
 	var extraversion: float      = _get_domain_average("Extraversion")
 	var neuroticism: float       = _get_domain_average("Negative Emotionality")
 	var agreeableness: float     = _get_domain_average("Agreeableness")
@@ -340,6 +345,7 @@ func _on_restart_requested() -> void:
 	answer_ui.visible  = false
 
 	InventoryManager.clear()
+	TelemetryTracker.reset()
 	_start_new_playthrough(current_student_name)
 
 	current_step = 0
