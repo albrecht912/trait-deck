@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_6lrwl"]
 [ext_resource type="PackedScene" uid="uid://dsq7x3dte520r" path="res://assets/musolla.glb" id="1_bl406"]
 [ext_resource type="PackedScene" uid="uid://ps4siwflgfxk" path="res://assets/arrow.glb" id="3_non5e"]
+[ext_resource type="PackedScene" path="res://scenes/unmarked_collectible.tscn" id="99_coll"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6lrwl"]
 vertices = PackedVector3Array(-9.08767, 0.5, 0.10000038, -1.0876703, 0.5, 0.10000038, -1.0876703, 0.5, -0.8999996, 0.16232967, 0.5, -1.1499996, 0.16232967, 0.5, -9.15, -9.08767, 0.5, -9.15, 1.1623297, 0.5, -0.8999996, 1.1623297, 0.5, 0.10000038, 9.16233, 0.5, 0.10000038, 9.16233, 0.5, -9.15, -0.8376703, 0.5, 1.1000004, -9.08767, 0.5, 9.6, 0.16232967, 0.5, 9.6, 0.16232967, 0.5, 1.1000004, 0.9123297, 0.5, 1.1000004, 9.16233, 0.5, 9.6)
@@ -36,5 +37,9 @@ shape = SubResource("BoxShape3D_xv0se")
 
 [node name="arrow" parent="ActiveWaypoint" unique_id=737539261 instance=ExtResource("3_non5e")]
 transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0.722363, 0)
+
+[node name="UnmarkedCollectible" parent="." unique_id=173098085 instance=ExtResource("99_coll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0.537, 3.57)
+item_id = "campus_map"
 
 [connection signal="body_entered" from="ActiveWaypoint/Area3D" to="." method="_on_area_3d_body_entered"]

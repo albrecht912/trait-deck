@@ -20,15 +20,20 @@ const ITEMS := {
 signal item_added(id: String)
 
 var items: Array[String] = []
+var found: Array[String] = []
 
 func add(id: String) -> void:
 	assert(ITEMS.has(id), "Unknown item id: %s" % id)
-	if items.has(id):
+	if found.has(id):
 		return
+	found.append(id)
 	items.append(id)
 	item_added.emit(id)
 	# weight 0: Phase 3 will score the found/available ratio instead.
 	DatabaseManager.log_event("Open-Mindedness", "collectible_found", 5.0, 0.0, {"item": id})
+
+func was_found(id: String) -> bool:
+	return found.has(id)
 
 func has(id: String) -> bool:
 	return items.has(id)
@@ -41,3 +46,4 @@ func consume(id: String) -> bool:
 
 func clear() -> void:
 	items.clear()
+	found.clear()

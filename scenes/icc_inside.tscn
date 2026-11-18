@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://crv4q6nbih7yi" path="res://scenes/mahallah_room.gd" id="1_divyu"]
 [ext_resource type="PackedScene" uid="uid://bvhn8agxr6grl" path="res://assets/ICC_inside.glb" id="1_dvxaj"]
 [ext_resource type="PackedScene" uid="uid://ps4siwflgfxk" path="res://assets/arrow.glb" id="3_hv383"]
+[ext_resource type="PackedScene" path="res://scenes/unmarked_collectible.tscn" id="99_coll"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_divyu"]
 vertices = PackedVector3Array(-9.5, 0.5, -14.5, -9.5, 0.5, 14.5, 9.5, 0.5, 14.5, 9.5, 0.5, -14.5, -9.5, 7.5, -11.75, -9.5, 7.5, 0.25, 9.5, 7.5, 0.25, 9.5, 7.5, -11.75, -9.5, 7.5, 3.75, -9.5, 7.5, 4.25, 9.5, 7.5, 4.25, 9.5, 7.5, 3.75)
@@ -37,5 +38,9 @@ shape = SubResource("BoxShape3D_omxeb")
 
 [node name="arrow" parent="ActiveWaypoint" unique_id=737539261 instance=ExtResource("3_hv383")]
 transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0.722363, 0)
+
+[node name="UnmarkedCollectible" parent="." unique_id=173039974 instance=ExtResource("99_coll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.18, 7.94, 4.3)
+item_id = "electrolyte_sachet"
 
 [connection signal="body_entered" from="ActiveWaypoint/Area3D" to="." method="_on_area_3d_body_entered"]

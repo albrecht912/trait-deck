@@ -707,6 +707,13 @@
       "likert_value": 5,
       "dialogue_text": "Terrified, but I had to keep a level head for Haris.",
       "requires_item": null
+    },
+    {
+      "card_id": 82,
+      "item_id": 15,
+      "likert_value": 5,
+      "dialogue_text": "[Use Campus Map Leaflet] Unfold the campus directory leaflet and trace the exact route to their Kulliyyah block together.",
+      "requires_item": "campus_map"
     }
   ],
   "CARD_EFFECT": [
@@ -717,6 +724,21 @@
     },
     {
       "card_id": 71,
+      "domain_id": 3,
+      "value": 5
+    },
+    {
+      "card_id": 82,
+      "domain_id": 1,
+      "value": 4
+    },
+    {
+      "card_id": 82,
+      "domain_id": 2,
+      "value": 5
+    },
+    {
+      "card_id": 82,
       "domain_id": 3,
       "value": 5
     }

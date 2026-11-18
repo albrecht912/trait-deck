@@ -19,7 +19,7 @@ extends Node
 
 var active_session_id: int = -1
 var current_item_id: int   = 1
-const TOTAL_ITEMS: int     = 12
+var current_step: int      = 0
 
 ## Active player name — resolved from the database on _ready().
 var current_student_name: String = ""
@@ -33,20 +33,25 @@ var _current_card_rows: Array      = []
 ## PROGRESSION TIMELINE MAP
 ## ==========================================
 
-var session_timeline: Dictionary = {
-	1:  "res://scenes/mo_office.tscn",
-	2:  "res://scenes/mo_office.tscn",
-	3:  "res://scenes/mahallah_room.tscn",
-	4:  "res://scenes/icc_outside.tscn",
-	5:  "res://scenes/cafe.tscn",
-	6:  "res://scenes/icc_inside.tscn",
-	7:  "res://scenes/sports_centre.tscn",
-	8:  "res://scenes/musolla.tscn",
-	9:  "res://scenes/musolla.tscn",
-	10: "res://scenes/musolla.tscn",
-	11: "res://scenes/mahallah_room.tscn",
-	12: "res://scenes/icc_inside.tscn",
-}
+# shortcut: items 13-16 use placeholder rooms; swap in SHAS foyer / walkway / Kulliyyah / rain corridor scenes when built.
+var session_timeline: Array = [
+	[1, "res://scenes/mo_office.tscn"],
+	[2, "res://scenes/mo_office.tscn"],
+	[3, "res://scenes/mahallah_room.tscn"],
+	[4, "res://scenes/icc_outside.tscn"],
+	[5, "res://scenes/cafe.tscn"],
+	[6, "res://scenes/icc_inside.tscn"],
+	[13, "res://scenes/icc_inside.tscn"],
+	[14, "res://scenes/icc_outside.tscn"],
+	[7, "res://scenes/sports_centre.tscn"],
+	[8, "res://scenes/musolla.tscn"],
+	[9, "res://scenes/musolla.tscn"],
+	[10, "res://scenes/musolla.tscn"],
+	[11, "res://scenes/mahallah_room.tscn"],
+	[15, "res://scenes/icc_outside.tscn"],
+	[16, "res://scenes/icc_outside.tscn"],
+	[12, "res://scenes/icc_inside.tscn"],
+]
 
 ## ==========================================
 ## NODE REFERENCES
@@ -90,8 +95,8 @@ func _ready() -> void:
 
 	hand.card_answer_submitted.connect(_on_card_answer_submitted)
 
-	current_item_id = 1
-	_load_scenario(current_item_id)
+	current_step = 0
+	_load_scenario(current_step)
 
 ## ==========================================
 ## 1. SESSION INITIALISATION
@@ -111,16 +116,18 @@ func _start_new_playthrough(student_name: String) -> void:
 ## This function is async to allow physics-frame deferral after teleport.
 ## ==========================================
 
-func _load_scenario(item_id: int) -> void:
+func _load_scenario(step: int) -> void:
 	# --- Guard: assessment complete ---
-	if not session_timeline.has(item_id):
-		push_warning("[TraitDeck] No room mapped for item_id=%d. Triggering completion." % item_id)
+	if step >= session_timeline.size():
+		push_warning("[TraitDeck] No room mapped for step=%d. Triggering completion." % step)
 		success.play()
 		_on_assessment_completed()
 		return
 
 	# --- Step A: Resolve scene path ---
-	var target_scene_path: String = session_timeline[item_id]
+	var item_id: int = session_timeline[step][0]
+	current_item_id = item_id
+	var target_scene_path: String = session_timeline[step][1]
 
 	# --- Step B: Hard-purge old room — always, even for identical scene paths.
 	# remove_child + queue_free forces the PhysicsServer to flush the previous
@@ -242,7 +249,7 @@ func _on_player_reached_waypoint() -> void:
 
 	# --- Slide the QuestionCard in with cached question data ---
 	if question_card:
-		question_card.slide_in_from_right(_current_question_text, current_item_id)
+		question_card.slide_in_from_right(_current_question_text, current_step + 1)
 
 	# --- Populate the card hand with cached answer options ---
 	hand.populate_hand_with_choices(_current_card_rows)
@@ -264,8 +271,8 @@ func _advance_to_next_scenario() -> void:
 		question_card.slide_out_to_left()
 		await question_card.slide_out_finished
 
-	current_item_id += 1
-	_load_scenario(current_item_id)
+	current_step += 1
+	_load_scenario(current_step)
 
 ## ==========================================
 ## 5. DATABASE WRITE
@@ -306,7 +313,7 @@ func _save_response(played_card_id: int) -> void:
 ## ==========================================
 
 func _on_assessment_completed() -> void:
-	print("[TraitDeck] *** Assessment complete! All %d items answered. ***" % TOTAL_ITEMS)
+	print("[TraitDeck] *** Assessment complete! All %d items answered. ***" % session_timeline.size())
 
 	var extraversion: float      = _get_domain_average("Extraversion")
 	var neuroticism: float       = _get_domain_average("Negative Emotionality")
@@ -335,8 +342,8 @@ func _on_restart_requested() -> void:
 	InventoryManager.clear()
 	_start_new_playthrough(current_student_name)
 
-	current_item_id = 1
-	_load_scenario(current_item_id)
+	current_step = 0
+	_load_scenario(current_step)
 
 ## ==========================================
 ## 8. REAL-TIME BFI-2 CALCULATIONS
