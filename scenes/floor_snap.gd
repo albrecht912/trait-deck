@@ -7,6 +7,7 @@ extends Node3D
 
 func _ready() -> void:
 	FloorSnap.snap(self, self)
+	IdleAnimator.attach(self)  # placed characters/crowds idle too; no-op for models without a HeadPivot
 
 static func snap(anchor: Node3D, model: Node3D) -> void:
 	await anchor.get_tree().physics_frame  # room collision bodies enter the physics space one frame after load

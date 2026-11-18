@@ -18,6 +18,7 @@ func _ready() -> void:
 		var model := (load(path) as PackedScene).instantiate() as Node3D
 		add_child(model)
 		FloorSnap.snap(self, model)
+		IdleAnimator.attach(model)
 	$Label3D.text = line
 	body_entered.connect(_on_body_entered)
 

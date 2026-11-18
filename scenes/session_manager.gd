@@ -404,6 +404,7 @@ func _process_environmental_updates() -> void:
 		var sky := world_environment.environment.sky
 		if sky and sky.sky_material is ShaderMaterial:
 			(sky.sky_material as ShaderMaterial).set_shader_parameter("overcast", 1.0 if mood == "storm" else 0.0)
+	WindSway.set_strength(3.0 if mood == "storm" else 1.0)  # monsoon gusts bend the trees harder
 	if not directional_light:
 		return
 

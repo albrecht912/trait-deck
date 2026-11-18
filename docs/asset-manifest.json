@@ -1553,7 +1553,7 @@
         "review_captures": "docs/hero_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "replaces assets/Player.glb in scenes/ui/player.tscn; static mesh under 'Model'; import root_type CharacterBody3D; budget raised to 8000 for smooth head and hair"
+      "note": "replaces assets/Player.glb in scenes/ui/player.tscn; static mesh under 'Model'; import root_type CharacterBody3D; budget raised to 8000 for smooth head and hair; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "haris",
@@ -1591,7 +1591,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "roommate"
+      "note": "roommate; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "facilitator_m",
@@ -1628,7 +1628,8 @@
         "approved_by": "",
         "review_captures": "docs/batch_review/"
       },
-      "used_in": "scenes/optional_interactable.tscn / crowd markers"
+      "used_in": "scenes/optional_interactable.tscn / crowd markers",
+      "note": "has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "facilitator_f",
@@ -1665,7 +1666,8 @@
         "approved_by": "",
         "review_captures": "docs/batch_review/"
       },
-      "used_in": "scenes/optional_interactable.tscn / crowd markers"
+      "used_in": "scenes/optional_interactable.tscn / crowd markers",
+      "note": "has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "pakcik_stall",
@@ -1703,7 +1705,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "cafe drink stall uncle"
+      "note": "cafe drink stall uncle; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "lost_freshman",
@@ -1740,7 +1742,8 @@
         "approved_by": "",
         "review_captures": "docs/batch_review/"
       },
-      "used_in": "scenes/optional_interactable.tscn / crowd markers"
+      "used_in": "scenes/optional_interactable.tscn / crowd markers",
+      "note": "has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "international_student",
@@ -1778,7 +1781,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "mo_office NPC"
+      "note": "mo_office NPC; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "crowd_student_a",
@@ -1816,7 +1819,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "crowd cluster filler"
+      "note": "crowd cluster filler; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "crowd_student_b",
@@ -1854,7 +1857,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "crowd cluster filler"
+      "note": "crowd cluster filler; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "stray_kitten",
@@ -1892,7 +1895,7 @@
         "review_captures": "docs/batch_review/"
       },
       "used_in": "scenes/optional_interactable.tscn / crowd markers",
-      "note": "hungry kitten, mosque_walkway"
+      "note": "hungry kitten, mosque_walkway; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "card_dialogue",
@@ -2679,7 +2682,8 @@
         "technical_checks_passed": true,
         "approved_by": "",
         "review_captures": "docs/batch_review/"
-      }
+      },
+      "note": "has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation"
     },
     {
       "id": "crowd_cluster",
@@ -2699,7 +2703,7 @@
         "2.5-head proportions"
       ],
       "used_in": "mo_office, cafe, icc_inside, mosque_walkway, kulliyyah_courtyard",
-      "note": "about 31k tris: five full students; fine on desktop Forward+, merge or decimate if targeting low-end",
+      "note": "about 31k tris: five full students; fine on desktop Forward+, merge or decimate if targeting low-end; has HeadPivot (kitten: EarPivotL/R, TailPivot) for the idle animation",
       "source": {
         "kind": "authored",
         "url_or_tool": "Blender 5.2.2 via Blender MCP (Claude)",
@@ -2715,6 +2719,70 @@
         "technical_checks_passed": true,
         "approved_by": "",
         "review_captures": "docs/batch_review/"
+      }
+    },
+    {
+      "id": "idle_animation",
+      "kind": "animation",
+      "role": "looping idle for protagonist and all NPCs: breathing, weight shift, head turn; kitten ear twitch and tail swish",
+      "path": "scenes/idle_animator.gd",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "gd",
+        "anchor": "n/a"
+      },
+      "visual_locks": [
+        "subtle, looping, Animal Crossing-style motion"
+      ],
+      "used_in": "player.gd, optional_interactable.gd, floor_snap.gd (decor and crowds)",
+      "note": "AnimationPlayer + 'idle' clip built at runtime from HeadPivot/EarPivot/TailPivot empties in each character glb; random speed and phase per instance",
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written Godot code (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "tests": "tests/test_idle.gd"
+      }
+    },
+    {
+      "id": "foliage_sway",
+      "kind": "shader",
+      "role": "wind sway for trees, hedges and bushes in every room; stronger in the storm mood",
+      "path": "shaders/foliage_sway.gdshader",
+      "status": "built-awaiting-in-game-review",
+      "technical": {
+        "format": "gdshader",
+        "anchor": "n/a"
+      },
+      "visual_locks": [
+        "subtle, looping, Animal Crossing-style motion"
+      ],
+      "used_in": "scenes/wind_sway.gd via BaseRoom._ready; session_manager sets strength 3.0 for storm",
+      "note": "vertex sway grows with world height so trunks stay planted",
+      "source": {
+        "kind": "authored",
+        "url_or_tool": "hand-written Godot code (Claude)",
+        "creator": "Claude Code for project owner",
+        "created_at": "2026-11-18",
+        "license": "project-owned",
+        "attribution": "",
+        "prompt_or_source_record": ""
+      },
+      "verification": {
+        "native_scale_reviewed": false,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": true,
+        "approved_by": "",
+        "tests": "tests/test_idle.gd"
       }
     }
   ]

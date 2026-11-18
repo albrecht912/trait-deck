@@ -29,6 +29,7 @@ func _ready() -> void:
 	# NavigationAgent3D requires one deferred frame after the scene tree is
 	# ready before its path queries are valid.
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
+	IdleAnimator.attach(self)  # breathing / head-turn loop on the protagonist model
 
 ## ==========================================
 ## PUBLIC API

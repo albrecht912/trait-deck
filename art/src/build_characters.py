@@ -1,6 +1,6 @@
 # TraitDeck characters (~2.5 heads, static meshes, face -Y, feet at z=0). Blender 5.2.
 # Run inside Blender: exec(open(<this file>).read()); build_characters()
-import bpy, math, os
+import bpy, math, os, re
 exec(open(os.path.join(r"G:/IIUM Docs/Year 3/Sem 2/FYP 1/trait-deck/art/src", "build_batch.py")).read())
 
 CHARACTERS = {
@@ -96,13 +96,45 @@ def build_kitten(P, root):
         box(f"Stripe{k}", (0.16, 0.04, 0.02), (0, k * 0.08, 0.215), "copper", P, bevel=0.01, chunk=False, parent=root)
     cyl("Tail", 0.025, 0.24, (0.02, 0.2, 0.1), "peach", P, bevel=0.01, verts=8, rot=(-40, 0, 10), parent=root)
 
+# Idle-animation pivots (scenes/idle_animator.gd turns these): head parts hang off a neck pivot,
+# kitten ears/tail off their base. Matched by the object's base name (Blender adds .001 / digits).
+HEAD_PARTS = {"Head", "Ear", "Eye", "EyeShine", "Blush", "Hair", "Fringe", "FringeSide", "Spike", "Tuft", "Curl",
+              "CurlTop", "Tudung", "Kopiah", "Lens", "LensIn", "Bridge", "CapCrown", "CapBrim", "Moustache",
+              "Muzzle", "Nose"}
+
+def _base(o):
+    return re.match(r"[A-Za-z]+", o.name).group()
+
+def _reparent(objs, pivot):
+    bpy.context.view_layer.update()
+    for o in objs:
+        mw = o.matrix_world.copy(); o.parent = pivot; o.matrix_world = mw
+
+def add_pivots(P, root, kitten=False):
+    bpy.context.view_layer.update()
+    kids = list(root.children)
+    if kitten:
+        hp = empty("HeadPivot", P, loc=(0, -0.05, 0.2), parent=root)
+        for s in (-1, 1):
+            ep = empty(f"EarPivot{'L' if s < 0 else 'R'}", P, loc=(s * 0.06, -0.13, 0.3), parent=root)
+            _reparent([o for o in kids if _base(o) == "Ear" and o.location.x * s > 0], ep)
+            _reparent([ep], hp)
+        tp = empty("TailPivot", P, loc=(0.02, 0.2, 0.1), parent=root)
+        _reparent([o for o in kids if _base(o) == "Tail"], tp)
+        _reparent([o for o in kids if _base(o) in HEAD_PARTS and _base(o) != "Ear"], hp)
+    else:
+        hp = empty("HeadPivot", P, loc=(0, 0, 0.74), parent=root)
+        _reparent([o for o in kids if _base(o) in HEAD_PARTS], hp)
+
 def build_characters():
     _use_scene(); out = {}
     for cid, spec in CHARACTERS.items():
-        P = coll("EX_" + cid); root = empty("Model", P); build_character(P, spec, root)
+        P = coll("EX_" + cid); root = empty("Model", P); build_character(P, spec, root); add_pivots(P, root)
         export(P, f"assets/characters/{cid}.glb"); out[cid] = tris(P)
-    P = coll("EX_stray_kitten"); root = empty("Model", P); build_kitten(P, root)
+    P = coll("EX_stray_kitten"); root = empty("Model", P); build_kitten(P, root); add_pivots(P, root, kitten=True)
     export(P, "assets/characters/stray_kitten.glb"); out["stray_kitten"] = tris(P)
+    P = build_protagonist(); add_pivots(P, next(o for o in P.objects if o.name.startswith("Model")))
+    export(P, "assets/characters/protagonist.glb"); out["protagonist"] = tris(P)
     # crowd cluster: 5 students in a loose ring facing the centre; origin = marker point on the floor
     G = coll("EX_crowd_cluster")
     for k, (cid, ang) in enumerate([("crowd_student_a", 0), ("crowd_student_b", 72), ("crowd_student_c", 144),
@@ -110,7 +142,7 @@ def build_characters():
         a = math.radians(ang)
         r = empty(f"Student{k}", G, loc=(0.85 * math.sin(a), 0.85 * math.cos(a), 0))
         r.rotation_euler = (0, 0, -a)  # local -Y (the face) points at the centre
-        build_character(G, CHARACTERS[cid], r)
+        build_character(G, CHARACTERS[cid], r); add_pivots(G, r)
     export(G, "assets/characters/crowd_cluster.glb"); out["crowd_cluster"] = tris(G)
     bpy.ops.wm.save_as_mainfile(filepath=PROJECT + "art/src/batch.blend")
     return out

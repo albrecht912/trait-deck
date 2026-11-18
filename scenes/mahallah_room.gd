@@ -24,6 +24,9 @@ class_name BaseRoom
 ## Euler rotation in degrees the Camera3D should adopt when this room loads.
 @export var custom_camera_rotation: Vector3 = Vector3(-15.0, 0.0, 0.0)
 
+func _ready() -> void:
+	WindSway.apply(self)  # trees and bushes in the room glb sway in the wind
+
 ## ==========================================
 ## ACTIVE WAYPOINT TRIGGER
 ## ==========================================
