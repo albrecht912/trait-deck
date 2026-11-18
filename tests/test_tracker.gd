@@ -47,4 +47,24 @@ func _initialize() -> void:
 	check("optional_npc_ratio logged", int(dm.db.query_result[0]["n"]) == 1)
 	tt.reset()
 
+	# Room tidying: 1 of 2 tasks done -> Conscientiousness 3, scored once per room.
+	tt.tidied["t1"] = true
+	var tidy_room := Node3D.new()
+	tidy_room.name = "tidy_room"
+	for id in ["t1", "t2"]:
+		var task = load("res://scenes/tidy_task.tscn").instantiate()
+		task.task_id = id
+		task.tidy_position = Vector3(0, 1, 0)
+		tidy_room.add_child(task)
+	root.add_child(tidy_room)
+	check("already-tidied task snaps to tidy spot", tidy_room.get_child(0).position == Vector3(0, 1, 0))
+	tt.begin_room(tidy_room, player)
+	tt.end_room()
+	check("tidy 1/2 gives Conscientiousness 3", dm.get_domain_score("Conscientiousness") == 3.0)
+	tt.begin_room(tidy_room, player)
+	tt.end_room()
+	dm.db.query_with_bindings("SELECT COUNT(*) AS n FROM TELEMETRY_LOG WHERE event_type = 'room_tidy' AND session_id = ?;", [dm.active_session_id])
+	check("room tidiness scored only once", int(dm.db.query_result[0]["n"]) == 1)
+	tt.reset()
+
 	quit(1 if failed else 0)

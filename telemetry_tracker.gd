@@ -13,6 +13,8 @@ var player: Node3D
 var samples: Array[float] = []
 var available := {"poi": {}, "npc": {}, "collectible": {}}
 var interacted := {"poi": {}, "npc": {}}
+var tidied := {}        # task_id -> true; read by TidyTask so tidied objects stay tidy on room reload
+var tidy_scored := {}   # room name -> true; a room's tidiness is scored on the first visit only
 var _timer: Timer
 
 static func proximity_to_value(d: float) -> float:
@@ -58,6 +60,18 @@ func end_room() -> void:
 		DatabaseManager.log_event("Extraversion", "crowd_proximity", proximity_to_value(avg), 1.0,
 			{"room": room.name, "avg_m": avg, "samples": samples.size()})
 	samples.clear()
+	if is_instance_valid(room) and not tidy_scored.has(room.name):
+		var total := 0
+		var done := 0
+		for n in get_tree().get_nodes_in_group("tidy_task"):
+			if room.is_ancestor_of(n):
+				total += 1
+				done += int(tidied.has(n.task_id))
+		if total > 0:
+			tidy_scored[room.name] = true
+			print("[TraitDeck] Tidy in %s: %d/%d -> C %.2f" % [room.name, done, total, ratio_to_value(done, total)])
+			DatabaseManager.log_event("Conscientiousness", "room_tidy", ratio_to_value(done, total), 1.0,
+				{"room": room.name, "done": done, "total": total})
 
 func mark_interacted(kind: String, id: String) -> bool:
 	if interacted[kind].has(id):
@@ -87,5 +101,7 @@ func reset() -> void:
 	samples.clear()
 	room = null
 	player = null
+	tidied.clear()
+	tidy_scored.clear()
 	for d in available.values() + interacted.values():
 		d.clear()
